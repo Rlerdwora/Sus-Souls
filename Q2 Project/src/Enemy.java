@@ -7,21 +7,72 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Hand{
+public class Enemy{
 	
 	//image related variables
 	private Image img; 	
 	private AffineTransform tx;
-	private int x, y;
-	private String LR, direction, weapon, action, fileType;
-
-	public Hand(int x, int y) {
-		img = getImage("/imgs/" + LR + "Hand" + weapon + action + direction + fileType); //load the image for Tree
+	private int x, y, xv, yv, xPos, yPos, HBX, HBY, width, height, health;
+	private String direction, action, fileType;
+	
+	public Enemy(int x, int y) {
+		img = getImage("/imgs/bg.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 	}
+	
+	public int x() {
+		return x;
+	}
+	
+	public int y() {
+		return y;
+	}
+	
+	public int xPos() {
+		return xPos;
+	}
+	
+	public int yPos() {
+		return yPos;
+	}
+	
+	public int width() {
+		return width;
+	}
+	
+	public int height() {
+		return height;
+	}
+	
+	public void moveRight() {
+		
+	}
 
+	public void moveLeft() {
+		
+	}
+
+	public void moveUp() {
+	
+	}
+
+	public void moveDown() {
+	
+	}
+	
+	public void attack() {
+		
+	}
+
+	public void takeDamage() {
+		
+	}
+	
+	public void die() {
+		
+	}
 	
 	/* update variables here */
 	private void update() {
@@ -44,8 +95,6 @@ public class Hand{
 		
 		g2.drawImage(img, tx, null);
 		
-		
-
 	}
 
 	
@@ -57,7 +106,7 @@ public class Hand{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = Hand.class.getResource(path);
+			URL imageURL = Enemy.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
