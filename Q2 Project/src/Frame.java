@@ -12,18 +12,16 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	//CREATE THE OBJECT (STEP 1)
-	private Background bg = new Background(0, 0);
-
+	Amogus amogus = new Amogus(200,200);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		bg.paint(g);
-
-		
+		amogus.paint(g);
 	}
 	
 	public static void main(String[] arg) {
@@ -31,8 +29,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
-		JFrame f = new JFrame("Crossy Street");
-		f.setSize(new Dimension(600, 400));
+		JFrame f = new JFrame("Sus Souls");
+		f.setSize(new Dimension(1365, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(false);
@@ -80,15 +78,60 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-			System.out.println(arg0.getKeyCode());
-
+		System.out.println(arg0.getKeyCode());
+		
+		//w is pressed
+		if(arg0.getKeyCode() == 87) {
+			amogus.moveUp();
+		}
+		
+		//a is pressed
+		if(arg0.getKeyCode() == 65) {
+			amogus.moveLeft();
+		}
+		
+		//s is pressed
+		if(arg0.getKeyCode() == 83) {
+			amogus.moveDown();
+		}
+		
+		//d is pressed
+		if(arg0.getKeyCode() == 68) {
+			amogus.moveRight();
+		}
+		
+		//shift is pressed
+		if(arg0.getKeyCode() == 16) {
+			amogus.run();
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		//w is released
+		if(arg0.getKeyCode() == 87) {
+			amogus.stopMoveUp();
+		}
+	
+		//a is released
+		if(arg0.getKeyCode() == 65) {
+				amogus.stopMoveLeft();
+		}
 		
+		//s is released
+		if(arg0.getKeyCode() == 83) {
+			amogus.stopMoveDown();
+		}
+		
+		//d is released
+		if(arg0.getKeyCode() == 68) {
+			amogus.stopMoveRight();
+		}
+		
+		//shift is released
+		if(arg0.getKeyCode() == 16) {
+			amogus.stopRun();
+		}
 	}
 
 	@Override

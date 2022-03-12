@@ -16,12 +16,14 @@ public class Hand{
 	private String LR, direction, weapon, action, fileType;
 
 	public Hand(int x, int y) {
-		img = getImage("/imgs/" + LR + "Hand" + weapon + action + direction + fileType); //load the image for Tree
+		this.x = x;
+		this.y = y;
+		img = getImage("/handSprites/hand" + weapon + action + direction + fileType); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 	}
-
+	
 	
 	/* update variables here */
 	private void update() {

@@ -46,6 +46,10 @@ public class Enemy{
 		return height;
 	}
 	
+	public String direction() {
+		return direction;
+	}
+	
 	public void moveRight() {
 		
 	}
