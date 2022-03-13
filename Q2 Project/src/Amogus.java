@@ -30,7 +30,8 @@ public class Amogus{
 		action = "Stand";
 		direction = "Down";
 		fileType = ".png";
-		
+		leftHand = new Hand(this, "Left");
+		rightHand = new Hand(this, "Right");
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(this.x, this.y); 				//initialize the location of the image
@@ -247,6 +248,22 @@ public class Amogus{
 		fileType = ".gif";
 		action = "Death";
 	}
+	
+	public int x() {
+		return x;
+	}
+	
+	public int y() {
+		return y;
+	}
+	
+	public String direction() {
+		return direction;
+	}
+	
+	public String action() {
+		return action;
+	}
 
 	/* update variables here */
 	private void update() {
@@ -346,13 +363,28 @@ public class Amogus{
 		//call update to update the actualy picture location
 		update();
 		
-		
-		
-		
-		g2.drawImage(img, tx, null);
-		
-		
-
+		switch(direction) {
+		case "Right":
+			leftHand.paint(g);
+			g2.drawImage(img, tx, null);
+			rightHand.paint(g);
+			break;
+		case "Left":
+			rightHand.paint(g);
+			g2.drawImage(img, tx, null);
+			leftHand.paint(g);
+			break;
+		case "Up":
+			leftHand.paint(g);
+			g2.drawImage(img, tx, null);
+			rightHand.paint(g);
+			break;
+		case "Down":
+			rightHand.paint(g);
+			g2.drawImage(img, tx, null);
+			leftHand.paint(g);
+			break;		
+		}		
 	}
 
 	

@@ -12,24 +12,131 @@ public class Hand{
 	//image related variables
 	private Image img; 	
 	private AffineTransform tx;
-	private int x, y;
-	private String LR, direction, weapon, action, fileType;
+	private int x, y, xPos, yPos;
+	private String direction, weapon, action, fileType;
+	private Amogus a;
 
-	public Hand(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Hand(Amogus a, String LR) {
+		this.a = a;
+		if(LR.equals("Left")) {
+			weapon = "Shield";
+		}else {
+			weapon = "Sword";
+		}
+		direction = "Right";
+		action = "Stand";
+		fileType = ".png";
 		img = getImage("/handSprites/hand" + weapon + action + direction + fileType); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 	}
 	
+	public void follow() {
+		x = a.x();
+		y = a.y();
+		action = a.action();
+		direction = a.direction();
+		if(a.action().equals("Stand")) {
+			fileType = ".png";
+		}else {
+			fileType = ".gif";
+		}
+	}
 	
 	/* update variables here */
 	private void update() {
-
+		follow();
+		
+		if(weapon.equals("Sword")) {
+			switch(direction) {
+			case "Right":
+				if(action.equals("Run")) {
+					xPos = 0;
+					yPos = 0;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = 21;
+					yPos = 0;
+				}
+				break;
+			
+			case "Left":
+				if(action.equals("Run")) {
+					xPos = 0;
+					yPos = 0;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = -21;
+					yPos = 0;
+				}
+				break;
+				
+			case "Up":
+				if(action.equals("Run")) {
+					xPos = 25;
+					yPos = -10;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = 25;
+					yPos = 0;
+				}
+				break;
+				
+			case "Down":
+				if(action.equals("Run")) {
+					xPos = -25;
+					yPos = +10;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = -25;
+					yPos = 0;
+				}
+				break;
+			}
+		}else if(weapon.equals("Shield")) {
+			switch(direction) {
+			case "Right":
+				if(action.equals("Run")) {
+					xPos = 0;
+					yPos = 0;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = 10;
+					yPos = 0;
+				}
+				break;
+			
+			case "Left":
+				if(action.equals("Run")) {
+					xPos = 0;
+					yPos = 0;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = -10;
+					yPos = 0;
+				}
+				break;
+				
+			case "Up":
+				if(action.equals("Run")) {
+					xPos = 25;
+					yPos = -10;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = -20;
+					yPos = 0;
+				}
+				break;
+				
+			case "Down":
+				if(action.equals("Run")) {
+					xPos = 20;
+					yPos = 10;
+				}else if(action.equals("Walk") || action.equals("Stand")) {
+					xPos = 20;
+					yPos = 0;
+				}
+				break;
+			}
+		}
 		
 		
+		img = getImage("/handSprites/hand" + weapon + action + direction + fileType);
+		init(x + xPos, y + yPos);
 	}
 	
 	/* Drawing commands */
@@ -53,7 +160,7 @@ public class Hand{
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(2.7, 2.5);
+		tx.scale(1, 1);
 	}
 
 	private Image getImage(String path) {

@@ -18,10 +18,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	//CREATE THE OBJECT (STEP 1)
 	Amogus amogus = new Amogus(200,200);
+	UI ui = new UI(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		amogus.paint(g);
+		ui.paint(g);
 	}
 	
 	public static void main(String[] arg) {
@@ -134,7 +136,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		if(arg0.getKeyCode() == 32) {
-			amogus.die();
+			amogus.takeDamage(10, "Right");
 		}
 	}
 
