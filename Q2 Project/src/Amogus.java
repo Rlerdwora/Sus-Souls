@@ -12,8 +12,8 @@ public class Amogus{
 	//image related variables
 	private Image img; 	
 	private AffineTransform tx;
-	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, health, 
-	stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
+	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, deathTimer, 
+	health, stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
 	private boolean invincible, control, running;
 	private String direction, action, fileType;
 	private Hand leftHand, rightHand;
@@ -21,9 +21,11 @@ public class Amogus{
 	public Amogus(int x, int y) {
 		this.x = x;
 		this.y = y;
+		health = 100;
 		control = true;
 		hurtTimer = 0;
 		attackTimer = 0;
+		deathTimer = 0;
 		weaponSelect = 0;
 		action = "Stand";
 		direction = "Down";
@@ -217,12 +219,33 @@ public class Amogus{
 	}
 	
 	public void die() {
+		health = 0;
 		control = false;
 		attackTimer = 0;
 		hurtTimer = 0;
 		rollTimer = 0;
+		deathTimer = 30;
 		xv = 0;
 		yv = 0;
+		switch(direction) {
+		case "Right":
+			direction = "Right";
+			break;
+			
+		case "Left":
+			direction = "Left";
+			break;
+			
+		case "Up":
+			direction = "Right";
+			break;
+			
+		case "Down":
+			direction = "Left";
+			break;
+		}
+		fileType = ".gif";
+		action = "Death";
 	}
 
 	/* update variables here */
@@ -231,11 +254,11 @@ public class Amogus{
 			x += xv;
 			y += yv;
 		}else {
-			x += 2 * xv;
 			y += 2 * yv;
+			x += 2 * xv;
 		}
 		
-		if(xv == 0 && yv == 0) {
+		if(xv == 0 && yv == 0 && health > 0) {
 			action = "Stand";
 			fileType = ".png";
 		}
@@ -288,6 +311,26 @@ public class Amogus{
 				break;
 			}
 			rollTimer --;
+		}
+		
+		if(hurtTimer > 0) {
+			if(hurtTimer == 1) {
+				invincible = false;
+			}else {
+				invincible = true;
+			}
+			hurtTimer --;
+		}
+		
+		if(deathTimer > 0 && health <= 0) {
+			if(deathTimer <= 20 && deathTimer > 1) {
+				action = "Dead";
+				fileType = ".png";
+			}else if(deathTimer == 1){
+				action = "Dead2";
+				fileType = ".png";
+			}
+			deathTimer --;
 		}
 		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);

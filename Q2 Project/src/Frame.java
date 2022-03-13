@@ -132,6 +132,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(arg0.getKeyCode() == 16) {
 			amogus.stopRun();
 		}
+		
+		if(arg0.getKeyCode() == 32) {
+			amogus.die();
+		}
 	}
 
 	@Override
