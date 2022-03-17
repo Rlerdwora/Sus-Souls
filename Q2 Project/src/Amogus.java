@@ -12,7 +12,7 @@ public class Amogus{
 	//image related variables
 	private Image img; 	
 	private AffineTransform tx;
-	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, deathTimer, 
+	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, deathTimer, leanTimer, 
 	health, stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
 	private boolean invincible, control, running;
 	private String direction, action, fileType;
@@ -26,6 +26,7 @@ public class Amogus{
 		hurtTimer = 0;
 		attackTimer = 0;
 		deathTimer = 0;
+		leanTimer = 0;
 		weaponSelect = 0;
 		action = "Stand";
 		direction = "Down";
@@ -187,11 +188,24 @@ public class Amogus{
 	}
 	
 	public void roll() {
-		rollTimer = 40;
+		if(control == true && rollTimer == 0) {
+			rollTimer = 23;
+			xv = 0;
+			yv = 0;
+		}
+	}
+	
+	public void lean() {
+		if(control) {
+			leanTimer = 30;
+			xv = 0;
+			yv = 0;
+		}
 	}
 	
 	public void takeDamage(int damage, String direction) {
 		if(invincible == false) {
+			rightHand.follow();
 			if(damage >= health) {
 				die();
 			}else {
@@ -275,7 +289,7 @@ public class Amogus{
 			x += 2 * xv;
 		}
 		
-		if(xv == 0 && yv == 0 && health > 0) {
+		if(xv == 0 && yv == 0 && health > 0 && rollTimer == 0) {
 			action = "Stand";
 			fileType = ".png";
 		}
@@ -303,30 +317,41 @@ public class Amogus{
 		}
 		
 		if(rollTimer > 0) {
-			if(rollTimer == 1) {
+			if(rollTimer <= 8) {
 				control = true;
 			}else {
 				control = false;
-			}
-			xv = 0;
-			yv = 0;
-			switch(direction) {
-			case "Right":
-				x += 10;
-				break;
 				
-			case "Left":
-				x -= 10;	
-				break;
-							
-			case "Up":
-				y -= 10;
-				break;
-				
-			case "Down":
-				y += 10;
-				break;
+				switch(direction) {
+				case "Right":
+					x += 10;
+					break;
+					
+				case "Left":
+					x -= 10;	
+					break;
+								
+				case "Up":
+					y -= 10;
+					break;
+					
+				case "Down":
+					y += 10;
+					break;
+				}
 			}
+			
+			if(rollTimer <= 23 && rollTimer > 18) {
+				action = "Roll1";
+				fileType = ".png";
+			}else if(rollTimer <= 18 && rollTimer > 8) {
+				action = "Roll2";
+				fileType = ".gif";
+			}else if(rollTimer == 8) {
+				action = "Stand";
+				fileType = ".png";
+			}
+
 			rollTimer --;
 		}
 		
@@ -350,6 +375,20 @@ public class Amogus{
 			deathTimer --;
 		}
 		
+		if(leanTimer > 0) {
+			if(leanTimer == 1) {
+				control = true;
+				rightHand.setWeapon("Sword");
+				rightHand.follow();
+			}else {
+				control = false;
+				rightHand.setWeapon("Lean");
+				rightHand.setAction("Drink");
+				rightHand.setFileType(".gif");
+			}
+			leanTimer --;
+		}
+		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);
 		init(x,y);
 	}
@@ -360,31 +399,34 @@ public class Amogus{
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		//call update to update the actualy picture location
+		//call update to update the actual picture location
 		update();
 		
-		switch(direction) {
-		case "Right":
-			leftHand.paint(g);
+		if(health > 0 && rollTimer < 8)
+			switch(direction) {
+			case "Right":
+				leftHand.paint(g);
+				g2.drawImage(img, tx, null);
+				rightHand.paint(g);
+				break;
+			case "Left":
+				rightHand.paint(g);
+				g2.drawImage(img, tx, null);
+				leftHand.paint(g);
+				break;
+			case "Up":
+				leftHand.paint(g);
+				rightHand.paint(g);
+				g2.drawImage(img, tx, null);
+				break;
+			case "Down":
+				leftHand.paint(g);
+				g2.drawImage(img, tx, null);
+				rightHand.paint(g);
+				break;		
+		}else {
 			g2.drawImage(img, tx, null);
-			rightHand.paint(g);
-			break;
-		case "Left":
-			rightHand.paint(g);
-			g2.drawImage(img, tx, null);
-			leftHand.paint(g);
-			break;
-		case "Up":
-			leftHand.paint(g);
-			g2.drawImage(img, tx, null);
-			rightHand.paint(g);
-			break;
-		case "Down":
-			rightHand.paint(g);
-			g2.drawImage(img, tx, null);
-			leftHand.paint(g);
-			break;		
-		}		
+		}
 	}
 
 	

@@ -106,6 +106,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(arg0.getKeyCode() == 16) {
 			amogus.run();
 		}
+		
+		//space is pressed
+		if(arg0.getKeyCode() == 32) {
+			amogus.roll();
+		}
+		
+		//k i pressed
+		if(arg0.getKeyCode() == 75) {
+			amogus.lean();
+		}
 	}
 
 	@Override
@@ -133,10 +143,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//shift is released
 		if(arg0.getKeyCode() == 16) {
 			amogus.stopRun();
-		}
-		
-		if(arg0.getKeyCode() == 32) {
-			amogus.takeDamage(10, "Right");
 		}
 	}
 
