@@ -16,7 +16,9 @@ public class Amogus{
 	health, stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
 	private boolean invincible, control, running;
 	private String direction, action, fileType;
-	private Hand leftHand, rightHand;
+	private Shield shield;
+	private Sword sword;
+	private Lean lean;
 	private Slash slash;
 
 	public Amogus(int x, int y) {
@@ -32,8 +34,9 @@ public class Amogus{
 		action = "Stand";
 		direction = "Down";
 		fileType = ".png";
-		leftHand = new Hand(this, "Left");
-		rightHand = new Hand(this, "Right");
+		shield = new Shield(this);
+		sword = new Sword(this);
+		lean = new Lean(this);
 		slash = new Slash(this);
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
@@ -176,7 +179,7 @@ public class Amogus{
 	}
 	
 	public void attack(Enemy e) {
-		if(attackTimer <= 0) {
+		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
 			if(e.x() < HBX + HBW && e.x() + e.width() > HBX
 			&& e.y() < HBY + HBH && e.y() + e.height() > HBY) {
 				e.takeDamage();
@@ -187,7 +190,7 @@ public class Amogus{
 	}
 	
 	public void slash() {
-		if(attackTimer <= 0) {
+		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
 			attackTimer = 15;
 			slash.slash(direction);
 		}
@@ -207,7 +210,7 @@ public class Amogus{
 	
 	public void lean() {
 		if(control) {
-			leanTimer = 30;
+			leanTimer = 60;
 			xv = 0;
 			yv = 0;
 		}
@@ -215,7 +218,7 @@ public class Amogus{
 	
 	public void takeDamage(int damage, String direction) {
 		if(invincible == false) {
-			rightHand.follow();
+			sword.follow();
 			if(damage >= health) {
 				die();
 			}else {
@@ -386,17 +389,10 @@ public class Amogus{
 		}
 		
 		if(leanTimer > 0) {
-			if(leanTimer == 1) {
-				control = true;
-				rightHand.setWeapon("Sword");
-				rightHand.follow();
-			}else {
-				control = false;
-				rightHand.setWeapon("Lean");
-				rightHand.setAction("Drink");
-				rightHand.setFileType(".gif");
-			}
 			leanTimer --;
+			if(xv != 0 || yv != 0) {
+				leanTimer = 0;
+			}
 		}
 		
 		if(attackTimer > 0) {
@@ -419,24 +415,40 @@ public class Amogus{
 		if(health > 0 && rollTimer < 8)
 			switch(direction) {
 			case "Right":
-				leftHand.paint(g);
+				shield.paint(g);
 				g2.drawImage(img, tx, null);
-				rightHand.paint(g);
+				if(leanTimer == 0) {
+					sword.paint(g);
+				}else {
+					lean.paint(g);
+				}
 				break;
 			case "Left":
-				rightHand.paint(g);
+				if(leanTimer == 0) {
+					sword.paint(g);
+				}else {
+					lean.paint(g);
+				}				
 				g2.drawImage(img, tx, null);
-				leftHand.paint(g);
+				shield.paint(g);
 				break;
 			case "Up":
-				leftHand.paint(g);
-				rightHand.paint(g);
+				shield.paint(g);
+				if(leanTimer == 0) {
+					sword.paint(g);
+				}else {
+					lean.paint(g);
+				}				
 				g2.drawImage(img, tx, null);
 				break;
 			case "Down":
-				leftHand.paint(g);
+				shield.paint(g);
 				g2.drawImage(img, tx, null);
-				rightHand.paint(g);
+				if(leanTimer == 0) {
+					sword.paint(g);
+				}else {
+					lean.paint(g);
+				}				
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);
