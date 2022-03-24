@@ -32,7 +32,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public Frame() {
 		JFrame f = new JFrame("Sus Souls");
-		f.setSize(new Dimension(1365, 720));
+		f.setSize(new Dimension(900, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(false);
@@ -115,6 +115,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//k i pressed
 		if(arg0.getKeyCode() == 75) {
 			amogus.lean();
+		}
+		
+		//l is pressed
+		if(arg0.getKeyCode() == 76) {
+			amogus.slash();
 		}
 	}
 

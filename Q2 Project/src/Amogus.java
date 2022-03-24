@@ -17,6 +17,7 @@ public class Amogus{
 	private boolean invincible, control, running;
 	private String direction, action, fileType;
 	private Hand leftHand, rightHand;
+	private Slash slash;
 
 	public Amogus(int x, int y) {
 		this.x = x;
@@ -33,6 +34,7 @@ public class Amogus{
 		fileType = ".png";
 		leftHand = new Hand(this, "Left");
 		rightHand = new Hand(this, "Right");
+		slash = new Slash(this);
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(this.x, this.y); 				//initialize the location of the image
@@ -180,6 +182,14 @@ public class Amogus{
 				e.takeDamage();
 			}
 			attackTimer = 15;
+			slash.slash(direction);
+		}
+	}
+	
+	public void slash() {
+		if(attackTimer <= 0) {
+			attackTimer = 15;
+			slash.slash(direction);
 		}
 	}
 	
@@ -389,6 +399,10 @@ public class Amogus{
 			leanTimer --;
 		}
 		
+		if(attackTimer > 0) {
+			attackTimer --;
+		}
+		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);
 		init(x,y);
 	}
@@ -427,6 +441,7 @@ public class Amogus{
 		}else {
 			g2.drawImage(img, tx, null);
 		}
+		slash.paint(g);
 	}
 
 	
