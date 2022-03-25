@@ -78,8 +78,8 @@ public class Sword{
 				break;
 				
 			case "Attack":
-				xPos = 5;
-				yPos = 0;
+				xPos = 30;
+				yPos = 10;
 				break;
 			}
 			break;
@@ -107,8 +107,8 @@ public class Sword{
 				break;
 				
 			case "Attack":
-				xPos = -5;
-				yPos = 0;
+				xPos = -30;
+				yPos = 10;
 				break;
 			}
 			break;
@@ -136,8 +136,8 @@ public class Sword{
 				break;
 				
 			case "Attack":
-				xPos = 25;
-				yPos = 0;
+				xPos = 10;
+				yPos = -20;
 				break;
 			}
 			break;
@@ -165,8 +165,8 @@ public class Sword{
 				break;
 				
 			case "Attack":
-				xPos = -25;
-				yPos = 0;
+				xPos = -10;
+				yPos = 20;
 				break;
 			}
 			break;

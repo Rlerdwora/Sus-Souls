@@ -409,8 +409,8 @@ public class Amogus{
 			attackTimer --;
 			shield.setAction("Attack");
 			shield.setFileType(".png");
-			sword.setAction("Block");
-			sword.setFileType(".png");
+			sword.setAction("Attack");
+			sword.setFileType(".gif");
 		}
 		
 		if(blocking == true) {
