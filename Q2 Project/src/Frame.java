@@ -112,6 +112,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			amogus.roll();
 		}
 		
+		if(arg0.getKeyCode() == 74) {
+			amogus.shield();
+		}
+		
 		//k i pressed
 		if(arg0.getKeyCode() == 75) {
 			amogus.lean();
@@ -148,6 +152,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//shift is released
 		if(arg0.getKeyCode() == 16) {
 			amogus.stopRun();
+		}
+		
+		if(arg0.getKeyCode() == 74) {
+			amogus.stopShield();
 		}
 	}
 

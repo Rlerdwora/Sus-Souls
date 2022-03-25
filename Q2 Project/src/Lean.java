@@ -19,7 +19,7 @@ public class Lean{
 	public Lean(Amogus a) {
 		this.a = a;
 		direction = "Right";
-		img = getImage("/handSprites/handShieldDrink" + direction + ".gif"); //load the image for Tree
+		img = getImage("/handSprites/handLeanDrink" + direction + ".gif"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables

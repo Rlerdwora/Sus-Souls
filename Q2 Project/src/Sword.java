@@ -31,6 +31,10 @@ public class Sword{
 		x = a.x();
 		y = a.y();
 		direction = a.direction();
+	}
+	
+	public void copyAction() {
+		action = a.action();
 		if(a.action().equals("Stand")) {
 			fileType = ".png";
 		}else {
@@ -38,65 +42,132 @@ public class Sword{
 		}
 	}
 	
-	public void copyAction() {
-		action = a.action();
+	public void setAction(String action) {
+		this.action = action;
 	}
 	
-	public void block() {
-		
-	}
-	
-	public void stopBlock() {
-		
-	}
-	
-	public void setWeapon(String weapon) {
-		this.weapon = weapon;
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 	
 	/* update variables here */
 	private void update() {
 		follow();
-		copyAction();
 		
 		switch(direction) {
-		case "Right":
-			if(action.equals("Run")) {
+		case "Right":			
+			switch(action) {
+			case "Run":
 				xPos = 0;
 				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
+				break;
+			
+			case "Walk":
 				xPos = 21;
 				yPos = 0;
+				break;
+				
+			case "Stand":
+				xPos = 21;
+				yPos = 0;
+				break;
+				
+			case "Block":
+				xPos = 0;
+				yPos = 0;
+				break;
+				
+			case "Attack":
+				xPos = 5;
+				yPos = 0;
+				break;
 			}
 			break;
 		
 		case "Left":
-				if(action.equals("Run")) {
+			switch(action) {
+			case "Run":
 				xPos = 0;
 				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
+				break;
+			
+			case "Walk":
 				xPos = -21;
 				yPos = 0;
+				break;
+				
+			case "Stand":
+				xPos = -21;
+				yPos = 0;
+				break;
+				
+			case "Block":
+				xPos = 0;
+				yPos = 0;
+				break;
+				
+			case "Attack":
+				xPos = -5;
+				yPos = 0;
+				break;
 			}
 			break;
 			
 		case "Up":
-			if(action.equals("Run")) {
-					xPos = 25;
+			switch(action) {
+			case "Run":
+				xPos = 25;
 				yPos = -10;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
+				break;
+			
+			case "Walk":
 				xPos = 25;
 				yPos = 0;
+				break;
+				
+			case "Stand":
+				xPos = 25;
+				yPos = 0;
+				break;
+				
+			case "Block":
+				xPos = 25;
+				yPos = 10;
+				break;
+				
+			case "Attack":
+				xPos = 25;
+				yPos = 0;
+				break;
 			}
 			break;
 			
-			case "Down":
-			if(action.equals("Run")) {
-					xPos = -25;
-				yPos = +10;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
+		case "Down":
+			switch(action) {
+			case "Run":
+				xPos = -25;
+				yPos = 10;
+				break;
+			
+			case "Walk":
 				xPos = -25;
 				yPos = 0;
+				break;
+				
+			case "Stand":
+				xPos = -25;
+				yPos = 0;
+				break;
+				
+			case "Block":
+				xPos = -25;
+				yPos = 0;
+				break;
+				
+			case "Attack":
+				xPos = -25;
+				yPos = 0;
+				break;
 			}
 			break;
 		}

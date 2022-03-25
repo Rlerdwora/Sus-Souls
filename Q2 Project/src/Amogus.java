@@ -14,7 +14,7 @@ public class Amogus{
 	private AffineTransform tx;
 	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, deathTimer, leanTimer, 
 	health, stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
-	private boolean invincible, control, running;
+	private boolean blocking, invincible, control, running;
 	private String direction, action, fileType;
 	private Shield shield;
 	private Sword sword;
@@ -26,6 +26,7 @@ public class Amogus{
 		this.y = y;
 		health = 100;
 		control = true;
+		blocking = false;
 		hurtTimer = 0;
 		attackTimer = 0;
 		deathTimer = 0;
@@ -166,6 +167,7 @@ public class Amogus{
 	
 	public void run() {
 		running = true;
+		stopShield();
 		if(xv != 0 || yv != 0) {
 			action = "Run";
 		}
@@ -190,14 +192,19 @@ public class Amogus{
 	}
 	
 	public void slash() {
-		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
+		if(attackTimer <= 0 && rollTimer == 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
 			slash.slash(direction);
 		}
 	}
 	
 	public void shield() {
-		
+		blocking = true;
+		stopRun();
+	}
+	
+	public void stopShield() {
+		blocking = false;
 	}
 	
 	public void roll() {
@@ -294,13 +301,16 @@ public class Amogus{
 
 	/* update variables here */
 	private void update() {
-		if(running == false) {
-			x += xv;
-			y += yv;
-		}else {
+		if(running == true && blocking == false) {
 			y += 2 * yv;
 			x += 2 * xv;
-		}
+		}else {
+			x += xv;
+			y += yv;
+		}		
+		
+		sword.copyAction();
+		shield.copyAction();
 		
 		if(xv == 0 && yv == 0 && health > 0 && rollTimer == 0) {
 			action = "Stand";
@@ -397,6 +407,17 @@ public class Amogus{
 		
 		if(attackTimer > 0) {
 			attackTimer --;
+			shield.setAction("Attack");
+			shield.setFileType(".png");
+			sword.setAction("Block");
+			sword.setFileType(".png");
+		}
+		
+		if(blocking == true) {
+			shield.setAction("Block");
+			sword.setAction("Block");
+			shield.setFileType(".png");
+			sword.setFileType(".png");
 		}
 		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);
@@ -408,11 +429,9 @@ public class Amogus{
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
-		//call update to update the actual picture location
 		update();
 		
-		if(health > 0 && rollTimer < 8)
+		if(health > 0 && rollTimer < 7)
 			switch(direction) {
 			case "Right":
 				shield.paint(g);
@@ -442,13 +461,13 @@ public class Amogus{
 				g2.drawImage(img, tx, null);
 				break;
 			case "Down":
-				shield.paint(g);
 				g2.drawImage(img, tx, null);
 				if(leanTimer == 0) {
 					sword.paint(g);
 				}else {
 					lean.paint(g);
 				}				
+				shield.paint(g);
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);

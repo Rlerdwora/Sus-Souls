@@ -31,24 +31,15 @@ public class Shield{
 		x = a.x();
 		y = a.y();
 		direction = a.direction();
-
+	}
+	
+	public void copyAction() {
+		action = a.action();
 		if(a.action().equals("Stand")) {
 			fileType = ".png";
 		}else {
 			fileType = ".gif";
 		}
-	}
-	
-	public void copyAction() {
-		action = a.action();
-	}
-	
-	public void block() {
-		
-	}
-	
-	public void stopBlock() {
-		
 	}
 	
 	public void setAction(String action) {
@@ -62,49 +53,125 @@ public class Shield{
 	/* update variables here */
 	private void update() {
 		follow();
-		copyAction();
 		
 		switch(direction) {
 			case "Right":
-				if(action.equals("Run")) {
-				xPos = 0;
-				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
-				xPos = 10;
-				yPos = 0;
-			}
-			break;
-		
-		case "Left":
-			if(action.equals("Run")) {
-				xPos = 0;
-				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
-				xPos = -10;
-				yPos = 0;
-			}
-			break;
+				switch(action) {
+				case "Run":
+					xPos = 0;
+					yPos = 0;
+					break;
 				
-		case "Up":
-			if(action.equals("Run")) {
-				xPos = -20;
-				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
-				xPos = -20;
-				yPos = 0;
+				case "Walk":
+					xPos = 10;
+					yPos = 0;
+					break;
+					
+				case "Stand":
+					xPos = 10;
+					yPos = 0;
+					break;
+					
+				case "Block":
+					xPos = 25;
+					yPos = 0;
+					break;
+					
+				case "Attack":
+					xPos = 5;
+					yPos = 0;
+					break;
+				}
+				
+				break;
+		
+			case "Left":
+				switch(action) {
+				case "Run":
+					xPos = 0;
+					yPos = 0;
+					break;
+				
+				case "Walk":
+					xPos = -10;
+					yPos = 0;
+					break;
+					
+				case "Stand":
+					xPos = -10;
+					yPos = 0;
+					break;
+					
+				case "Block":
+					xPos = -25;
+					yPos = 0;
+					break;
+					
+				case "Attack":
+					xPos = -5;
+					yPos = 0;
+					break;
+				}
+				break;
+					
+			case "Up":			
+				switch(action) {
+				case "Run":
+					xPos = -20;
+					yPos = 0;
+					break;
+				
+				case "Walk":
+					xPos = -20;
+					yPos = 0;
+					break;
+					
+				case "Stand":
+					xPos = -20;
+					yPos = 0;
+					break;
+					
+				case "Block":
+					xPos = -5;
+					yPos = -10;
+					break;
+					
+				case "Attack":
+					xPos = -20;
+					yPos = 0;
+					break;
+				}
+				break;
+				
+			case "Down":
+				switch(action) {
+				case "Run":
+					xPos = 20;
+					yPos = 0;
+					break;
+				
+				case "Walk":
+					xPos = 20;
+					yPos = 0;
+					break;
+					
+				case "Stand":
+					xPos = 20;
+					yPos = 0;
+					break;
+					
+				case "Block":
+					xPos = 5;
+					yPos = 10;
+					break;
+					
+				case "Attack":
+					xPos = 20;
+					yPos = 0;
+					break;
+				}
+				break;
 			}
-			break;
-			
-		case "Down":
-			if(action.equals("Run")) {
-				xPos = 20;
-				yPos = 0;
-			}else if(action.equals("Walk") || action.equals("Stand")) {
-				xPos = 20;
-				yPos = 0;
-			}
-			break;
-		}
 		
 		img = getImage("/handSprites/handShield" + action + direction + fileType);
 		init(x + xPos, y + yPos);
