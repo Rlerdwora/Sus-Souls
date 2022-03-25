@@ -17,13 +17,16 @@ import java.util.ArrayList;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	//CREATE THE OBJECT (STEP 1)
-	Amogus amogus = new Amogus(200,200);
+	Amogus amogus = new Amogus(395,200);
+	Camera camera = new Camera(amogus);
 	UI ui = new UI(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		amogus.paint(g);
 		ui.paint(g);
+		g.drawRect(200 + camera.x(), 200 + camera.y(), 10, 10);
+		camera.focus();
 	}
 	
 	public static void main(String[] arg) {

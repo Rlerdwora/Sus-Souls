@@ -283,21 +283,17 @@ public class Amogus{
 		action = "Death";
 	}
 	
-	public int x() {
-		return x;
-	}
+	public int x() {return x;}
 	
-	public int y() {
-		return y;
-	}
+	public int y() {return y;}
 	
-	public String direction() {
-		return direction;
-	}
+	public String direction() {return direction;}
 	
-	public String action() {
-		return action;
-	}
+	public String action() {return action;}
+	
+	public void setX(int x) {this.x = x;}
+	
+	public void setY(int y) {this.y = y;}
 
 	/* update variables here */
 	private void update() {
