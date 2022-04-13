@@ -16,17 +16,16 @@ import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	//CREATE THE OBJECT (STEP 1)
-	Amogus amogus = new Amogus(395,200);
+	Character amogus = new Amogus(395,200);
 	Camera camera = new Camera(amogus);
 	UI ui = new UI(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		amogus.paint(g);
-		ui.paint(g);
 		g.drawRect(200 + camera.x(), 200 + camera.y(), 10, 10);
 		camera.focus();
+		ui.paint(g);
 	}
 	
 	public static void main(String[] arg) {
@@ -112,21 +111,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//space is pressed
 		if(arg0.getKeyCode() == 32) {
-			amogus.roll();
+			((Amogus) amogus).roll();
 		}
 		
+		//j is pressed
 		if(arg0.getKeyCode() == 74) {
 			amogus.shield();
 		}
 		
 		//k i pressed
 		if(arg0.getKeyCode() == 75) {
-			amogus.lean();
+			((Amogus) amogus).lean();
 		}
 		
 		//l is pressed
 		if(arg0.getKeyCode() == 76) {
-			amogus.slash();
+			((Amogus) amogus).slash();
 		}
 	}
 

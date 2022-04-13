@@ -7,19 +7,12 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Amogus{
+public class Amogus extends Character{
 	
 	//image related variables
-	private Image img; 	
-	private AffineTransform tx;
-	private int x, y, xv, yv, hurtTimer, attackTimer, rollTimer, deathTimer, leanTimer, 
-	health, stamina, weaponSelect, width, height, HBX, HBY, HBW, HBH;
+	private int rollTimer, leanCount, leanTimer, stamina;
 	private boolean blocking, invincible, control, running;
-	private String direction, action, fileType;
-	private Shield shield;
-	private Sword sword;
-	private Lean lean;
-	private Slash slash;
+	private Hand lean;
 
 	public Amogus(int x, int y) {
 		this.x = x;
@@ -35,14 +28,12 @@ public class Amogus{
 		action = "Stand";
 		direction = "Down";
 		fileType = ".png";
-		shield = new Shield(this);
-		sword = new Sword(this);
+		weaponSelect = 0;
+		shieldSelect = 0;
+		shield.add(new Shield(this));
+		sword.add(new Sword(this));
 		lean = new Lean(this);
-		slash = new Slash(this);
-		img = getImage("/amogusSprites/amogus" + action + direction + fileType); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(this.x, this.y); 				//initialize the location of the image
-									//use your variables
+		effect.add(new Slash(this));
 	}
 	
 	public void moveRight() {
@@ -180,6 +171,7 @@ public class Amogus{
 		}
 	}
 	
+	/*
 	public void attack(Enemy e) {
 		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
 			if(e.x() < HBX + HBW && e.x() + e.width() > HBX
@@ -187,29 +179,37 @@ public class Amogus{
 				e.takeDamage();
 			}
 			attackTimer = 15;
-			slash.slash(direction);
+			//slash.slash(direction);
 		}
-	}
+	}*/
 	
 	public void slash() {
 		if(attackTimer <= 0 && rollTimer == 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
-			slash.slash(direction);
+			effect.get(weaponSelect).play();
 		}
 	}
 	
 	public void shield() {
-		blocking = true;
-		stopRun();
+		if(attackTimer == 0 && rollTimer == 0 && control == true) {
+			blocking = true;
+			if(running == true) {
+				action = "Walk";
+			}
+		}
 	}
 	
 	public void stopShield() {
 		blocking = false;
+		if(running == true) {
+			action = "Run";
+		}
 	}
 	
 	public void roll() {
 		if(control == true && rollTimer == 0) {
 			rollTimer = 23;
+			leanTimer = 0;
 			xv = 0;
 			yv = 0;
 		}
@@ -225,12 +225,12 @@ public class Amogus{
 	
 	public void takeDamage(int damage, String direction) {
 		if(invincible == false) {
-			sword.follow();
 			if(damage >= health) {
 				die();
 			}else {
 				health -= damage;
 				hurtTimer = 20;
+				running = false;
 				
 				switch(direction) {
 				case "Right":
@@ -282,21 +282,9 @@ public class Amogus{
 		fileType = ".gif";
 		action = "Death";
 	}
-	
-	public int x() {return x;}
-	
-	public int y() {return y;}
-	
-	public String direction() {return direction;}
-	
-	public String action() {return action;}
-	
-	public void setX(int x) {this.x = x;}
-	
-	public void setY(int y) {this.y = y;}
 
 	/* update variables here */
-	private void update() {
+	public void update() {
 		if(running == true && blocking == false) {
 			y += 2 * yv;
 			x += 2 * xv;
@@ -305,8 +293,9 @@ public class Amogus{
 			y += yv;
 		}		
 		
-		sword.copyAction();
-		shield.copyAction();
+		sword.get(weaponSelect).copyAction();
+		shield.get(shieldSelect).copyAction();
+		effect.get(weaponSelect).follow();
 		
 		if(xv == 0 && yv == 0 && health > 0 && rollTimer == 0) {
 			action = "Stand";
@@ -403,24 +392,23 @@ public class Amogus{
 		
 		if(attackTimer > 0) {
 			attackTimer --;
-			shield.setAction("Attack");
-			shield.setFileType(".png");
-			sword.setAction("Attack");
-			sword.setFileType(".gif");
+			shield.get(shieldSelect).setAction("Attack");
+			shield.get(shieldSelect).setFileType(".png");
+			sword.get(weaponSelect).setAction("Attack");
+			sword.get(weaponSelect).setFileType(".gif");
 		}
 		
 		if(blocking == true) {
-			shield.setAction("Block");
-			sword.setAction("Block");
-			shield.setFileType(".png");
-			sword.setFileType(".png");
+			shield.get(shieldSelect).setAction("Block");
+			sword.get(weaponSelect).setAction("Block");
+			shield.get(shieldSelect).setFileType(".png");
+			sword.get(weaponSelect).setFileType(".png");
 		}
 		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);
 		init(x,y);
 	}
 	
-	/* Drawing commands */
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -430,27 +418,27 @@ public class Amogus{
 		if(health > 0 && rollTimer < 7)
 			switch(direction) {
 			case "Right":
-				shield.paint(g);
+				shield.get(shieldSelect).paint(g);
 				g2.drawImage(img, tx, null);
 				if(leanTimer == 0) {
-					sword.paint(g);
+					sword.get(weaponSelect).paint(g);
 				}else {
 					lean.paint(g);
 				}
 				break;
 			case "Left":
 				if(leanTimer == 0) {
-					sword.paint(g);
+					sword.get(weaponSelect).paint(g);
 				}else {
 					lean.paint(g);
 				}				
 				g2.drawImage(img, tx, null);
-				shield.paint(g);
+				shield.get(shieldSelect).paint(g);
 				break;
 			case "Up":
-				shield.paint(g);
+				shield.get(shieldSelect).paint(g);
 				if(leanTimer == 0) {
-					sword.paint(g);
+					sword.get(weaponSelect).paint(g);
 				}else {
 					lean.paint(g);
 				}				
@@ -459,33 +447,16 @@ public class Amogus{
 			case "Down":
 				g2.drawImage(img, tx, null);
 				if(leanTimer == 0) {
-					sword.paint(g);
+					sword.get(weaponSelect).paint(g);
 				}else {
 					lean.paint(g);
 				}				
-				shield.paint(g);
+				shield.get(shieldSelect).paint(g);
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);
 		}
-		slash.paint(g);
+		
+		effect.get(weaponSelect).paint(g);
 	}
-
-	
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
-	}
-
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Amogus.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
-	}
-
 }

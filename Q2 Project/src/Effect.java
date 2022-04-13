@@ -1,0 +1,53 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.net.URL;
+
+public class Effect{
+	
+	//image related variables
+	public Image img; 	
+	public AffineTransform tx;
+	public int x, y, xPos, yPos, timer;
+	public String direction;
+	public Character character;
+	
+	public Effect(Character character) {
+		this.character = character;
+		timer = 0;
+		tx = AffineTransform.getTranslateInstance(x, y );
+	}
+	
+	public void follow() {
+		 x = character.x();
+		 y = character.y();
+		 direction = character.direction();
+	}
+	
+	public void play() {}
+	
+	public void update() {}
+	
+	public void paint(Graphics g) {}
+	
+	public void init(double a, double b) {
+		tx.setToTranslation(a, b);
+		tx.scale(1, 1);
+	}
+
+	public Image getImage(String path) {
+		Image tempImage = null;
+		try {
+			URL imageURL = Background.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tempImage;
+	}
+
+}

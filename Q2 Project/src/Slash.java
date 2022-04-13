@@ -7,39 +7,19 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Slash{
-	
-	//image related variables
-	private Image img; 	
-	private AffineTransform tx;
-	private int x, y, xPos, yPos, timer;
-	private String direction;
-	Amogus amogus;
+public class Slash extends Effect{
 
-	public Slash(Amogus amogus) {
-		this.x = x;
-		this.y = y;
-		this.direction = direction;
-		this.amogus = amogus;
-		timer = 0;
-		img = getImage("/effects/slashRight.gif"); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 				//initialize the location of the image
-									//use your variables
+	public Slash(Character character) {
+		super(character);
 	}
 	
-	public void follow() {
-		 x = amogus.x();
-		 y = amogus.y();
-	}
-	
-	public void slash(String direction) {
+	public void play() {
 		timer = 8;
-		this.direction = direction;
+		direction = character.direction();
 	}
 	
 	/* update variables here */
-	private void update() {
+	public void update() {
 		follow();
 		
 		switch(direction) {
@@ -79,22 +59,4 @@ public class Slash{
 			timer --;
 		}
 	}
-
-	
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
-	}
-
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Background.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
-	}
-
 }
