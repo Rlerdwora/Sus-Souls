@@ -12,7 +12,7 @@ public class Character{
 	
 	//image related variables
 	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health,
-	weaponSelect, shieldSelect, hurtTimer, attackTimer, deathTimer, detectRange;
+	weaponSelect, shieldSelect, hurtTimer, attackTimer, deathTimer, detectRange, combatRange;
 	public boolean blocking, invincible;
 	public String direction, action, fileType;
 	public ArrayList<Hand> shield = new ArrayList<Hand>(), sword = new ArrayList<Hand>();
@@ -95,15 +95,24 @@ public class Character{
 		}
 	}
 	
-	public void follow(Character focus) {
-		if(focus.hurtBoxX() > hurtBoxX + hurtBoxW) {
-			moveRight();
-		}else if(hurtBoxX() + hurtBoxW() < hurtBoxX) {
-			moveLeft();
+	public void follow() {
+		int xDiff = (Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2);
+		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY + Camera.y() + hurtBoxH/2);
+		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) <= combatRange) {
+			stopMove();
 		}else {
-			xv = 0;
+			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange > hurtBoxX + Camera.x() + hurtBoxW/2){
+				moveRight();
+			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange < hurtBoxX + Camera.x() + hurtBoxW/2){
+				moveLeft();
+			}
+			
+			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange > hurtBoxY + Camera.y() + hurtBoxH/2){
+				moveDown();
+			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange < hurtBoxY + Camera.y() + hurtBoxH/2){
+				moveUp();
+			}
 		}
-		
 	}
 	
 	public void init(double a, double b) {

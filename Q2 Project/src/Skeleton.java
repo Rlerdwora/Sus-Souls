@@ -23,6 +23,7 @@ public class Skeleton extends Character{
 		randomTimer = 10;
 		weaponSelect = 0;
 		detectRange = 300;
+		combatRange = 90;
 		action = "Stand";
 		direction = "Right";
 		fileType = ".png";
@@ -52,6 +53,7 @@ public class Skeleton extends Character{
 	}
 	
 	public void moveUp() {
+		fileType = ".gif";
 		if(xv == 0) {
 			yv = -4;
 			direction = "Up";
@@ -214,10 +216,36 @@ public class Skeleton extends Character{
 	public void update() {
 		
 		if(detect() == true) {
-			xv = 0;
-			yv = 0;
+			stopMove();
+			follow();
 		}else {
 			moveRandom();
+		}
+		
+		if(xv == 0) {
+			if(yv > 0) {
+				yv = 4;
+			}else if(yv < 0) {
+				yv = -4;
+			}
+		}else if(xv > 0) {
+			xv = 4;
+			if(yv > 0) {
+				yv = 3;
+				xv = 3;
+			}else if(yv < 0) {
+				yv = -3;
+				xv = 3;
+			}
+		}else if(xv < 0) {
+			xv = -4;
+			if(yv > 0) {
+				yv = 3;
+				xv = -3;
+			}else if(yv < 0) {
+				yv = -3;
+				xv = -3;
+			}
 		}
 		
 		x += xv;
@@ -237,37 +265,6 @@ public class Skeleton extends Character{
 		
 		sword.get(weaponSelect).copyAction();
 		effect.get(weaponSelect).follow();
-		
-		if(yv == 0 && xv < 0) {
-			xv = -4;
-		}else if(yv == 0 && xv > 0) {
-			xv = 4;
-		}else if(yv < 0 && xv == 0) {
-			yv = -4;
-		}else if(yv > 0 && xv == 0) {
-			yv = 4;
-		}else if(yv < 0 && xv < 0) {
-			yv = -3;
-			xv = -3;
-		}else if(yv < 0 && xv > 0) {
-			yv = -3;
-			xv = 3;
-		}else if(yv > 0 && xv < 0) {
-			yv = 3;
-			xv = -3;
-		}else if(yv > 0 && xv > 0) {
-			yv = 3;
-			xv = 3;
-		}
-		
-		if(hurtTimer > 0) {
-			if(hurtTimer == 1) {
-				invincible = false;
-			}else {
-				invincible = true;
-			}
-			hurtTimer --;
-		}
 		
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {
@@ -317,7 +314,8 @@ public class Skeleton extends Character{
 		}else {
 			g2.drawImage(img, tx, null);
 		}
-		
+		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - combatRange, hurtBoxY + hurtBoxH/2 + Camera.y() - combatRange, combatRange * 2, combatRange * 2);
+		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - detectRange, hurtBoxY + hurtBoxH/2 + Camera.y() - detectRange, detectRange * 2, detectRange * 2);
 		g.drawRect(hurtBoxX + Camera.x(), hurtBoxY + Camera.y(), hurtBoxW, hurtBoxH);
 		effect.get(weaponSelect).paint(g);
 	}

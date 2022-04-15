@@ -303,26 +303,30 @@ public class Amogus extends Character{
 			fileType = ".png";
 		}
 		
-		if(yv == 0 && xv < 0) {
-			xv = -4;
-		}else if(yv == 0 && xv > 0) {
+		if(xv == 0) {
+			if(yv > 0) {
+				yv = 4;
+			}else if(yv < 0) {
+				yv = -4;
+			}
+		}else if(xv > 0) {
 			xv = 4;
-		}else if(yv < 0 && xv == 0) {
-			yv = -4;
-		}else if(yv > 0 && xv == 0) {
-			yv = 4;
-		}else if(yv < 0 && xv < 0) {
-			yv = -3;
-			xv = -3;
-		}else if(yv < 0 && xv > 0) {
-			yv = -3;
-			xv = 3;
-		}else if(yv > 0 && xv < 0) {
-			yv = 3;
-			xv = -3;
-		}else if(yv > 0 && xv > 0) {
-			yv = 3;
-			xv = 3;
+			if(yv > 0) {
+				yv = 3;
+				xv = 3;
+			}else if(yv < 0) {
+				yv = -3;
+				xv = 3;
+			}
+		}else if(xv < 0) {
+			xv = -4;
+			if(yv > 0) {
+				yv = 3;
+				xv = -3;
+			}else if(yv < 0) {
+				yv = -3;
+				xv = -3;
+			}
 		}
 		
 		if(rollTimer > 0) {
