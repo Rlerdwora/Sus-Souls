@@ -17,6 +17,8 @@ public class Amogus extends Character{
 	public Amogus(int x, int y) {
 		this.x = x;
 		this.y = y;
+		hurtBoxW = 50;
+		hurtBoxH = 70;
 		health = 100;
 		control = true;
 		blocking = false;
@@ -38,10 +40,10 @@ public class Amogus extends Character{
 	
 	public void moveRight() {
 		if(control == true) {
-			if(running == false) {
-				action = "Walk";
-			}else {
+			if(running == true && blocking == false) {
 				action = "Run";
+			}else {
+				action = "Walk";
 			}
 			if(yv == 0) {
 				direction = "Right";
@@ -57,10 +59,10 @@ public class Amogus extends Character{
 	
 	public void moveLeft() {
 		if(control == true) {
-			if(running == false) {
-				action = "Walk";
-			}else {
+			if(running == true && blocking == false) {
 				action = "Run";
+			}else {
+				action = "Walk";
 			}
 			if(yv == 0) {
 				direction = "Left";
@@ -76,10 +78,10 @@ public class Amogus extends Character{
 	
 	public void moveUp() {
 		if(control == true) {
-			if(running == false) {
-				action = "Walk";
-			}else {
+			if(running == true && blocking == false) {
 				action = "Run";
+			}else {
+				action = "Walk";
 			}
 			if(xv == 0) {
 				direction = "Up";
@@ -95,10 +97,10 @@ public class Amogus extends Character{
 	
 	public void moveDown() {
 		if(control == true) {
-			if(running == false) {
-				action = "Walk";
-			}else {
+			if(running == true && blocking == false) {
 				action = "Run";
+			}else {
+				action = "Walk";
 			}
 			if(xv == 0) {
 				direction = "Down";
@@ -291,11 +293,10 @@ public class Amogus extends Character{
 		}else {
 			x += xv;
 			y += yv;
-		}		
+		}	
 		
-		sword.get(weaponSelect).copyAction();
-		shield.get(shieldSelect).copyAction();
-		effect.get(weaponSelect).follow();
+		hurtBoxX = x + 16;
+		hurtBoxY = y + 6;
 		
 		if(xv == 0 && yv == 0 && health > 0 && rollTimer == 0) {
 			action = "Stand";
@@ -390,6 +391,10 @@ public class Amogus extends Character{
 			}
 		}
 		
+		sword.get(weaponSelect).copyAction();
+		shield.get(shieldSelect).copyAction();
+		effect.get(weaponSelect).follow();
+		
 		if(attackTimer > 0) {
 			attackTimer --;
 			shield.get(shieldSelect).setAction("Attack");
@@ -441,7 +446,7 @@ public class Amogus extends Character{
 					sword.get(weaponSelect).paint(g);
 				}else {
 					lean.paint(g);
-				}				
+				}
 				g2.drawImage(img, tx, null);
 				break;
 			case "Down":
@@ -456,6 +461,8 @@ public class Amogus extends Character{
 		}else {
 			g2.drawImage(img, tx, null);
 		}
+		
+		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
 		
 		effect.get(weaponSelect).paint(g);
 	}

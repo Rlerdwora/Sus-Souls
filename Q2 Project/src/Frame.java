@@ -16,12 +16,14 @@ import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	Character amogus = new Amogus(395,200);
+	static Character amogus = new Amogus(395,200);
+	Character skeleton = new Skeleton(100,100);
 	Camera camera = new Camera(amogus);
 	UI ui = new UI(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		skeleton.paint(g);
 		amogus.paint(g);
 		g.drawRect(200 + camera.x(), 200 + camera.y(), 10, 10);
 		camera.focus();

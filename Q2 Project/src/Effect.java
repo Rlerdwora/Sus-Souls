@@ -30,6 +30,10 @@ public class Effect{
 	
 	public void play() {}
 	
+	public void stop() {
+		timer = 0;
+	}
+	
 	public void update() {}
 	
 	public void paint(Graphics g) {}

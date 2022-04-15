@@ -18,6 +18,7 @@ public class Hand{
 
 	public Hand(Character character) {
 		this.character = character;
+		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	
 	public void follow() {
