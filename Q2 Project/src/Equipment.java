@@ -7,13 +7,13 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class UI{
+public class Equipment{
 	
 	//image related variables
 	private Image leftHand, rightHand, down; 	
 	private AffineTransform tx1, tx2, tx3;
 
-	public UI(int x, int y) {
+	public Equipment(int x, int y) {
 		leftHand = getImage("/UI/shieldIcon.png");
 		rightHand = getImage("/UI/swordIcon.png");
 		down = getImage("/UI/leanIcon.png");
@@ -54,7 +54,7 @@ public class UI{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = UI.class.getResource(path);
+			URL imageURL = Background.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

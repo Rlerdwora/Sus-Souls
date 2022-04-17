@@ -16,18 +16,21 @@ import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
+	Color red = new Color(255,0,0);
 	static Character amogus = new Amogus(395,200);
+	Bar bar = new Bar(10,10, Frame.amogus.health(), red);
 	Character skeleton = new Skeleton(100,100);
 	Camera camera = new Camera(amogus);
-	UI ui = new UI(10,520);
+	Equipment equipment = new Equipment(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		bar.paint(g);
 		skeleton.paint(g);
 		amogus.paint(g);
 		g.drawRect(200 + camera.x(), 200 + camera.y(), 10, 10);
 		camera.focus();
-		ui.paint(g);
+		equipment.paint(g);
 	}
 	
 	public static void main(String[] arg) {

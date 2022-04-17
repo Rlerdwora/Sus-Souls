@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.awt.Color;
 
 public class Skeleton extends Character{
 
@@ -314,8 +315,11 @@ public class Skeleton extends Character{
 		}else {
 			g2.drawImage(img, tx, null);
 		}
+		g.setColor(new Color(255,0,0));
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - combatRange, hurtBoxY + hurtBoxH/2 + Camera.y() - combatRange, combatRange * 2, combatRange * 2);
+		g.setColor(new Color(0,255,0));
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - detectRange, hurtBoxY + hurtBoxH/2 + Camera.y() - detectRange, detectRange * 2, detectRange * 2);
+		g.setColor(new Color(0,0,0));
 		g.drawRect(hurtBoxX + Camera.x(), hurtBoxY + Camera.y(), hurtBoxW, hurtBoxH);
 		effect.get(weaponSelect).paint(g);
 	}

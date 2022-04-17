@@ -57,8 +57,6 @@ public class Character{
 	
 	public void attack() {}
 	
-	public void update() {}
-	
 	public void takeDamage() {}
 	
 	public void die() {}
@@ -79,11 +77,11 @@ public class Character{
 	
 	public String direction() {return direction;}
 	
+	public int health() {return health;}
+	
 	public void setX(int x) {this.x = x;}
 	
 	public void setY(int y) {this.y = y;}
-	
-	public void paint(Graphics g) {}
 	
 	public boolean detect() {
 		int xDiff = Math.abs((Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2));
@@ -114,6 +112,10 @@ public class Character{
 			}
 		}
 	}
+	
+	public void update() {}
+	
+	public void paint(Graphics g) {}
 	
 	public void init(double a, double b) {
 		tx.setToTranslation(a, b);

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -37,6 +38,8 @@ public class Amogus extends Character{
 		lean = new Lean(this);
 		effect.add(new Slash(this));
 	}
+	
+	public int stamina() {return stamina;}
 	
 	public void moveRight() {
 		if(control == true) {
@@ -466,6 +469,7 @@ public class Amogus extends Character{
 			g2.drawImage(img, tx, null);
 		}
 		
+		g.setColor(new Color(0,0,0));
 		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
 		
 		effect.get(weaponSelect).paint(g);

@@ -36,7 +36,16 @@ public class Effect{
 	
 	public void update() {}
 	
-	public void paint(Graphics g) {}
+	public void paint(Graphics g) {
+		//these are the 2 lines of code needed draw an image on the screen
+		Graphics2D g2 = (Graphics2D) g;		
+		
+		if(timer > 0) {
+			update();
+			g2.drawImage(img, tx, null);
+			timer --;
+		}
+	}
 	
 	public void init(double a, double b) {
 		tx.setToTranslation(a, b);

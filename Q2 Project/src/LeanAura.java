@@ -11,6 +11,7 @@ public class LeanAura extends Effect{
 
 	public LeanAura(Character character) {
 		super(character);
+		img = getImage("/effects/leanAura.gif");
 	}
 	
 	public void play() {
@@ -21,42 +22,6 @@ public class LeanAura extends Effect{
 	public void update() {
 		follow();
 		
-		/*
-		switch(direction) {
-		case "Right":
-			xPos = 50;
-			yPos = 0;
-			break;
-			
-		case "Left":
-			xPos = -50;
-			yPos = 0;
-			break;
-			
-		case "Up":
-			xPos = 0;
-			yPos = -45;
-			break;
-			
-		case "Down":
-			xPos = 0;
-			yPos = 45;
-			break;
-		}*/
-		
-		img = getImage("/effects/leanAura.gif");
 		init(x, y);
-	}
-	
-	/* Drawing commands */
-	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;		
-		
-		if(timer > 0) {
-			update();
-			g2.drawImage(img, tx, null);
-			timer --;
-		}
 	}
 }
