@@ -19,7 +19,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Color red = new Color(255,0,0);
 	static Character amogus = new Amogus(395,200);
 	Bar bar = new Bar(10,10, Frame.amogus.health(), red);
-	Character skeleton = new Skeleton(100,100);
+	Character skeleton = new Skeleton(0,0);
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
 

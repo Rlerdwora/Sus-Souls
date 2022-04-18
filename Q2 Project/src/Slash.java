@@ -20,8 +20,6 @@ public class Slash extends Effect{
 	
 	/* update variables here */
 	public void update() {
-		follow();
-		
 		switch(direction) {
 		case "Right":
 			xPos = 50;
@@ -45,7 +43,7 @@ public class Slash extends Effect{
 		}
 		
 		img = getImage("/effects/slash" + direction + ".gif");
-		init(x + xPos, y + yPos);
+		init(x + xPos,y + yPos);
 	}
 	
 	/* Drawing commands */

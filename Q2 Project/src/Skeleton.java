@@ -129,7 +129,7 @@ public class Skeleton extends Character{
 		}
 	}*/
 	
-	public void slash() {
+	public void attack() {
 		if(attackTimer <= 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
 			effect.get(weaponSelect).play();
@@ -265,7 +265,8 @@ public class Skeleton extends Character{
 		}
 		
 		sword.get(weaponSelect).copyAction();
-		effect.get(weaponSelect).follow();
+		effect.get(weaponSelect).x = x + Camera.x();
+		effect.get(weaponSelect).y = y + Camera.y();
 		
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {

@@ -98,6 +98,7 @@ public class Character{
 		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY + Camera.y() + hurtBoxH/2);
 		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) <= combatRange) {
 			stopMove();
+			attack();
 		}else {
 			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange > hurtBoxX + Camera.x() + hurtBoxW/2){
 				moveRight();
