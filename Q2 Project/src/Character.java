@@ -96,21 +96,31 @@ public class Character{
 	public void follow() {
 		int xDiff = (Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2);
 		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY + Camera.y() + hurtBoxH/2);
-		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) <= combatRange) {
-			stopMove();
-			attack();
-		}else {
-			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange > hurtBoxX + Camera.x() + hurtBoxW/2){
+		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) > combatRange) {
+			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX + Camera.x() + hurtBoxW/2){
 				moveRight();
-			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange < hurtBoxX + Camera.x() + hurtBoxW/2){
+			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX + Camera.x() + hurtBoxW/2){
 				moveLeft();
 			}
 			
-			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange > hurtBoxY + Camera.y() + hurtBoxH/2){
+			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY + Camera.y() + hurtBoxH/2){
 				moveDown();
-			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange < hurtBoxY + Camera.y() + hurtBoxH/2){
+			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY + Camera.y() + hurtBoxH/2){
 				moveUp();
 			}
+		}else {
+			stopMove();
+			attack();
+		}
+	}
+	
+	public boolean checkHitBox(Character character) {
+		if(character.getClass().equals("class Amogus")) {
+			return(hitBoxX + hitBoxW + Camera.x() < character.hitBoxX && hitBoxX + Camera.x() > character.hitBoxX + character.hitBoxW
+				&& hitBoxY + hitBoxH + Camera.y() < character.hitBoxY && hitBoxY + Camera.y() > character.hitBoxY + character.hitBoxH);
+		}else {
+			return(hitBoxX + hitBoxW < character.hitBoxX + Camera.x() && hitBoxX > character.hitBoxX + character.hitBoxW + Camera.x()
+				&& hitBoxY + hitBoxH < character.hitBoxY + Camera.y() && hitBoxY > character.hitBoxY + character.hitBoxH + Camera.y());
 		}
 	}
 	
