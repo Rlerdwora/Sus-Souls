@@ -12,7 +12,8 @@ public class Character{
 	
 	//image related variables
 	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health, maxHealth,
-	weaponSelect, shieldSelect, hurtTimer, attackTimer, recoilTimer, deathTimer, detectRange, combatRange, stamina;
+	weaponSelect, shieldSelect, hurtTimer, attackTimer, recoilTimer, deathTimer, detectRange, combatRange, staminaRegenTimer;
+	public double stamina, staminaRegen, maxStamina;
 	public boolean blocking, invincible;
 	public String direction, action, fileType;
 	public ArrayList<Hand> shield = new ArrayList<Hand>(), sword = new ArrayList<Hand>();
@@ -84,6 +85,28 @@ public class Character{
 	public void setX(int x) {this.x = x;}
 	
 	public void setY(int y) {this.y = y;}
+	
+	public void decreaseStamina(double decrease) {
+		if(stamina - decrease < 0) {
+			stamina = 0;
+		}else {
+			stamina -= decrease;
+		}
+		staminaRegenTimer = 20;
+	}
+	
+	public void regenStamina() {
+		if(staminaRegenTimer > 0) {
+			staminaRegenTimer --;
+		}
+		if(staminaRegenTimer == 0) {
+			if(stamina + staminaRegen > maxStamina) {
+				stamina = maxStamina;
+			}else {
+				stamina += staminaRegen;
+			}
+		}
+	}
 	
 	public boolean detect() {
 		int xDiff = Math.abs((Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2));

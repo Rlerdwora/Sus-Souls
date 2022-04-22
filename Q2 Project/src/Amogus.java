@@ -22,7 +22,10 @@ public class Amogus extends Character{
 		hurtBoxH = 70;
 		health = 100;
 		stamina = 50;
-		maxHealth = 100;
+		staminaRegen = 1;
+		staminaRegenTimer = 0;
+		maxHealth = health;
+		maxStamina = stamina;
 		control = true;
 		blocking = false;
 		hurtTimer = 0;
@@ -41,8 +44,6 @@ public class Amogus extends Character{
 		lean = new Lean(this);
 		effect.add(new Slash(this));
 	}
-	
-	public int stamina() {return stamina;}
 	
 	public void moveRight() {
 		if(control == true) {
@@ -180,8 +181,9 @@ public class Amogus extends Character{
 	}
 	
 	public void attack() {
-		if(attackTimer <= 0 && health > 0 && blocking == false) {
+		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5) {
 			attackTimer = 15;
+			decreaseStamina(5);
 			effect.get(weaponSelect).play();
 			switch(direction) {
 			case "Right":
@@ -212,6 +214,7 @@ public class Amogus extends Character{
 				hitBoxH = 40;
 				break;
 			}
+			
 			for(Character character : Frame.enemies) {
 				System.out.println(checkHitBox(character));
 				if(checkHitBox(character)){
@@ -238,16 +241,17 @@ public class Amogus extends Character{
 	}
 	
 	public void roll() {
-		if(control == true && rollTimer == 0) {
+		if(control == true && rollTimer == 0 && stamina >= 20) {
 			rollTimer = 23;
 			leanTimer = 0;
 			xv = 0;
 			yv = 0;
+			decreaseStamina(20);
 		}
 	}
 	
 	public void lean() {
-		if(control) {
+		if(control && leanTimer == 0) {
 			leanTimer = 60;
 			xv = 0;
 			yv = 0;
@@ -284,8 +288,9 @@ public class Amogus extends Character{
 				break;
 			}
 		}
-		
-		if(invincible == false && health > 0 && blocked == false) {
+		if(blocked == true) {
+			decreaseStamina(damage / 2);
+		}else if(invincible == false && health > 0) {
 			if(damage >= health) {
 				die();
 			}else {
@@ -344,12 +349,15 @@ public class Amogus extends Character{
 		action = "Death";
 	}
 
-	/* update variables here */
 	public void update() {
-		if(running == true && blocking == false) {
+		if(running == true && blocking == false && stamina >= .5) {
 			y += 2 * yv;
 			x += 2 * xv;
+			if(xv != 0 || yv != 0) {
+				decreaseStamina(.5);
+			}
 		}else {
+			stopRun();
 			x += xv;
 			y += yv;
 		}	
@@ -479,6 +487,8 @@ public class Amogus extends Character{
 			shield.get(shieldSelect).setFileType(".png");
 			sword.get(weaponSelect).setFileType(".png");
 		}
+		
+		regenStamina();
 		
 		img = getImage("/amogusSprites/amogus" + action + direction + fileType);
 		init(x,y);

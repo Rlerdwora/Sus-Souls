@@ -21,14 +21,14 @@ public class Bar{
 		this.color = color;
 		maxValue = value;
 		barSegments.add(new BarSegment(x, y, "start"));
-		length = barSegments.get(0).length();
-		for(int i = 0; i < length; i ++) {
-			BarSegment barSegment = new BarSegment(x + length, y, "middle");
+		this.length = barSegments.get(0).length();
+		for(int i = 0; i < length - 1; i ++) {
+			BarSegment barSegment = new BarSegment(x + this.length, y, "middle");
 			barSegments.add(barSegment);
-			length += barSegment.length();
+			this.length += barSegment.length();
 		}
-		barSegments.add(new BarSegment(x + length, y, "end"));
-		length += barSegments.get(barSegments.size() - 1).length();
+		barSegments.add(new BarSegment(x + this.length, y, "end"));
+		this.length += barSegments.get(barSegments.size() - 1).length();
 	}
 	
 	public void updateValue(int value) {
