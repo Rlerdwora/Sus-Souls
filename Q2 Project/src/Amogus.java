@@ -11,7 +11,7 @@ import java.net.URL;
 public class Amogus extends Character{
 	
 	//image related variables
-	private int rollTimer, leanCount, leanTimer, stamina;
+	private int rollTimer, leanCount, leanTimer;
 	private boolean blocking, invincible, control, running;
 	private Hand lean;
 
@@ -25,6 +25,7 @@ public class Amogus extends Character{
 		blocking = false;
 		hurtTimer = 0;
 		attackTimer = 0;
+		recoilTimer = 0;
 		deathTimer = 0;
 		leanTimer = 0;
 		weaponSelect = 0;
@@ -188,10 +189,45 @@ public class Amogus extends Character{
 		}
 	}*/
 	
-	public void slash() {
-		if(attackTimer <= 0 && rollTimer == 0 && health > 0 && blocking == false) {
+	public void attack() {
+		if(attackTimer <= 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
 			effect.get(weaponSelect).play();
+			switch(direction) {
+			case "Right":
+				hitBoxX = hurtBoxX + hurtBoxW + 20;
+				hitBoxY = hurtBoxY - 10;
+				hitBoxW = 40;
+				hitBoxH = 90;
+				break;
+				
+			case "Left":
+				hitBoxX = hurtBoxX - hitBoxW - 20;
+				hitBoxY = hurtBoxY - 10;		
+				hitBoxW = 40;
+				hitBoxH = 90;
+				break;
+				
+			case "Up":
+				hitBoxX = hurtBoxX - 20;
+				hitBoxY = hurtBoxY - hurtBoxH + 20;
+				hitBoxW = 90;
+				hitBoxH = 40;
+				break;
+				
+			case "Down":
+				hitBoxX = hurtBoxX - 20;
+				hitBoxY = hurtBoxY + hurtBoxH + 20;
+				hitBoxW = 90;
+				hitBoxH = 40;
+				break;
+			}
+			for(Character character : Frame.enemies) {
+				System.out.println(checkHitBox(character));
+				if(checkHitBox(character)){
+					character.takeDamage(10, direction);
+				}
+			}
 		}
 	}
 	
@@ -229,7 +265,7 @@ public class Amogus extends Character{
 	}
 	
 	public void takeDamage(int damage, String direction) {
-		if(invincible == false) {
+		if(invincible == false && health > 0) {
 			if(damage >= health) {
 				die();
 			}else {
@@ -239,19 +275,19 @@ public class Amogus extends Character{
 				
 				switch(direction) {
 				case "Right":
-					x += 10;
+					x += 1;
 					break;
 				
 				case "Left":
-					x -= 10;
+					x -= 1;
 					break;
 					
 				case "Up":
-					y -= 10;
+					y -= 1;
 					break;
 					
 				case "Down":
-					y += 10;
+					y += 1;
 					break;
 				}
 			}
@@ -470,6 +506,7 @@ public class Amogus extends Character{
 		}
 		
 		g.setColor(new Color(0,0,0));
+		g.drawRect(hitBoxX, hitBoxY, hitBoxW, hitBoxH);
 		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
 		
 		effect.get(weaponSelect).paint(g);

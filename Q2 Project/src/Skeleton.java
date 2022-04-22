@@ -17,9 +17,12 @@ public class Skeleton extends Character{
 		this.y = y;
 		hurtBoxW = 50;
 		hurtBoxH = 70;
+		hitBoxW = 40;
+		hitBoxH = 90;
 		health = 100;
 		hurtTimer = 0;
 		attackTimer = 0;
+		recoilTimer = 0;
 		deathTimer = 0;
 		randomTimer = 10;
 		weaponSelect = 0;
@@ -117,48 +120,68 @@ public class Skeleton extends Character{
 		}
 	}
 	
-	/*
-	public void attack(Enemy e) {
-		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
-			if(e.x() < HBX + HBW && e.x() + e.width() > HBX
-			&& e.y() < HBY + HBH && e.y() + e.height() > HBY) {
-				e.takeDamage();
-			}
-			attackTimer = 15;
-			//slash.slash(direction);
-		}
-	}*/
-	
 	public void attack() {
 		if(attackTimer <= 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
 			effect.get(weaponSelect).play();
+			switch(direction) {
+			case "Right":
+				hitBoxX = hurtBoxX + hurtBoxW + 20;
+				hitBoxY = hurtBoxY - 10;
+				hitBoxW = 40;
+				hitBoxH = 90;
+				break;
+				
+			case "Left":
+				hitBoxX = hurtBoxX - hitBoxW - 20;
+				hitBoxY = hurtBoxY - 10;		
+				hitBoxW = 40;
+				hitBoxH = 90;
+				break;
+				
+			case "Up":
+				hitBoxX = hurtBoxX - 20;
+				hitBoxY = hurtBoxY - hurtBoxH + 20;
+				hitBoxW = 90;
+				hitBoxH = 40;
+				break;
+				
+			case "Down":
+				hitBoxX = hurtBoxX - 20;
+				hitBoxY = hurtBoxY + hurtBoxH + 20;
+				hitBoxW = 90;
+				hitBoxH = 40;
+				break;
+			}
+			
+			if(checkHitBox(Frame.amogus)) {
+				Frame.amogus.takeDamage(10, direction);
+			}
 		}
 	}
 	
 	public void takeDamage(int damage, String direction) {
-		if(invincible == false) {
+		if(invincible == false && health > 0) {
 			if(damage >= health) {
 				die();
 			}else {
 				health -= damage;
-				hurtTimer = 20;
 				
 				switch(direction) {
 				case "Right":
-					x += 10;
+					x += 1;
 					break;
 				
 				case "Left":
-					x -= 10;
+					x -= 1;
 					break;
 					
 				case "Up":
-					y -= 10;
+					y -= 1;
 					break;
 					
 				case "Down":
-					y += 10;
+					y += 1;
 					break;
 				}
 			}
@@ -169,7 +192,7 @@ public class Skeleton extends Character{
 		health = 0;
 		attackTimer = 0;
 		hurtTimer = 0;
-		deathTimer = 30;
+		deathTimer = 22;
 		xv = 0;
 		yv = 0;
 		fileType = ".gif";
@@ -216,11 +239,13 @@ public class Skeleton extends Character{
 	/* update variables here */
 	public void update() {
 		
-		if(detect() == true) {
-			stopMove();
-			follow();
-		}else {
-			moveRandom();
+		if(health > 0) {
+			if(detect() == true) {
+				stopMove();
+				follow();
+			}else {
+				moveRandom();
+			}
 		}
 		
 		if(xv == 0) {
@@ -318,6 +343,7 @@ public class Skeleton extends Character{
 		}
 		g.setColor(new Color(255,0,0));
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - combatRange, hurtBoxY + hurtBoxH/2 + Camera.y() - combatRange, combatRange * 2, combatRange * 2);
+		g.drawRect(hitBoxX + Camera.x(), hitBoxY + Camera.y(), hitBoxW, hitBoxH);
 		g.setColor(new Color(0,255,0));
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - detectRange, hurtBoxY + hurtBoxH/2 + Camera.y() - detectRange, detectRange * 2, detectRange * 2);
 		g.setColor(new Color(0,0,0));

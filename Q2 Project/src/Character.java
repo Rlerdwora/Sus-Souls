@@ -12,7 +12,7 @@ public class Character{
 	
 	//image related variables
 	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health,
-	weaponSelect, shieldSelect, hurtTimer, attackTimer, deathTimer, detectRange, combatRange;
+	weaponSelect, shieldSelect, hurtTimer, attackTimer, recoilTimer, deathTimer, detectRange, combatRange, stamina;
 	public boolean blocking, invincible;
 	public String direction, action, fileType;
 	public ArrayList<Hand> shield = new ArrayList<Hand>(), sword = new ArrayList<Hand>();
@@ -53,11 +53,13 @@ public class Character{
 	
 	public void stopShield() {}
 	
+	public void stagger() {}
+	
 	public void drink() {}
 	
 	public void attack() {}
 	
-	public void takeDamage() {}
+	public void takeDamage(int damage, String direction) {}
 	
 	public void die() {}
 	
@@ -109,18 +111,29 @@ public class Character{
 				moveUp();
 			}
 		}else {
+			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX + Camera.x() + hurtBoxW/2){
+				direction = "Right";
+			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX + Camera.x() + hurtBoxW/2){
+				direction = "Left";
+			}
+			
+			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY + Camera.y() + hurtBoxH/2){
+				direction = "Down";
+			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY + Camera.y() + hurtBoxH/2){
+				direction = "Up";
+			}
 			stopMove();
 			attack();
 		}
 	}
 	
 	public boolean checkHitBox(Character character) {
-		if(character.getClass().equals("class Amogus")) {
-			return(hitBoxX + hitBoxW + Camera.x() < character.hitBoxX && hitBoxX + Camera.x() > character.hitBoxX + character.hitBoxW
-				&& hitBoxY + hitBoxH + Camera.y() < character.hitBoxY && hitBoxY + Camera.y() > character.hitBoxY + character.hitBoxH);
+		if(character == Frame.amogus) {
+			return(hitBoxX + hitBoxW + Camera.x() > character.hurtBoxX && hitBoxX + Camera.x() < character.hurtBoxX + character.hurtBoxW
+				&& hitBoxY + hitBoxH + Camera.y() > character.hurtBoxY && hitBoxY + Camera.y() < character.hurtBoxY + character.hurtBoxH);
 		}else {
-			return(hitBoxX + hitBoxW < character.hitBoxX + Camera.x() && hitBoxX > character.hitBoxX + character.hitBoxW + Camera.x()
-				&& hitBoxY + hitBoxH < character.hitBoxY + Camera.y() && hitBoxY > character.hitBoxY + character.hitBoxH + Camera.y());
+			return(hitBoxX + hitBoxW > character.hurtBoxX + Camera.x() && hitBoxX < character.hurtBoxX + character.hurtBoxW + Camera.x()
+				&& hitBoxY + hitBoxH > character.hurtBoxY  + Camera.y() && hitBoxY < character.hurtBoxY + character.hurtBoxH + Camera.y());		
 		}
 	}
 	

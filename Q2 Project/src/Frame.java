@@ -17,18 +17,20 @@ import java.util.ArrayList;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	Color red = new Color(255,0,0);
-	static Character amogus = new Amogus(395,200);
+	static Character amogus = new Amogus(400,400);
+	static ArrayList<Character> enemies = new ArrayList<Character>();
 	Bar bar = new Bar(10,10, Frame.amogus.health(), red);
-	Character skeleton = new Skeleton(0,0);
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		bar.updateValue(amogus.health());
 		bar.paint(g);
-		skeleton.paint(g);
+		for(Character c : enemies) {
+			c.paint(g);
+		}
 		amogus.paint(g);
-		g.drawRect(200 + camera.x(), 200 + camera.y(), 10, 10);
 		camera.focus();
 		equipment.paint(g);
 	}
@@ -50,7 +52,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-		
+		enemies.add(new Skeleton(0,0));
 	}
 	
 	@Override
@@ -131,7 +133,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//l is pressed
 		if(arg0.getKeyCode() == 76) {
-			((Amogus) amogus).slash();
+			((Amogus) amogus).attack();
 		}
 	}
 

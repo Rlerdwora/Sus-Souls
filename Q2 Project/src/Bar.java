@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Bar{
 	private Color color;
-	private int x, y, value, length;
+	private int x, y, maxValue, value, length;
 	private ArrayList<BarSegment> barSegments = new ArrayList<BarSegment>();
 
 	public Bar(int x, int y, int value, Color color) {
@@ -19,6 +19,7 @@ public class Bar{
 		this.y = y;
 		this.value = value;
 		this.color = color;
+		maxValue = value;
 		barSegments.add(new BarSegment(x, y, "start"));
 		length = barSegments.get(0).length();
 		for(int i = 0; i < 10; i ++) {
@@ -30,9 +31,19 @@ public class Bar{
 		length += barSegments.get(barSegments.size() - 1).length();
 	}
 	
+	public void updateValue(int value) {
+		this.value = value;
+	}
+	
+	public void increase() {
+		
+	}
+	
 	public void paint(Graphics g) {
 		g.setColor(color);
-		g.fillRect(x, y, value * length / value, (int) (30 * .75));
+		if(value != 0) {
+			g.fillRect(x, y, value * length / maxValue, (int) (30 * .75));
+		}
 		for(BarSegment barSegment : barSegments) {
 			barSegment.paint(g);
 		}
