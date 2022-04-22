@@ -21,6 +21,8 @@ public class Amogus extends Character{
 		hurtBoxW = 50;
 		hurtBoxH = 70;
 		health = 100;
+		stamina = 50;
+		maxHealth = 100;
 		control = true;
 		blocking = false;
 		hurtTimer = 0;
@@ -177,18 +179,6 @@ public class Amogus extends Character{
 		}
 	}
 	
-	/*
-	public void attack(Enemy e) {
-		if(attackTimer <= 0 && rollTimer == 0 && health > 0) {
-			if(e.x() < HBX + HBW && e.x() + e.width() > HBX
-			&& e.y() < HBY + HBH && e.y() + e.height() > HBY) {
-				e.takeDamage();
-			}
-			attackTimer = 15;
-			//slash.slash(direction);
-		}
-	}*/
-	
 	public void attack() {
 		if(attackTimer <= 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
@@ -265,7 +255,37 @@ public class Amogus extends Character{
 	}
 	
 	public void takeDamage(int damage, String direction) {
-		if(invincible == false && health > 0) {
+		boolean blocked = false;
+		
+		if(blocking == true) {
+			switch(this.direction) {
+			case "Right":
+				if(direction.equals("Left")) {
+					blocked = true;
+				}
+				break;
+				
+			case "Left":
+				if(direction.equals("Right")) {
+					blocked = true;
+				}
+				break;
+			
+			case "Up":
+				if(direction.equals("Down")) {
+					blocked = true;
+				}
+				break;
+				
+			case "Down":
+				if(direction.equals("Up")) {
+					blocked = true;
+				}
+				break;
+			}
+		}
+		
+		if(invincible == false && health > 0 && blocked == false) {
 			if(damage >= health) {
 				die();
 			}else {
@@ -431,6 +451,13 @@ public class Amogus extends Character{
 			leanTimer --;
 			if(xv != 0 || yv != 0) {
 				leanTimer = 0;
+			}
+			if(leanTimer == 1) {
+				if(health + 40 > maxHealth) {
+					health = maxHealth;
+				}else {
+					health += 40;
+				}
 			}
 		}
 		

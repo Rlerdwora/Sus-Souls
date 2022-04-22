@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Character{
 	
 	//image related variables
-	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health,
+	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health, maxHealth,
 	weaponSelect, shieldSelect, hurtTimer, attackTimer, recoilTimer, deathTimer, detectRange, combatRange, stamina;
 	public boolean blocking, invincible;
 	public String direction, action, fileType;

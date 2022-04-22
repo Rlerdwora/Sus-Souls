@@ -17,16 +17,20 @@ import java.util.ArrayList;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	Color red = new Color(255,0,0);
+	Color green = new Color(0, 255, 0);
 	static Character amogus = new Amogus(400,400);
 	static ArrayList<Character> enemies = new ArrayList<Character>();
-	Bar bar = new Bar(10,10, Frame.amogus.health(), red);
+	Bar health = new Bar(10,10, Frame.amogus.health, 10, red);
+	Bar stamina = new Bar(10,30, Frame.amogus.stamina, 5, green);
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		bar.updateValue(amogus.health());
-		bar.paint(g);
+		health.updateValue(amogus.health);
+		health.paint(g);
+		stamina.updateValue(amogus.stamina);
+		stamina.paint(g);
 		for(Character c : enemies) {
 			c.paint(g);
 		}
