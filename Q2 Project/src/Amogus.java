@@ -314,24 +314,6 @@ public class Amogus extends Character{
 				health -= damage;
 				hurtTimer = 20;
 				running = false;
-				
-				switch(direction) {
-				case "Right":
-					x += 1;
-					break;
-				
-				case "Left":
-					x -= 1;
-					break;
-					
-				case "Up":
-					y -= 1;
-					break;
-					
-				case "Down":
-					y += 1;
-					break;
-				}
 			}
 		}
 	}
@@ -367,7 +349,7 @@ public class Amogus extends Character{
 	}
 
 	public void update() {
-		if(running == true && blocking == false && stamina >= .5) {
+		if(running == true && blocking == false && rollTimer == 0&& stamina >= .5) {
 			y += 2 * yv;
 			x += 2 * xv;
 			if(xv != 0 || yv != 0) {

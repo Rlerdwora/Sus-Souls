@@ -10,7 +10,8 @@ import java.net.URL;
 public class Brick{
 	
 	//image related variables
-	private int x, y, length = 84;
+	private int x, y;
+	public static int length = 84;
 	private boolean wall;
 	private Image img; 	
 	private AffineTransform tx;
@@ -33,7 +34,7 @@ public class Brick{
 		init(x, y);
 	}
 	
-	public Brick(int x, int y, String horizontal, String vertical) {
+	public Brick(int x, int y, String vertical, String horizontal) {
 		this.x = x;
 		this.y = y;
 		wall = true;
