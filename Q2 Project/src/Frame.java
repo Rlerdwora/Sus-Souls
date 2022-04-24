@@ -22,17 +22,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static ArrayList<Character> enemies = new ArrayList<Character>();
 	Bar health = new Bar(10,10, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(10,40, (int)Frame.amogus.stamina, 5, green);
+	Brick brick = new Brick(400,300, "Left");
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		brick.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
 		for(Character c : enemies) {
-			c.paint(g);
+			//c.paint(g);
 		}
 		amogus.paint(g);
 		camera.focus();

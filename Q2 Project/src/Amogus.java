@@ -11,8 +11,8 @@ import java.net.URL;
 public class Amogus extends Character{
 	
 	//image related variables
-	private int rollTimer, leanCount, leanTimer;
-	private boolean blocking, invincible, control, running;
+	public int rollTimer, leanCount, leanTimer;
+	public boolean blocking, invincible, control, running;
 	private Hand lean;
 
 	public Amogus(int x, int y) {
@@ -22,7 +22,7 @@ public class Amogus extends Character{
 		hurtBoxH = 70;
 		health = 100;
 		stamina = 50;
-		staminaRegen = 1;
+		staminaRegen = .5;
 		staminaRegenTimer = 0;
 		maxHealth = health;
 		maxStamina = stamina;
@@ -44,6 +44,8 @@ public class Amogus extends Character{
 		lean = new Lean(this);
 		effect.add(new Slash(this));
 	}
+	
+	public boolean running() {return running;}
 	
 	public void moveRight() {
 		if(control == true) {
@@ -244,8 +246,23 @@ public class Amogus extends Character{
 		if(control == true && rollTimer == 0 && stamina >= 20) {
 			rollTimer = 23;
 			leanTimer = 0;
-			xv = 0;
-			yv = 0;
+			switch(direction) {
+			case "Right":
+				xv = 10;
+				break;
+				
+			case "Left":
+				xv = -10;	
+				break;
+							
+			case "Up":
+				yv = -10;
+				break;
+				
+			case "Down":
+				yv = 10;
+				break;
+			}
 			decreaseStamina(20);
 		}
 	}
@@ -370,55 +387,9 @@ public class Amogus extends Character{
 			fileType = ".png";
 		}
 		
-		if(xv == 0) {
-			if(yv > 0) {
-				yv = 4;
-			}else if(yv < 0) {
-				yv = -4;
-			}
-		}else if(xv > 0) {
-			xv = 4;
-			if(yv > 0) {
-				yv = 3;
-				xv = 3;
-			}else if(yv < 0) {
-				yv = -3;
-				xv = 3;
-			}
-		}else if(xv < 0) {
-			xv = -4;
-			if(yv > 0) {
-				yv = 3;
-				xv = -3;
-			}else if(yv < 0) {
-				yv = -3;
-				xv = -3;
-			}
-		}
-		
 		if(rollTimer > 0) {
-			if(rollTimer <= 8) {
-				control = true;
-			}else {
+			if(rollTimer > 8) {
 				control = false;
-				
-				switch(direction) {
-				case "Right":
-					x += 10;
-					break;
-					
-				case "Left":
-					x -= 10;	
-					break;
-								
-				case "Up":
-					y -= 10;
-					break;
-					
-				case "Down":
-					y += 10;
-					break;
-				}
 			}
 			
 			if(rollTimer <= 23 && rollTimer > 18) {
@@ -430,9 +401,37 @@ public class Amogus extends Character{
 			}else if(rollTimer == 8) {
 				action = "Stand";
 				fileType = ".png";
+				control = true;
+				xv = 0;
+				yv = 0;
 			}
-
 			rollTimer --;
+		}else {
+			if(xv == 0) {
+				if(yv > 0) {
+					yv = 4;
+				}else if(yv < 0) {
+					yv = -4;
+				}
+			}else if(xv > 0) {
+				xv = 4;
+				if(yv > 0) {
+					yv = 3;
+					xv = 3;
+				}else if(yv < 0) {
+					yv = -3;
+					xv = 3;
+				}
+			}else if(xv < 0) {
+				xv = -4;
+				if(yv > 0) {
+					yv = 3;
+					xv = -3;
+				}else if(yv < 0) {
+					yv = -3;
+					xv = -3;
+				}
+			}
 		}
 		
 		if(hurtTimer > 0) {
