@@ -227,7 +227,7 @@ public class Amogus extends Character{
 	}
 	
 	public void shield() {
-		if(attackTimer == 0 && rollTimer == 0 && control == true) {
+		if(attackTimer == 0 && rollTimer == 0 && control == true && staggerTimer == 0) {
 			blocking = true;
 			if(running == true) {
 				action = "Walk";
@@ -306,7 +306,14 @@ public class Amogus extends Character{
 			}
 		}
 		if(blocked == true) {
-			decreaseStamina(damage / 2);
+			if(stamina - damage / 2 >= 0) {
+				decreaseStamina(damage / 2);
+			}else {
+				stopShield();
+				stamina = 0;
+				staminaRegenTimer = 30;
+				staggerTimer = 30;
+			}
 		}else if(invincible == false && health > 0) {
 			if(damage >= health) {
 				die();
@@ -448,6 +455,10 @@ public class Amogus extends Character{
 					health += 40;
 				}
 			}
+		}
+		
+		if(staggerTimer > 0) {
+			staggerTimer --;
 		}
 		
 		sword.get(weaponSelect).copyAction();
