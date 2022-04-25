@@ -25,10 +25,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Background b = new Background(0,0, 1);
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
+	Bonfire bonfire = new Bonfire(420,400, true);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		b.paint(g);
+		bonfire.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);
 		stamina.updateValue((int)amogus.stamina);
