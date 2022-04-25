@@ -18,6 +18,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	Color red = new Color(255,0,0);
 	Color green = new Color(0, 255, 0);
+	Color black = new Color(0,0,0);
 	static Character amogus = new Amogus(400,400);
 	static ArrayList<Character> enemies = new ArrayList<Character>();
 	Bar health = new Bar(10,10, Frame.amogus.health, 10, red);
@@ -29,6 +30,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		g.setColor(black);
+		g.fillRect(0, 0, 1000, 1000);
 		b.paint(g);
 		bonfire.paint(g);
 		health.updateValue(amogus.health);
