@@ -13,13 +13,13 @@ public class Equipment{
 	private ArrayList<Img> imgs = new ArrayList<Img>();
 	
 	public Equipment(int x, int y) {
-		imgs.add(new Img(x, y, "/UI/shieldIcon.png"));
-		imgs.add(new Img(x + 65, y + 42, "/UI/leanIcon.png"));
-		imgs.add(new Img(x + 130, y, "/UI/swordIcon.png"));
-		imgs.add(new Img(x, y, "/UI/iconFrame1.png"));
-		imgs.add(new Img(x + 65, y + 42, "/UI/iconFrame2.png"));
-		imgs.add(new Img(x + 65, y - 42, "/UI/iconFrame1.png"));
-		imgs.add(new Img(x + 130, y, "/UI/iconFrame2.png"));
+		imgs.add(new Img(x, y, "/UI/shieldIcon.png", 1f));
+		imgs.add(new Img(x + 65, y + 42, "/UI/leanIcon.png", 1f));
+		imgs.add(new Img(x + 130, y, "/UI/swordIcon.png", 1f));
+		imgs.add(new Img(x, y, "/UI/iconFrame1.png", 1f));
+		imgs.add(new Img(x + 65, y + 42, "/UI/iconFrame2.png", 1f));
+		imgs.add(new Img(x + 65, y - 42, "/UI/iconFrame1.png", 1f));
+		imgs.add(new Img(x + 130, y, "/UI/iconFrame2.png", 1f));
 	}
 	
 	/* Drawing commands */

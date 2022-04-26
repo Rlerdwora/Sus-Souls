@@ -21,6 +21,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Color black = new Color(0,0,0);
 	static Character amogus = new Amogus(400,400);
 	static ArrayList<Character> enemies = new ArrayList<Character>();
+	static Img deathScreen = new Img(0, 180, "/UI/deathScreen.png", 0f);
 	Bar health = new Bar(10,10, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(10,40, (int)Frame.amogus.stamina, 5, green);
 	Background b = new Background(0,0, 1);
@@ -44,6 +45,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		amogus.paint(g);
 		camera.focus();
 		equipment.paint(g);
+		deathScreen.paint(g);
 	}
 	
 	public static void main(String[] arg) {

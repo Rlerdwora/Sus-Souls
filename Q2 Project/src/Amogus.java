@@ -539,5 +539,9 @@ public class Amogus extends Character{
 		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
 		
 		effect.get(weaponSelect).paint(g);
+		
+		if(health == 0) {
+			Frame.deathScreen.fadeIn();
+		}
 	}
 }

@@ -1,3 +1,4 @@
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,12 +11,14 @@ import java.net.URL;
 public class Img{
 	
 	private int x, y;
+	private float alpha;
 	private Image img;
 	private AffineTransform tx;
 
-	public Img(int x, int y, String url) {
+	public Img(int x, int y, String url, float alpha) {
 		this.x = x;
 		this.y = y;
+		this.alpha = alpha;
 		img = getImage(url);
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
@@ -24,9 +27,21 @@ public class Img{
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;	
 		init(x,y);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		g2.drawImage(img, tx, null);
 	}
 
+	public void fadeIn() {
+		if(alpha < 1f - 0.01f) {
+			alpha += 0.01f;
+		}
+	}
+	
+	public void fadeOut() {
+		if(alpha > 0f + 0.01f) {
+			alpha -= 0.01f;
+		}
+	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
