@@ -17,9 +17,9 @@ public class Bonfire{
 		this.x = x;
 		this.y = y;
 		if(kindled == true) {
-			img = getImage("/miscSprites/bonfireKindled.gif");
+			img = getImage("/objectSprites/bonfireKindled.gif");
 		}else {
-			img = getImage("/miscSprites/bonfire.png");
+			img = getImage("/objectSprites/bonfire.png");
 		}
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x + Camera.x(), y + Camera.y());

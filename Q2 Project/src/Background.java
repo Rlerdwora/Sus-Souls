@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Background{
 	
 	private int x, y;
-	private ArrayList<Brick> bricks = new ArrayList<Brick>();
+	public ArrayList<Brick> bricks = new ArrayList<Brick>();
 
 	public Background(int x, int y, int id) {
 		this.x = x;

@@ -34,6 +34,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setColor(black);
 		g.fillRect(0, 0, 1000, 1000);
 		b.paint(g);
+		for(Brick brick : b.bricks) {
+			brick.checkCollision();
+		}
 		bonfire.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);

@@ -20,7 +20,7 @@ public class Brick{
 		this.x = x;
 		this.y = y;
 		wall = false;
-		img = getImage("/brickSprites/brickTile.png"); //load the image for Tree
+		img = getImage("/objectSprites/brickTile.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}
@@ -29,7 +29,7 @@ public class Brick{
 		this.x = x;
 		this.y = y;
 		wall = true;
-		img = getImage("/brickSprites/brickWall" + side + ".png"); //load the image for Tree
+		img = getImage("/objectSprites/brickWall" + side + ".png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}
@@ -38,12 +38,16 @@ public class Brick{
 		this.x = x;
 		this.y = y;
 		wall = true;
-		img = getImage("/brickSprites/brickCorner" + vertical + horizontal + ".png"); //load the image for Tree
+		img = getImage("/objectSprites/brickCorner" + vertical + horizontal + ".png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}
 	
 	public void checkCollision() {
+		if(wall == false) {
+			return;
+		}
+		
 		//amogus is to the left of wall
 		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length + Camera.x() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() && Frame.amogus.hurtBoxY < y + length + Camera.y()
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > y + Camera.y() && Frame.amogus.hurtBoxY + 3 < y + length + Camera.y()) {
@@ -95,11 +99,6 @@ public class Brick{
 
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		
-		if(wall == true) {
-			checkCollision();
-		}
-		
 		init(x + Camera.x(), y + Camera.y());
 		g2.drawImage(img, tx, null);
 	}
