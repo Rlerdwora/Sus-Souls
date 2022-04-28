@@ -22,12 +22,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static Character amogus = new Amogus(400,400);
 	static ArrayList<Character> enemies = new ArrayList<Character>();
 	static Img deathScreen = new Img(0, 180, "/UI/deathScreen.png", 0f);
-	Bar health = new Bar(10,10, Frame.amogus.health, 10, red);
-	Bar stamina = new Bar(10,40, (int)Frame.amogus.stamina, 5, green);
+	SuspicionIcon susIcon = new SuspicionIcon(5,5);
+	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
+	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
 	Background b = new Background(0,0, 1);
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
-	Bonfire bonfire = new Bonfire(420,400, true);
+	Bonfire bonfire = new Bonfire(420,400, 1);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -38,6 +39,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			brick.checkCollision();
 		}
 		bonfire.paint(g);
+		susIcon.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);
 		stamina.updateValue((int)amogus.stamina);

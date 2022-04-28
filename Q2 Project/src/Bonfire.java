@@ -9,14 +9,16 @@ import java.net.URL;
 
 public class Bonfire{
 	
-	private int x, y;
+	private int x, y, kindleLevel, leanRegen;
+	private boolean kindled;
 	private Image img;
 	private AffineTransform tx;
 
-	public Bonfire(int x, int y, boolean kindled) {
+	public Bonfire(int x, int y, int kindleLevel) {
 		this.x = x;
 		this.y = y;
-		if(kindled == true) {
+		this.kindleLevel = kindleLevel;
+		if(kindleLevel > 0) {
 			img = getImage("/objectSprites/bonfireKindled.gif");
 		}else {
 			img = getImage("/objectSprites/bonfire.png");
@@ -31,6 +33,14 @@ public class Bonfire{
 		g2.drawImage(img, tx, null);
 	}
 
+	public void kindle() {
+		if(kindleLevel == 0) {
+			img = getImage("/objectSprites/bonfireKindled.gif");
+		}
+		if(kindleLevel < 4) {
+			kindleLevel ++;
+		}
+	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);

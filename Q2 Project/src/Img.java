@@ -11,14 +11,50 @@ import java.net.URL;
 public class Img{
 	
 	private int x, y;
+	private double scaleX, scaleY;
 	private float alpha;
 	private Image img;
 	private AffineTransform tx;
 
+	public Img(int x, int y, String url) {
+		this.x = x;
+		this.y = y;
+		scaleX = 1;
+		scaleY = 1;
+		alpha = 1f;
+		img = getImage(url);
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public Img(int x, int y, double scaleX, double scaleY, String url) {
+		this.x = x;
+		this.y = y;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
+		alpha = 1f;
+		img = getImage(url);
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
 	public Img(int x, int y, String url, float alpha) {
 		this.x = x;
 		this.y = y;
 		this.alpha = alpha;
+		scaleX = 1;
+		scaleY = 1;
+		img = getImage(url);
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public Img(int x, int y, double scaleX, double scaleY, String url, float alpha) {
+		this.x = x;
+		this.y = y;
+		this.alpha = alpha;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
 		img = getImage(url);
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
@@ -29,6 +65,10 @@ public class Img{
 		init(x,y);
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		g2.drawImage(img, tx, null);
+	}
+	
+	public void setImg(String path) {
+		img = getImage(path);
 	}
 
 	public void fadeIn() {
@@ -45,7 +85,7 @@ public class Img{
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
+		tx.scale(scaleX, scaleY);
 	}
 
 	private Image getImage(String path) {

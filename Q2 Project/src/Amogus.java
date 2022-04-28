@@ -11,13 +11,14 @@ import java.net.URL;
 public class Amogus extends Character{
 	
 	//image related variables
-	public int rollTimer, leanCount, leanTimer;
+	public int rollTimer, leanCount, leanTimer, suspicion;
 	public boolean blocking, invincible, control, running;
 	private Hand lean;
 
 	public Amogus(int x, int y) {
 		this.x = x;
 		this.y = y;
+		suspicion = 00;
 		hurtBoxW = 50;
 		hurtBoxH = 70;
 		health = 100;
