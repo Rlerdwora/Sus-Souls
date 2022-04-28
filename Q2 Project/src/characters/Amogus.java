@@ -133,46 +133,54 @@ public class Amogus extends Character{
 	}
 	
 	public void stopMoveRight() {
-		if(xv > 0) {
-			xv = 0;
-		}
-		if(yv < 0) {
-			direction = "Up";
-		}else if(yv > 0) {
-			direction = "Down";
+		if(control == true) {
+			if(xv > 0) {
+				xv = 0;
+			}
+			if(yv < 0) {
+				direction = "Up";
+			}else if(yv > 0) {
+				direction = "Down";
+			}
 		}
 	}
 	
 	public void stopMoveLeft() {
-		if(xv < 0) {
-			xv = 0;
-		}
-		if(yv < 0) {
-			direction = "Up";
-		}else if(yv > 0) {
-			direction = "Down";
+		if(control == true) {
+			if(xv < 0) {
+				xv = 0;
+			}
+			if(yv < 0) {
+				direction = "Up";
+			}else if(yv > 0) {
+				direction = "Down";
+			}
 		}
 	}
 	
 	public void stopMoveUp() {
-		if(yv < 0) {
-			yv = 0;
-		}
-		if(xv < 0) {
-			direction = "Left";
-		}else if(xv > 0) {
-			direction = "Right";
+		if(control == true) {
+			if(yv < 0) {
+				yv = 0;
+			}
+			if(xv < 0) {
+				direction = "Left";
+			}else if(xv > 0) {
+				direction = "Right";
+			}
 		}
 	}
 	
 	public void stopMoveDown() {
-		if(yv > 0) {
-			yv = 0;
-		}
-		if(xv < 0) {
-			direction = "Left";
-		}else if(xv > 0) {
-			direction = "Right";
+		if(control == true) {
+			if(yv > 0) {
+				yv = 0;
+			}
+			if(xv < 0) {
+				direction = "Left";
+			}else if(xv > 0) {
+				direction = "Right";
+			}
 		}
 	}
 	
