@@ -1,3 +1,4 @@
+package characters;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,6 +8,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+
+import effects.Slash;
+import hands.Hand;
+import hands.Lean;
+import hands.Shield;
+import hands.Sword;
+import runner.Frame;
 
 public class Amogus extends Character{
 	

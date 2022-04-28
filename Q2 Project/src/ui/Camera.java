@@ -1,3 +1,5 @@
+package ui;
+import characters.Character;
 
 public class Camera {
 	

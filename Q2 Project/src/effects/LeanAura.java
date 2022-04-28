@@ -1,3 +1,4 @@
+package effects;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,11 +8,13 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
+import characters.Character;
+
 public class LeanAura extends Effect{
 
 	public LeanAura(Character character) {
 		super(character);
-		img = getImage("/effects/leanAura.gif");
+		img = getImage("/effectSprites/leanAura.gif");
 	}
 	
 	public void play() {

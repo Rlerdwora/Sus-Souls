@@ -1,3 +1,4 @@
+package runner;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +13,19 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import characters.Amogus;
+import characters.Character;
+import characters.Skeleton;
+import objects.Background;
+import objects.Bonfire;
+import objects.Brick;
+import ui.Bar;
+import ui.Camera;
+import ui.Equipment;
+import ui.Img;
+import ui.SuspicionIcon;
+
 import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
@@ -19,9 +33,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Color red = new Color(255,0,0);
 	Color green = new Color(0, 255, 0);
 	Color black = new Color(0,0,0);
-	static Character amogus = new Amogus(400,400);
-	static ArrayList<Character> enemies = new ArrayList<Character>();
-	static Img deathScreen = new Img(0, 180, "/UI/deathScreen.png", 0f);
+	public static Character amogus = new Amogus(400,400);
+	public static ArrayList<Character> enemies = new ArrayList<Character>();
+	public static Img deathScreen = new Img(0, 180, "/uiSprites/deathScreen.png", 0f);
 	SuspicionIcon susIcon = new SuspicionIcon(5,5);
 	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);

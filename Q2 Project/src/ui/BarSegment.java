@@ -1,3 +1,4 @@
+package ui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,7 +19,7 @@ public class BarSegment{
 		this.x = x;
 		this.y = y;
 		this.position = position;
-		img = getImage("/UI/" + position + "Bracket.png");
+		img = getImage("/uiSprites/" + position + "Bracket.png");
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}

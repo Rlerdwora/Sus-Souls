@@ -1,3 +1,4 @@
+package characters;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,6 +8,11 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
+
+import effects.Effect;
+import hands.Hand;
+import runner.Frame;
+import ui.Camera;
 
 public class Character{
 	

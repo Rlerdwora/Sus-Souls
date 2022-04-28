@@ -1,3 +1,4 @@
+package hands;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,14 +8,16 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Sword extends Hand{
+import characters.Character;
+import ui.Camera;
+
+public class SkeletonSword extends Hand{
 	
-	public Sword(Character character) {
+	public SkeletonSword(Character character) {
 		super(character);
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
-		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	
 	public void update() {
@@ -138,7 +141,7 @@ public class Sword extends Hand{
 			break;
 		}
 
-		img = getImage("/handSprites/handSword" + action + direction + fileType);
-		init(x + xPos, y + yPos);
+		img = getImage("/skeletonSprites/skeletonSword" + action + direction + fileType);
+		init(x + xPos + Camera.x(), y + yPos + Camera.y());
 	}
 }

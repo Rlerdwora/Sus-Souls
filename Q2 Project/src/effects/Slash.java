@@ -1,3 +1,4 @@
+package effects;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -6,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+
+import characters.Character;
 
 public class Slash extends Effect{
 
@@ -42,7 +45,7 @@ public class Slash extends Effect{
 			break;
 		}
 		
-		img = getImage("/effects/slash" + direction + ".gif");
+		img = getImage("/effectSprites/slash" + direction + ".gif");
 		init(x + xPos,y + yPos);
 	}
 	
