@@ -14,6 +14,7 @@ public class Shield extends Hand{
 
 	public Shield(Character character) {
 		super(character);
+		toString = "shield";
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";

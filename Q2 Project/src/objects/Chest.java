@@ -9,48 +9,92 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Amogus;
+import hands.Hand;
 import runner.Frame;
 import ui.Camera;
 
 public class Chest{
 	
 	//image related variables
-	private int x, y, hurtBoxX, hurtBoxY;
-	public int width, height;
-	private boolean wall;
+	private int x, y, hurtBoxX, hurtBoxY, width, height;
+	private String direction;
+	private boolean wall, opened;
+	private Hand loot;
 	private Image img;
 	private AffineTransform tx;
 
-	public Chest(int x, int y, String direction) {
+	public Chest(int x, int y, String direction, Hand loot) {
 		this.x = x;
 		this.y = y;
+		this.loot = loot;
+		this.direction = direction;
+		opened = false;
 		switch(direction) {
 		case "Right":
-			hurtBoxX = x + 15;
-			hurtBoxY = y + 5;
-			width = 50;
-			height = 74;
+			hurtBoxX = x + 20;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
 			break;
 		
 		case "Left":
-			hurtBoxX = x + 18;
-			hurtBoxY = y + 5;
-			width = 50;
-			height = 74;
+			hurtBoxX = x + 23;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
 			break;
 			
 		case "Up":
-			hurtBoxX = x;
-			hurtBoxY = y + 10;
-			width = 84;
-			height = 60;
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
 			break;
 			
 		case "Down":
-			hurtBoxX = x;
-			hurtBoxY = y + 10;
-			width = 84;
-			height = 60;
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
+			break;
+		}
+		img = getImage("/objectSprites/chest" + direction +".png"); //load the image for Tree
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public Chest(int x, int y, String direction) {
+		this.x = x;
+		this.y = y;
+		opened = false;
+		this.direction = direction;
+		switch(direction) {
+		case "Right":
+			hurtBoxX = x + 20;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
+			break;
+		
+		case "Left":
+			hurtBoxX = x + 23;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
+			break;
+			
+		case "Up":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
+			break;
+			
+		case "Down":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
 			break;
 		}
 		img = getImage("/objectSprites/chest" + direction +".png"); //load the image for Tree
@@ -103,6 +147,54 @@ public class Chest{
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
 				}else {
 					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
+				}
+			}
+		}
+	}
+	
+	public void open() {
+		if(opened == false) {
+			boolean openable = false;
+			
+			switch(direction) {
+			case "Right":
+				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + 10 + width + Camera.x()
+				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+					openable = true;
+				}
+				break;
+			
+			case "Left":
+				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX - 10 + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
+				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+					openable = true;
+				}
+				break;
+				
+			case "Up":
+				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
+				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY - 10 + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+					openable = true;
+				}
+				break;
+				
+			case "Down":
+				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
+				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + 10 + height + Camera.y()) {
+					openable = true;
+				}
+				break;
+			}
+			
+			if(openable) {
+				switch(loot.toString()) {
+				case"shield":
+					Frame.amogus.shield.add(loot);
+					break;
+					
+				case"sword":
+					Frame.amogus.sword.add(loot);
+					break;
 				}
 			}
 		}

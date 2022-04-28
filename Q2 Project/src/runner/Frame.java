@@ -17,6 +17,8 @@ import javax.swing.Timer;
 import characters.Amogus;
 import characters.Character;
 import characters.Skeleton;
+import hands.Hand;
+import hands.Shield;
 import objects.Background;
 import objects.Bonfire;
 import objects.Brick;
@@ -44,7 +46,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Camera camera = new Camera(amogus);
 	Equipment equipment = new Equipment(10,520);
 	Bonfire bonfire = new Bonfire(420,400, 1);
-	Chest chest = new Chest(600,400, "Left");
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -55,7 +56,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			brick.checkCollision();
 		}
 		bonfire.paint(g);
-		chest.paint(g);
 		susIcon.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);
