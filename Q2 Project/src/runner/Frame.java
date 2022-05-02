@@ -53,8 +53,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.fillRect(0, 0, 1000, 1000);
 		b.paint(g);
 		for(Brick brick : b.bricks) {
-			brick.checkCollision();
+			if(brick.checkCollision()) {
+				break;
+			}
 		}
+		amogus.paint(g);
 		bonfire.paint(g);
 		susIcon.paint(g);
 		health.updateValue(amogus.health);
@@ -62,9 +65,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
 		for(Character c : enemies) {
-			c.paint(g);
+			//c.paint(g);
 		}
-		amogus.paint(g);
 		camera.focus();
 		equipment.paint(g);
 		deathScreen.paint(g);

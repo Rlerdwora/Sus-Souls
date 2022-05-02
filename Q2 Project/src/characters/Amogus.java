@@ -263,6 +263,7 @@ public class Amogus extends Character{
 		if(control == true && rollTimer == 0 && stamina >= 20) {
 			rollTimer = 23;
 			leanTimer = 0;
+			running = false;
 			switch(direction) {
 			case "Right":
 				xv = 10;

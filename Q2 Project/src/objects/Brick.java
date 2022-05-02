@@ -48,26 +48,36 @@ public class Brick{
 		init(x, y);
 	}
 	
-	public void checkCollision() {
+	public boolean checkCollision() {
+		boolean returnValue = false;
 		if(wall == false) {
-			return;
+			return returnValue;
 		}
 		
 		//amogus is to the left of wall
-		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length + Camera.x() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() && Frame.amogus.hurtBoxY < y + length + Camera.y()
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > y + Camera.y() && Frame.amogus.hurtBoxY + 3 < y + length + Camera.y()) {
-			if(Frame.amogus.xv > 0) {
+		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length + Camera.x() 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY < y + length + Camera.y()
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 10 > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY + 10 < y + length + Camera.y()) {
+			if(Frame.amogus.xv > 0 && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
 				}else {
 					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
 				}
 			}
+			returnValue = true;
 		}
 		
 		//amogus is to the right of wall
-		if(Frame.amogus.hurtBoxX < x + length + Camera.x() && Frame.amogus.hurtBoxX > x + Camera.x() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() && Frame.amogus.hurtBoxY < y + length + Camera.y() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > y + Camera.y() && Frame.amogus.hurtBoxY + 3 < y + length + Camera.y()) {
+		if(Frame.amogus.hurtBoxX < x + length + Camera.x() 
+		&& Frame.amogus.hurtBoxX > x + Camera.x() 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY < y + length + Camera.y() 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 10 > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY + 10 < y + length + Camera.y()) {
 			if(Frame.amogus.xv < 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
@@ -75,11 +85,16 @@ public class Brick{
 					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
 				}
 			}
+			returnValue = true;
 		}
-		
+				
 		//amogus is above wall
-		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length + Camera.y() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() && Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > x + Camera.x() && Frame.amogus.hurtBoxX + 3 < x + length + Camera.x()) {
+		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length + Camera.y() 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 10 > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX + 10 < x + length + Camera.x()) {
 			if(Frame.amogus.yv > 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
@@ -87,11 +102,16 @@ public class Brick{
 					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
 				}
 			}
+			returnValue = true;
 		}
-		
+				
 		//amogus is above wall
-		if(Frame.amogus.hurtBoxY < y + length + Camera.y() && Frame.amogus.hurtBoxY > y + Camera.y() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() && Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > x + Camera.x() && Frame.amogus.hurtBoxX + 3 < x + length + Camera.x()) {
+		if(Frame.amogus.hurtBoxY < y + length + Camera.y() 
+		&& Frame.amogus.hurtBoxY > y + Camera.y() 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 10 > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX + 10 < x + length + Camera.x()) {
 			if(Frame.amogus.yv < 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
@@ -99,7 +119,10 @@ public class Brick{
 					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
 				}
 			}
+			returnValue = true;
 		}
+		
+		return returnValue;
 	}
 
 	public void paint(Graphics g) {
