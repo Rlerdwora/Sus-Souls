@@ -57,7 +57,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
 		for(Character c : enemies) {
-			//c.paint(g);
+			c.paint(g);
 		}
 		amogus.paint(g);
 		camera.focus();
