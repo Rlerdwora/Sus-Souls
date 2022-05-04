@@ -26,6 +26,8 @@ public class Amogus extends Character{
 	public Amogus(int x, int y) {
 		this.x = x;
 		this.y = y;
+		hurtBoxX = x + 16;
+		hurtBoxY = y + 6;
 		suspicion = 00;
 		hurtBoxW = 50;
 		hurtBoxH = 70;
