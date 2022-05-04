@@ -57,11 +57,11 @@ public class Brick{
 		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length + Camera.x() 
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
 		&& Frame.amogus.hurtBoxY < y + length + Camera.y()
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 10 > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY + 10 < y + length + Camera.y()) {
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY + 20 < y + length + Camera.y()) {
 			while(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()) {
 				Frame.amogus.x --;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 16;
+				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
 			}
 		}
@@ -71,11 +71,11 @@ public class Brick{
 		&& Frame.amogus.hurtBoxX > x + Camera.x() 
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
 		&& Frame.amogus.hurtBoxY < y + length + Camera.y() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 10 > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY + 10 < y + length + Camera.y()) {
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y + Camera.y() 
+		&& Frame.amogus.hurtBoxY + 20 < y + length + Camera.y()) {
 			while(Frame.amogus.hurtBoxX < x + length + Camera.x()) {
 				Frame.amogus.x ++;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 16;
+				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
 			}
 		}
@@ -85,25 +85,24 @@ public class Brick{
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length + Camera.y() 
 		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
 		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 10 > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX + 10 < x + length + Camera.x()) {
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX + 20 < x + length + Camera.x()) {
 			while(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()) {
 				Frame.amogus.y --;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 16;
+				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
 			}
 		}
-				
 		//amogus is below wall
 		if(Frame.amogus.hurtBoxY < y + length + Camera.y() 
 		&& Frame.amogus.hurtBoxY > y + Camera.y() 
 		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
 		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 10 > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX + 10 < x + length + Camera.x()) {
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x + Camera.x() 
+		&& Frame.amogus.hurtBoxX + 20 < x + length + Camera.x()) {
 			while(Frame.amogus.hurtBoxY < y + length + Camera.y()) {
 				Frame.amogus.y ++;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 16;
+				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
 			}
 		}
