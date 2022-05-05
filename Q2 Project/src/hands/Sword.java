@@ -155,6 +155,5 @@ public class Sword extends Hand{
 		Graphics2D g2 = (Graphics2D) g;
 		update();
 		g2.drawImage(img, tx, null);
-		effect.paint(g2);
 	}
 }

@@ -17,14 +17,9 @@ public class LeanAura extends Effect{
 		img = getImage("/effectSprites/leanAura.gif");
 	}
 	
-	public void play() {
-		timer = 60;
-	}
-	
 	/* update variables here */
 	public void update() {
 		follow();
-		
 		init(x, y);
 	}
 }
