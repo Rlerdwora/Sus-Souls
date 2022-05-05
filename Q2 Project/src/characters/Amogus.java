@@ -12,6 +12,7 @@ import java.net.URL;
 import effects.Slash;
 import hands.Hand;
 import hands.Lean;
+import hands.Murasama;
 import hands.Shield;
 import hands.Sword;
 import runner.Frame;
@@ -51,7 +52,7 @@ public class Amogus extends Character{
 		weaponSelect = 0;
 		shieldSelect = 0;
 		shield.add(new Shield(this));
-		sword.add(new Sword(this));
+		sword.add(new Murasama(this));
 		lean = new Lean(this);
 	}
 	
