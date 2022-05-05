@@ -9,6 +9,7 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Character;
+import effects.Effect;
 
 public class Hand{
 	

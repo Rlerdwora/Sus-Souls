@@ -53,7 +53,6 @@ public class Amogus extends Character{
 		shield.add(new Shield(this));
 		sword.add(new Sword(this));
 		lean = new Lean(this);
-		effect.add(new Slash(this));
 	}
 	
 	public boolean running() {return running;}
@@ -205,7 +204,7 @@ public class Amogus extends Character{
 		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5) {
 			attackTimer = 15;
 			decreaseStamina(5);
-			effect.get(weaponSelect).play();
+			((Sword)sword.get(weaponSelect)).effect.play();
 			switch(direction) {
 			case "Right":
 				hitBoxX = hurtBoxX + hurtBoxW + 20;
@@ -483,7 +482,7 @@ public class Amogus extends Character{
 		
 		sword.get(weaponSelect).copyAction();
 		shield.get(shieldSelect).copyAction();
-		effect.get(weaponSelect).follow();
+		((Sword)sword.get(weaponSelect)).effect.follow();
 		
 		if(attackTimer > 0) {
 			attackTimer --;
@@ -557,9 +556,7 @@ public class Amogus extends Character{
 		g.setColor(new Color(0,0,0));
 		g.drawRect(hitBoxX, hitBoxY, hitBoxW, hitBoxH);
 		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
-		
-		effect.get(weaponSelect).paint(g);
-		
+				
 		if(health == 0) {
 			Frame.deathScreen.fadeIn();
 		}

@@ -10,6 +10,7 @@ import java.net.URL;
 
 import effects.Slash;
 import hands.SkeletonSword;
+import hands.Sword;
 import runner.Frame;
 import ui.Camera;
 
@@ -40,7 +41,6 @@ public class Skeleton extends Character{
 		fileType = ".png";
 		weaponSelect = 0;
 		sword.add(new SkeletonSword(this));
-		effect.add(new Slash(this));
 	}
 	
 	public void moveRight() {
@@ -130,7 +130,7 @@ public class Skeleton extends Character{
 	public void attack() {
 		if(attackTimer <= 0 && health > 0 && blocking == false) {
 			attackTimer = 15;
-			effect.get(weaponSelect).play();
+			((Sword)sword.get(weaponSelect)).effect.play();
 			switch(direction) {
 			case "Right":
 				hitBoxX = hurtBoxX + hurtBoxW + 20;
@@ -297,8 +297,8 @@ public class Skeleton extends Character{
 		}
 		
 		sword.get(weaponSelect).copyAction();
-		effect.get(weaponSelect).x = x + Camera.x();
-		effect.get(weaponSelect).y = y + Camera.y();
+		((Sword)sword.get(weaponSelect)).effect.x = x + Camera.x();
+		((Sword)sword.get(weaponSelect)).effect.y = y + Camera.y();
 		
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {
@@ -355,6 +355,5 @@ public class Skeleton extends Character{
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - detectRange, hurtBoxY + hurtBoxH/2 + Camera.y() - detectRange, detectRange * 2, detectRange * 2);
 		g.setColor(new Color(0,0,0));
 		g.drawRect(hurtBoxX + Camera.x(), hurtBoxY + Camera.y(), hurtBoxW, hurtBoxH);
-		effect.get(weaponSelect).paint(g);
 	}
 }

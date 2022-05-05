@@ -19,6 +19,7 @@ import characters.Character;
 import characters.Skeleton;
 import hands.Hand;
 import hands.Shield;
+import hands.SkeletonSword;
 import objects.Background;
 import objects.Bonfire;
 import objects.Brick;

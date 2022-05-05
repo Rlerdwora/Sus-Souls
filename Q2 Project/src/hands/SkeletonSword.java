@@ -9,12 +9,15 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Character;
+import effects.Effect;
+import effects.Slash;
 import ui.Camera;
 
-public class SkeletonSword extends Hand{
+public class SkeletonSword extends Sword{
 	
 	public SkeletonSword(Character character) {
 		super(character);
+		effect = new Slash(character);
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
@@ -143,5 +146,12 @@ public class SkeletonSword extends Hand{
 
 		img = getImage("/skeletonSprites/skeletonSword" + action + direction + fileType);
 		init(x + xPos + Camera.x(), y + yPos + Camera.y());
+	}
+	
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		update();
+		g2.drawImage(img, tx, null);
+		effect.paint(g2);
 	}
 }

@@ -43,7 +43,7 @@ public class Effect{
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;		
-		
+		follow();
 		if(timer > 0) {
 			update();
 			g2.drawImage(img, tx, null);

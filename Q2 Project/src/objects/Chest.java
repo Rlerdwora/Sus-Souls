@@ -10,6 +10,8 @@ import java.net.URL;
 
 import characters.Amogus;
 import hands.Hand;
+import hands.Shield;
+import hands.Sword;
 import runner.Frame;
 import ui.Camera;
 
@@ -189,11 +191,11 @@ public class Chest{
 			if(openable) {
 				switch(loot.toString()) {
 				case"shield":
-					Frame.amogus.shield.add(loot);
+					Frame.amogus.shield.add((Shield) loot);
 					break;
 					
 				case"sword":
-					Frame.amogus.sword.add(loot);
+					Frame.amogus.sword.add((Sword) loot);
 					break;
 				}
 			}

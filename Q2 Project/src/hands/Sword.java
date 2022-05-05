@@ -9,11 +9,17 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Character;
+import effects.Effect;
+import effects.Slash;
 
 public class Sword extends Hand{
 	
+	public Effect effect;
+	
 	public Sword(Character character) {
 		super(character);
+		effect = new Slash(character);
+		toString = "sword";
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
@@ -140,8 +146,15 @@ public class Sword extends Hand{
 			}
 			break;
 		}
-
+		
 		img = getImage("/handSprites/handSword" + action + direction + fileType);
 		init(x + xPos, y + yPos);
+	}
+	
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		update();
+		g2.drawImage(img, tx, null);
+		effect.paint(g2);
 	}
 }

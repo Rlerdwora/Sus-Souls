@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import effects.Effect;
 import hands.Hand;
+import hands.Shield;
+import hands.Sword;
 import runner.Frame;
 import ui.Camera;
 
@@ -23,7 +25,6 @@ public class Character{
 	public boolean blocking, invincible;
 	public String direction, action, fileType;
 	public ArrayList<Hand> shield = new ArrayList<Hand>(), sword = new ArrayList<Hand>();
-	public ArrayList<Effect> effect = new ArrayList<Effect>();
 	public Image img; 	
 	public AffineTransform tx;
 
