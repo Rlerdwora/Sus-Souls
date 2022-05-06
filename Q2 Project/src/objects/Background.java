@@ -20,37 +20,27 @@ public class Background{
 		switch(id) {
 		
 		case 1:
-			for(int i = 0; i < 10; i ++) {
-				for(int j = 0; j < 10; j ++) {
-					if(i == 0) {
-						if(j == 0) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Up", "Left"));
-						}else if(j == 9) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Down", "Left"));
-						}else {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Left"));
-						}
-					}else if(i == 9) {
-						if(j == 0) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Up", "Right"));
-						}else if(j == 9) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Down", "Right"));
-						}else {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Right"));
-						}
-					}else if(j == 0){
-						if(i != 0 && i != 9) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Up"));
-						}
-					}else if(j == 9) {
-						if(i != 0 && i != 9) {
-							bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length, "Down"));
-						}
-					}else{
-						bricks.add(new Brick(x + i * Brick.length, y + j * Brick.length));
-					}
+			for(int i = 0; i < 7; i ++) {
+				for(int j = 0; j < 7; j ++) {
+					bricks.add(new Brick(x + Brick.length + i * Brick.length, y + Brick.length + j * Brick.length));
 				}
 			}
+			
+			for(int i = 0; i < 7; i ++) {
+				bricks.add(new Brick(x, y + (i + 1) * Brick.length, "Left"));
+				bricks.add(new Brick(x + 8 * Brick.length, y + (i + 1) * Brick.length, "Right"));
+				bricks.add(new Brick(x + (i + 1) * Brick.length, y + 8 * Brick.length, "Down"));
+				if(i != 3) {
+					bricks.add(new Brick(x + (i + 1) * Brick.length, y, "Up"));
+				}
+			}
+			
+			bricks.add(new Brick(x, y, "Up", "Left"));
+			bricks.add(new Brick(x + 8 * Brick.length, y, "Up", "Right"));
+			bricks.add(new Brick(x + 8 * Brick.length, y + 8 * Brick.length, "Down", "Right"));
+			bricks.add(new Brick(x, y + 8 * Brick.length, "Down", "Left"));
+			bricks.add(new Brick(x + 4 * Brick.length, y, "Up", false));
+			
 			break;
 		}
 	}

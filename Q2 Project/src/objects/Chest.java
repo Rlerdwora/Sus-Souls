@@ -9,9 +9,9 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Amogus;
-import hands.Hand;
-import hands.Shield;
-import hands.Sword;
+import equipment.Hand;
+import equipment.Shield;
+import equipment.Sword;
 import runner.Frame;
 import ui.Camera;
 

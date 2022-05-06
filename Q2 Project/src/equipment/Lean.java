@@ -1,4 +1,4 @@
-package hands;
+package equipment;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -44,7 +44,7 @@ public class Lean extends Hand{
 			break;
 		}
 				
-		img = getImage("/handSprites/handLeanDrink" + direction + ".gif");
+		img = getImage("/equipmentSprites/handLeanDrink" + direction + ".gif");
 		init(x + xPos, y + yPos);
 	}
 	

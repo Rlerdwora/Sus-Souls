@@ -9,8 +9,8 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import effects.Slash;
-import hands.SkeletonSword;
-import hands.Sword;
+import equipment.SkeletonSword;
+import equipment.Sword;
 import runner.Frame;
 import ui.Camera;
 

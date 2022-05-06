@@ -1,4 +1,4 @@
-package hands;
+package equipment;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -143,7 +143,7 @@ public class Shield extends Hand{
 				break;
 			}
 		
-		img = getImage("/handSprites/handShield" + action + direction + fileType);
+		img = getImage("/equipmentSprites/handShield" + action + direction + fileType);
 		init(x + xPos, y + yPos);
 	}
 }

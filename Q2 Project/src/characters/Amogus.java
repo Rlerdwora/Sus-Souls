@@ -10,11 +10,11 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import effects.Slash;
-import hands.Hand;
-import hands.Lean;
-import hands.Murasama;
-import hands.Shield;
-import hands.Sword;
+import equipment.Hand;
+import equipment.Lean;
+import equipment.Murasama;
+import equipment.Shield;
+import equipment.Sword;
 import runner.Frame;
 
 public class Amogus extends Character{
@@ -187,10 +187,12 @@ public class Amogus extends Character{
 	}
 	
 	public void run() {
-		running = true;
-		stopShield();
-		if(xv != 0 || yv != 0) {
-			action = "Run";
+		if(health > 0) {
+			running = true;
+			stopShield();
+			if(xv != 0 || yv != 0) {
+				action = "Run";
+			}
 		}
 	}
 	
@@ -266,6 +268,7 @@ public class Amogus extends Character{
 			rollTimer = 23;
 			leanTimer = 0;
 			running = false;
+			invincible = true;
 			switch(direction) {
 			case "Right":
 				xv = 10;
@@ -296,6 +299,8 @@ public class Amogus extends Character{
 	}
 	
 	public void takeDamage(int damage, String direction) {
+		if(invincible == true) {return;}
+		
 		boolean blocked = false;
 		
 		if(blocking == true) {
@@ -334,7 +339,7 @@ public class Amogus extends Character{
 				staminaRegenTimer = 30;
 				staggerTimer = 30;
 			}
-		}else if(invincible == false && health > 0) {
+		}else if(health > 0) {
 			if(damage >= health) {
 				die();
 			}else {
@@ -411,6 +416,7 @@ public class Amogus extends Character{
 				action = "Stand";
 				fileType = ".png";
 				control = true;
+				invincible = false;
 				xv = 0;
 				yv = 0;
 			}

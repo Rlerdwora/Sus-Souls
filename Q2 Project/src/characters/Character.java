@@ -10,9 +10,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import effects.Effect;
-import hands.Hand;
-import hands.Shield;
-import hands.Sword;
+import equipment.Hand;
+import equipment.Shield;
+import equipment.Sword;
 import runner.Frame;
 import ui.Camera;
 

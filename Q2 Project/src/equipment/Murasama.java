@@ -1,4 +1,4 @@
-package hands;
+package equipment;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -151,7 +151,7 @@ public class Murasama extends Sword{
 			break;
 		}
 		
-		img = getImage("/handSprites/murasama" + action + direction + fileType);
+		img = getImage("/equipmentSprites/murasama" + action + direction + fileType);
 		init(x + xPos, y + yPos);
 	}
 	

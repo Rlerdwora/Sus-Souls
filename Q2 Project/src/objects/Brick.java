@@ -30,11 +30,11 @@ public class Brick{
 		init(x, y);
 	}
 	
-	public Brick(int x, int y, String side) {
+	public Brick(int x, int y, String direction) {
 		this.x = x;
 		this.y = y;
 		wall = true;
-		img = getImage("/objectSprites/brickWall" + side + ".png"); //load the image for Tree
+		img = getImage("/objectSprites/brickWall" + direction + ".png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}
@@ -44,6 +44,19 @@ public class Brick{
 		this.y = y;
 		wall = true;
 		img = getImage("/objectSprites/brickCorner" + vertical + horizontal + ".png"); //load the image for Tree
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public Brick(int x, int y, String direction, boolean open) {
+		this.x = x;
+		this.y = y;
+		wall = !open;
+		if(open) {
+			img = getImage("/objectSprites/brickDoorOpen" + direction + ".png");
+		}else{
+			img = getImage("/objectSprites/brickDoorClosed" + direction + ".png");
+		}
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
 	}

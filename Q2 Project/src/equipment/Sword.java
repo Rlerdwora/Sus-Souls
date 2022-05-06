@@ -1,4 +1,4 @@
-package hands;
+package equipment;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -147,7 +147,7 @@ public class Sword extends Hand{
 			break;
 		}
 		
-		img = getImage("/handSprites/handSword" + action + direction + fileType);
+		img = getImage("/equipmentSprites/handSword" + action + direction + fileType);
 		init(x + xPos, y + yPos);
 	}
 	
