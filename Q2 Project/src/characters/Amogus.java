@@ -34,7 +34,7 @@ public class Amogus extends Character{
 		hurtBoxH = 70;
 		health = 100;
 		stamina = 50;
-		staminaRegen = .5;
+		staminaRegen = .8;
 		staminaRegenTimer = 0;
 		maxHealth = health;
 		maxStamina = stamina;
@@ -52,7 +52,7 @@ public class Amogus extends Character{
 		weaponSelect = 0;
 		shieldSelect = 0;
 		shield.add(new Shield(this));
-		sword.add(new Murasama(this));
+		sword.add(new Sword(this));
 		lean = new Lean(this);
 	}
 	
