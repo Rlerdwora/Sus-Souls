@@ -8,21 +8,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.ArrayList;
 
 import effects.Slash;
 import equipment.Hand;
 import equipment.Lean;
 import equipment.Murasama;
 import equipment.Shield;
+import equipment.Shoes;
 import equipment.Sword;
 import runner.Frame;
 
 public class Amogus extends Character{
 	
 	//image related variables
-	public int rollTimer, leanCount, leanTimer, suspicion;
+	public int rollTimer, leanCount, leanTimer, suspicion, shoeSelect;
 	public boolean blocking, invincible, control, running;
 	private Hand lean;
+	private ArrayList<Shoes> shoes = new ArrayList<Shoes>();
 
 	public Amogus(int x, int y) {
 		this.x = x;
@@ -51,9 +54,11 @@ public class Amogus extends Character{
 		fileType = ".png";
 		weaponSelect = 0;
 		shieldSelect = 0;
+		shoeSelect = 0;
 		shield.add(new Shield(this));
 		sword.add(new Sword(this));
 		lean = new Lean(this);
+		shoes.add(new Shoes(this));
 	}
 	
 	public boolean running() {return running;}
@@ -523,6 +528,7 @@ public class Amogus extends Character{
 			case "Right":
 				shield.get(shieldSelect).paint(g);
 				g2.drawImage(img, tx, null);
+				shoes.get(shoeSelect).paint(g2);
 				if(leanTimer == 0) {
 					sword.get(weaponSelect).paint(g);
 				}else {
@@ -536,6 +542,7 @@ public class Amogus extends Character{
 					lean.paint(g);
 				}				
 				g2.drawImage(img, tx, null);
+				shoes.get(shoeSelect).paint(g2);
 				shield.get(shieldSelect).paint(g);
 				break;
 			case "Up":
@@ -546,9 +553,11 @@ public class Amogus extends Character{
 					lean.paint(g);
 				}
 				g2.drawImage(img, tx, null);
+				shoes.get(shoeSelect).paint(g2);
 				break;
 			case "Down":
 				g2.drawImage(img, tx, null);
+				shoes.get(shoeSelect).paint(g2);
 				if(leanTimer == 0) {
 					sword.get(weaponSelect).paint(g);
 				}else {
@@ -558,6 +567,7 @@ public class Amogus extends Character{
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);
+			shoes.get(shoeSelect).paint(g2);
 		}
 		
 		g.setColor(new Color(0,0,0));
