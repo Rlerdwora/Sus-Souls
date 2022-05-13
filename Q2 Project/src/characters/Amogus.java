@@ -55,10 +55,10 @@ public class Amogus extends Character{
 		weaponSelect = 0;
 		shieldSelect = 0;
 		shoeSelect = 0;
-		shield.add(new Shield(this));
-		sword.add(new Sword(this));
+		shield.add(null);
+		sword.add(null);
 		lean = new Lean(this);
-		shoes.add(new Shoes(this));
+		shoes.add(null);
 	}
 	
 	public boolean running() {return running;}
@@ -209,7 +209,8 @@ public class Amogus extends Character{
 	}
 	
 	public void attack() {
-		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5) {
+		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5 && sword.size() > 0) {
+			if(sword.get(weaponSelect) == null) {return;}
 			attackTimer = 15;
 			decreaseStamina(5);
 			((Sword)sword.get(weaponSelect)).effect.play();
@@ -253,7 +254,8 @@ public class Amogus extends Character{
 	}
 	
 	public void shield() {
-		if(attackTimer == 0 && rollTimer == 0 && control == true && staggerTimer == 0) {
+		if(attackTimer == 0 && rollTimer == 0 && control == true && staggerTimer == 0 && shield.size() > 0) {
+			if(shield.get(shieldSelect) == null) {return;}
 			blocking = true;
 			if(running == true) {
 				action = "Walk";
@@ -492,16 +494,25 @@ public class Amogus extends Character{
 			staggerTimer --;
 		}
 		
-		sword.get(weaponSelect).copyAction();
-		shield.get(shieldSelect).copyAction();
-		((Sword)sword.get(weaponSelect)).effect.follow();
+		if(sword.size() > 0 && sword.get(weaponSelect) != null) {
+			sword.get(weaponSelect).copyAction();
+			((Sword)sword.get(weaponSelect)).effect.follow();
+
+		}
+		if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+			shield.get(shieldSelect).copyAction();
+		}		
 		
 		if(attackTimer > 0) {
 			attackTimer --;
-			shield.get(shieldSelect).setAction("Attack");
-			shield.get(shieldSelect).setFileType(".png");
-			sword.get(weaponSelect).setAction("Attack");
-			sword.get(weaponSelect).setFileType(".gif");
+			if(shield.size() > 0) {
+				shield.get(shieldSelect).setAction("Attack");
+				shield.get(shieldSelect).setFileType(".png");			
+			}	
+			if(sword.size() > 0) {
+				sword.get(weaponSelect).setAction("Attack");
+				sword.get(weaponSelect).setFileType(".gif");
+			}
 		}
 		
 		if(blocking == true) {
@@ -526,48 +537,74 @@ public class Amogus extends Character{
 		if(health > 0 && rollTimer < 7)
 			switch(direction) {
 			case "Right":
-				shield.get(shieldSelect).paint(g);
+				if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+					shield.get(shieldSelect).paint(g);
+				}	
 				g2.drawImage(img, tx, null);
-				shoes.get(shoeSelect).paint(g2);
+				if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
+					shoes.get(shoeSelect).paint(g2);
+				}	
 				if(leanTimer == 0) {
-					sword.get(weaponSelect).paint(g);
+					if(sword.size() > 0 && sword.get(weaponSelect) != null) {
+						sword.get(weaponSelect).paint(g);
+					}
 				}else {
 					lean.paint(g);
 				}
 				break;
 			case "Left":
 				if(leanTimer == 0) {
-					sword.get(weaponSelect).paint(g);
+					if(sword.size() > 0 && sword.get(weaponSelect) != null) {
+						sword.get(weaponSelect).paint(g);
+					}
 				}else {
 					lean.paint(g);
 				}				
 				g2.drawImage(img, tx, null);
-				shoes.get(shoeSelect).paint(g2);
-				shield.get(shieldSelect).paint(g);
+				if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
+					shoes.get(shoeSelect).paint(g2);
+				}				
+				if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+					shield.get(shieldSelect).paint(g);
+				}					
 				break;
 			case "Up":
-				shield.get(shieldSelect).paint(g);
+				if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+					shield.get(shieldSelect).paint(g);
+				}					
 				if(leanTimer == 0) {
-					sword.get(weaponSelect).paint(g);
+					if(sword.size() > 0 && sword.get(weaponSelect) != null) {
+						sword.get(weaponSelect).paint(g);
+					}
 				}else {
 					lean.paint(g);
 				}
 				g2.drawImage(img, tx, null);
-				shoes.get(shoeSelect).paint(g2);
+				if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
+					shoes.get(shoeSelect).paint(g2);
+				}	
 				break;
 			case "Down":
 				g2.drawImage(img, tx, null);
-				shoes.get(shoeSelect).paint(g2);
+				if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
+					shoes.get(shoeSelect).paint(g2);
+				}	
 				if(leanTimer == 0) {
-					sword.get(weaponSelect).paint(g);
+						if(sword.size() > 0 && sword.get(weaponSelect) != null) {
+							sword.get(weaponSelect).paint(g);
+						}
 				}else {
 					lean.paint(g);
 				}				
-				shield.get(shieldSelect).paint(g);
+				if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+					shield.get(shieldSelect).paint(g);
+				}				
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);
-			shoes.get(shoeSelect).paint(g2);
+			if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
+				shoes.get(shoeSelect).paint(g2);
+			}	
 		}
 		
 		g.setColor(new Color(0,0,0));

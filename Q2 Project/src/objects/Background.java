@@ -13,6 +13,7 @@ public class Background{
 	
 	private int x, y;
 	public ArrayList<Brick> bricks = new ArrayList<Brick>();
+	public ArrayList<Chest> chests = new ArrayList<Chest>();
 
 	public Background(int x, int y, int id) {
 		this.x = x;
