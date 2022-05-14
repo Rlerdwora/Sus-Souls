@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Background{
 	
 	private int x, y;
-	public ArrayList<Brick> bricks = new ArrayList<Brick>();
+	public ArrayList<Block> bricks = new ArrayList<Block>();
 	public ArrayList<Chest> chests = new ArrayList<Chest>();
 
 	public Background(int x, int y, int id) {
@@ -49,7 +49,7 @@ public class Background{
 	/* Drawing commands */
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		for(Brick brick : bricks) {
+		for(Block brick : bricks) {
 			brick.paint(g);
 		}
 	}

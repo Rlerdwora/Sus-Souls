@@ -21,6 +21,7 @@ import equipment.Hand;
 import equipment.Shield;
 import equipment.SkeletonSword;
 import objects.Background;
+import objects.Block;
 import objects.Bonfire;
 import objects.Brick;
 import objects.Chest;
@@ -165,6 +166,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//l is pressed
 		if(arg0.getKeyCode() == 76) {
 			((Amogus) amogus).attack();
+		}
+		
+		//e is pressed
+		if(arg0.getKeyCode() == 69) {
+			for(Block b : b.bricks) {
+				b.interact();
+			}
 		}
 	}
 
