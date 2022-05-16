@@ -20,7 +20,7 @@ public class Chest{
 	//image related variables
 	private int x, y, hurtBoxX, hurtBoxY, width, height;
 	private String direction;
-	private boolean wall, opened;
+	private boolean opened;
 	private Hand loot;
 	private Image img;
 	private AffineTransform tx;
@@ -31,45 +31,6 @@ public class Chest{
 		this.loot = loot;
 		this.direction = direction;
 		opened = false;
-		switch(direction) {
-		case "Right":
-			hurtBoxX = x + 20;
-			hurtBoxY = y + 8;
-			width = 40;
-			height = 66;
-			break;
-		
-		case "Left":
-			hurtBoxX = x + 23;
-			hurtBoxY = y + 8;
-			width = 40;
-			height = 66;
-			break;
-			
-		case "Up":
-			hurtBoxX = x + 3;
-			hurtBoxY = y + 15;
-			width = 77;
-			height = 50;
-			break;
-			
-		case "Down":
-			hurtBoxX = x + 3;
-			hurtBoxY = y + 15;
-			width = 77;
-			height = 50;
-			break;
-		}
-		img = getImage("/objectSprites/chest" + direction +".png"); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y);
-	}
-	
-	public Chest(int x, int y, String direction) {
-		this.x = x;
-		this.y = y;
-		opened = false;
-		this.direction = direction;
 		switch(direction) {
 		case "Right":
 			hurtBoxX = x + 20;
@@ -154,54 +115,62 @@ public class Chest{
 		}
 	}
 	
-	public void open() {
-		if(opened == false) {
-			boolean openable = false;
-			
-			switch(direction) {
-			case "Right":
-				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + 10 + width + Camera.x()
-				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
-					openable = true;
-				}
-				break;
-			
-			case "Left":
-				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX - 10 + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
-				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
-					openable = true;
-				}
-				break;
-				
-			case "Up":
-				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
-				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY - 10 + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
-					openable = true;
-				}
-				break;
-				
-			case "Down":
-				if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
-				&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + 10 + height + Camera.y()) {
-					openable = true;
-				}
-				break;
+	public void interact() {
+		switch(Frame.amogus.direction) {
+		case "Right":
+			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() - 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= hurtBoxX + Camera.x() + 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y()
+			&& Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+				open();
 			}
+			break;
 			
-			if(openable) {
-				switch(loot.toString()) {
-				case"shield":
-					Frame.amogus.shield.add((Shield) loot);
-					break;
-					
-				case"sword":
-					Frame.amogus.sword.add((Sword) loot);
-					break;
-				}
+		case "Left":
+			if(Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x() + 10
+			&& Frame.amogus.hurtBoxX >= hurtBoxX + width + Camera.x() - 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y()
+			&& Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+				open();
 			}
+			break;
+			
+		case "Up":
+			if(Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y() + 10
+			&& Frame.amogus.hurtBoxY >= hurtBoxY + height + Camera.y() - 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x()
+			&& Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()) {
+				open();
+			}
+			break;
+			
+		case "Down":
+			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() - 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= hurtBoxY + Camera.y() + 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x()
+			&& Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()) {
+				open();
+			}			
+			break;
 		}
 	}
-
+	
+	public void open() {
+		if(opened == true) {return;}
+		
+		opened = true;
+		img = getImage("/objectSprites/chestOpen" + direction + ".png");
+		switch(loot.toString()) {
+		case "sword":
+			Frame.amogus.sword.add(loot);
+			break;
+			
+		case "shield":
+			Frame.amogus.shield.add(loot);
+			break;
+		}
+	}
+	
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		checkCollision();

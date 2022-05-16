@@ -187,7 +187,7 @@ public class Block{
 					wall = true;
 					img = getImage("/objectSprites/" + material() + "DoorClosed" + direction1 + ".png");
 				}
-			}			
+			}
 			break;
 		}
 	}

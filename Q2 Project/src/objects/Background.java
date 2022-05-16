@@ -9,11 +9,15 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
+import equipment.Murasama;
+import runner.Frame;
+
 public class Background{
 	
 	private int x, y;
 	public ArrayList<Block> bricks = new ArrayList<Block>();
 	public ArrayList<Chest> chests = new ArrayList<Chest>();
+	public ArrayList<Bonfire> bonfires = new ArrayList<Bonfire>();
 
 	public Background(int x, int y, int id) {
 		this.x = x;
@@ -42,6 +46,8 @@ public class Background{
 			bricks.add(new Brick(x, y + 8 * Brick.length, "Down", "Left"));
 			bricks.add(new Brick(x + 4 * Brick.length, y, "Up", false));
 			
+			chests.add(new Chest(x + Brick.length, y + Brick.length, "Right", new Murasama(Frame.amogus)));
+			bonfires.add(new Bonfire(x + 4 * Brick.length, y + 6 * Brick.length, 1));
 			break;
 		}
 	}
@@ -51,6 +57,12 @@ public class Background{
 		Graphics2D g2 = (Graphics2D) g;
 		for(Block brick : bricks) {
 			brick.paint(g);
+		}
+		for(Chest c : chests) {
+			c.paint(g2);
+		}
+		for(Bonfire b : bonfires) {
+			b.paint(g2);
 		}
 	}
 }

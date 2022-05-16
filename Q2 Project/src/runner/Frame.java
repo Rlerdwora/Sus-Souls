@@ -51,7 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(black);
-		g.fillRect(0, 0, 1000, 1000);
+		g.fillRect(0, 0, 900, 720);
 		b.paint(g);
 		susIcon.paint(g);
 		health.updateValue(amogus.health);
@@ -59,7 +59,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
 		for(Character c : enemies) {
-			c.paint(g);
+			//c.paint(g);
 		}
 		amogus.paint(g);
 		camera.focus();
@@ -172,6 +172,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(arg0.getKeyCode() == 69) {
 			for(Block b : b.bricks) {
 				b.interact();
+			}
+			for(Chest c : b.chests) {
+				c.interact();
 			}
 		}
 	}

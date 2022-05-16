@@ -18,11 +18,6 @@ public class Murasama extends Sword{
 	public Murasama(Character character) {
 		super(character);
 		effect = new MurasamaSlash(character);
-		toString = "sword";
-		direction = "Down";
-		action = "Stand";
-		fileType = ".gif";
-		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	
 	public void copyAction() {
@@ -153,12 +148,5 @@ public class Murasama extends Sword{
 		
 		img = getImage("/equipmentSprites/murasama" + action + direction + fileType);
 		init(x + xPos, y + yPos);
-	}
-	
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		update();
-		g2.drawImage(img, tx, null);
-		effect.paint(g2);
 	}
 }
