@@ -131,8 +131,8 @@ public class Block{
 		
 		switch(Frame.amogus.direction) {
 		case "Right":
-			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() - 10
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= x + Camera.x() + 10
+			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() - 20
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= x + Camera.x() + 20
 			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()
 			&& Frame.amogus.hurtBoxY < y + length + Camera.y()) {
 				if(wall) {
@@ -146,8 +146,8 @@ public class Block{
 			break;
 			
 		case "Left":
-			if(Frame.amogus.hurtBoxX < x + length + Camera.x() + 10
-			&& Frame.amogus.hurtBoxX >= x + length + Camera.x() - 10
+			if(Frame.amogus.hurtBoxX < x + length + Camera.x() + 20
+			&& Frame.amogus.hurtBoxX >= x + length + Camera.x() - 20
 			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()
 			&& Frame.amogus.hurtBoxY < y + length + Camera.y()) {
 				if(wall) {
@@ -161,8 +161,8 @@ public class Block{
 			break;
 			
 		case "Up":
-			if(Frame.amogus.hurtBoxY < y + length + Camera.y() + 10
-			&& Frame.amogus.hurtBoxY >= y + length + Camera.y() - 10
+			if(Frame.amogus.hurtBoxY < y + length + Camera.y() + 20
+			&& Frame.amogus.hurtBoxY >= y + length + Camera.y() - 20
 			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()
 			&& Frame.amogus.hurtBoxX < x + length + Camera.x()) {
 				if(wall) {
@@ -176,8 +176,8 @@ public class Block{
 			break;
 			
 		case "Down":
-			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() - 10
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= y + Camera.y() + 10
+			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() - 20
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= y + Camera.y() + 20
 			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()
 			&& Frame.amogus.hurtBoxX < x + length + Camera.x()) {
 				if(wall) {
