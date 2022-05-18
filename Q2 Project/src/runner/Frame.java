@@ -29,6 +29,7 @@ import ui.Bar;
 import ui.Camera;
 import ui.Equipment;
 import ui.Img;
+import ui.ItemMenu;
 import ui.SuspicionIcon;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
 	Background b = new Background(0,0, 1);
 	Equipment equipment = new Equipment(10,520);
+	ItemMenu itemMenu = new ItemMenu();
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -64,7 +66,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		amogus.paint(g);
 		camera.focus();
 		equipment.paint(g);
+		g.setColor(green);
 		deathScreen.paint(g);
+		itemMenu.paint(g);
 	}
 	
 	public static void main(String[] arg) {
