@@ -47,7 +47,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
 	Background b = new Background(0,0, 1);
-	Equipment equipment = new Equipment(10,520);
+	Equipment equipment = new Equipment();
+	boolean itemMenuOpen = false;
 	ItemMenu itemMenu = new ItemMenu();
 
 	public void paint(Graphics g) {
@@ -68,7 +69,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		equipment.paint(g);
 		g.setColor(green);
 		deathScreen.paint(g);
-		itemMenu.paint(g);
+		if(itemMenuOpen) {
+			itemMenu.paint(g);
+		}
 	}
 	
 	public static void main(String[] arg) {
@@ -127,59 +130,90 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyPressed(KeyEvent arg0) {
 		System.out.println(arg0.getKeyCode());
 		
-		//w is pressed
-		if(arg0.getKeyCode() == 87) {
-			amogus.moveUp();
-		}
-		
-		//a is pressed
-		if(arg0.getKeyCode() == 65) {
-			amogus.moveLeft();
-		}
-		
-		//s is pressed
-		if(arg0.getKeyCode() == 83) {
-			amogus.moveDown();
-		}
-		
-		//d is pressed
-		if(arg0.getKeyCode() == 68) {
-			amogus.moveRight();
-		}
-		
-		//shift is pressed
-		if(arg0.getKeyCode() == 16) {
-			amogus.run();
-		}
-		
-		//space is pressed
-		if(arg0.getKeyCode() == 32) {
-			((Amogus) amogus).roll();
-		}
-		
-		//j is pressed
-		if(arg0.getKeyCode() == 74) {
-			amogus.shield();
-		}
-		
-		//k i pressed
-		if(arg0.getKeyCode() == 75) {
-			((Amogus) amogus).lean();
-		}
-		
-		//l is pressed
-		if(arg0.getKeyCode() == 76) {
-			((Amogus) amogus).attack();
-		}
-		
-		//e is pressed
-		if(arg0.getKeyCode() == 69) {
-			for(Block b : b.bricks) {
-				b.interact();
+		if(itemMenuOpen == false) {
+			//w is pressed
+			if(arg0.getKeyCode() == 87) {
+				amogus.moveUp();
 			}
-			for(Chest c : b.chests) {
-				c.interact();
+			
+			//a is pressed
+			if(arg0.getKeyCode() == 65) {
+				amogus.moveLeft();
 			}
+			
+			//s is pressed
+			if(arg0.getKeyCode() == 83) {
+				amogus.moveDown();
+			}
+			
+			//d is pressed
+			if(arg0.getKeyCode() == 68) {
+				amogus.moveRight();
+			}
+			
+			//shift is pressed
+			if(arg0.getKeyCode() == 16) {
+				amogus.run();
+			}
+			
+			//space is pressed
+			if(arg0.getKeyCode() == 32) {
+				((Amogus) amogus).roll();
+			}
+			
+			//j is pressed
+			if(arg0.getKeyCode() == 74) {
+				amogus.shield();
+			}
+			
+			//k i pressed
+			if(arg0.getKeyCode() == 75) {
+				((Amogus) amogus).lean();
+			}
+			
+			//l is pressed
+			if(arg0.getKeyCode() == 76) {
+				((Amogus) amogus).attack();
+			}
+			
+			//e is pressed
+			if(arg0.getKeyCode() == 69) {
+				for(Block b : b.bricks) {
+					b.interact();
+				}
+				for(Chest c : b.chests) {
+					c.interact();
+				}
+			}
+		}else {
+			//w is pressed
+			if(arg0.getKeyCode() == 87) {
+				itemMenu.moveUp();
+			}
+			
+			//s is pressed
+			if(arg0.getKeyCode() == 83) {
+				itemMenu.moveDown();
+			}
+			
+			//j is pressed
+			if(arg0.getKeyCode() == 74) {
+				itemMenu.select();
+			}
+			
+			//l is pressed
+			if(arg0.getKeyCode() == 76) {
+				itemMenu.deselect();
+			}
+			
+		}
+		
+		//enter pressed
+		if(arg0.getKeyCode() == 10) {
+			amogus.stopMove();
+			equipment.update();
+			itemMenu.update();
+			itemMenuOpen = !itemMenuOpen;
 		}
 	}
 

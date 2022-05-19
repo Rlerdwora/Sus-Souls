@@ -16,7 +16,7 @@ public class Hand{
 	//image related variables
 	public int x, y, xPos, yPos;
 	public Character character;
-	public String action, direction, fileType, toString;
+	public String action, direction, fileType, type;
 	public Image img;
 	public AffineTransform tx;
 
@@ -25,9 +25,7 @@ public class Hand{
 		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	
-	public String toString() {
-		return toString;
-	}
+	public String type() {return type;}
 	
 	public void follow() {
 		x = character.x();

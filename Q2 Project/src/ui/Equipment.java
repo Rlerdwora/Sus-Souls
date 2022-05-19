@@ -10,19 +10,31 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import objects.Background;
+import runner.Frame;
 
 public class Equipment{
 
-	private ArrayList<Img> imgs = new ArrayList<Img>();
+	private ArrayList<Img> frames = new ArrayList<Img>();
+	private Img shield, sword, lean = new Img(10 + 65, 520 + 42, "/uiSprites/leanIcon.png");
 	
-	public Equipment(int x, int y) {
-		imgs.add(new Img(x, y, "/uiSprites/shieldIcon.png", 1f));
-		imgs.add(new Img(x + 65, y + 42, "/uiSprites/leanIcon.png", 1f));
-		imgs.add(new Img(x + 130, y, "/uiSprites/swordIcon.png", 1f));
-		imgs.add(new Img(x, y, "/uiSprites/iconFrame1.png", 1f));
-		imgs.add(new Img(x + 65, y + 42, "/uiSprites/iconFrame2.png", 1f));
-		imgs.add(new Img(x + 65, y - 42, "/uiSprites/iconFrame1.png", 1f));
-		imgs.add(new Img(x + 130, y, "/uiSprites/iconFrame2.png", 1f));
+	public Equipment() {
+		frames.add(new Img(10,520, "/uiSprites/iconFrame1.png"));
+		frames.add(new Img(10 + 65, 520 + 42, "/uiSprites/iconFrame2.png"));
+		frames.add(new Img(10 + 130, 520, "/uiSprites/iconFrame2.png"));
+	}
+	
+	public void update() {
+		if(Frame.amogus.shield.get(Frame.amogus.shieldSelect) != null){
+			shield = new Img(10, 520, "/uiSprites/" + Frame.amogus.shield.get(Frame.amogus.shieldSelect).toString() + "Icon.png");
+		}else {
+			shield = null;
+		}
+		
+		if(Frame.amogus.sword.get(Frame.amogus.weaponSelect) != null){
+			sword = new Img(140, 520, "/uiSprites/" + Frame.amogus.sword.get(Frame.amogus.weaponSelect).toString() + "Icon.png");
+		}else {
+			sword = null;
+		}
 	}
 	
 	/* Drawing commands */
@@ -30,20 +42,18 @@ public class Equipment{
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		for(Img img : imgs) {
+		if(shield != null) {
+			shield.paint(g2);
+		}
+		
+		if(sword != null) {
+			sword.paint(g2);
+		}
+		
+		lean.paint(g2);
+		
+		for(Img img : frames) {
 			img.paint(g);
 		}
 	}
-
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Background.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
-	}
-
 }

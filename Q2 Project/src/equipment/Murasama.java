@@ -20,6 +20,10 @@ public class Murasama extends Sword{
 		effect = new MurasamaSlash(character);
 	}
 	
+	public String toString() {
+		return "murasama";
+	}
+	
 	public void copyAction() {
 		action = character.action;
 		fileType = ".gif";

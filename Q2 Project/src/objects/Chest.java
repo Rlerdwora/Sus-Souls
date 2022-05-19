@@ -160,7 +160,7 @@ public class Chest{
 		
 		opened = true;
 		img = getImage("/objectSprites/chestOpen" + direction + ".png");
-		switch(loot.toString()) {
+		switch(loot.type()) {
 		case "sword":
 			Frame.amogus.sword.add(loot);
 			break;

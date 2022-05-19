@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import equipment.Murasama;
+import equipment.Sword;
 import runner.Frame;
 
 public class Background{
@@ -47,6 +48,7 @@ public class Background{
 			bricks.add(new Brick(x + 4 * Brick.length, y, "Up", false));
 			
 			chests.add(new Chest(x + Brick.length, y + Brick.length, "Right", new Murasama(Frame.amogus)));
+			chests.add(new Chest(x + 7 * Brick.length, y + Brick.length, "Left", new Sword(Frame.amogus)));
 			bonfires.add(new Bonfire(x + 4 * Brick.length, y + 6 * Brick.length, 1));
 			break;
 		}

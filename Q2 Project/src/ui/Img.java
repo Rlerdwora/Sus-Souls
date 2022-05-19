@@ -11,11 +11,11 @@ import java.net.URL;
 
 public class Img{
 	
-	private int x, y;
-	private double scaleX, scaleY;
-	private float alpha;
-	private Image img;
-	private AffineTransform tx;
+	public int x, y;
+	public double scaleX, scaleY;
+	public float alpha;
+	public Image img;
+	public AffineTransform tx;
 
 	public Img(int x, int y, String url) {
 		this.x = x;

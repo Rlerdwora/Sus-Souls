@@ -24,8 +24,8 @@ public class Amogus extends Character{
 	//image related variables
 	public int rollTimer, leanCount, leanTimer, suspicion, shoeSelect;
 	public boolean blocking, invincible, control, running;
-	private Hand lean;
-	private ArrayList<Shoes> shoes = new ArrayList<Shoes>();
+	public Hand lean;
+	public ArrayList<Shoes> shoes = new ArrayList<Shoes>();
 
 	public Amogus(int x, int y) {
 		this.x = x;
@@ -505,11 +505,11 @@ public class Amogus extends Character{
 		
 		if(attackTimer > 0) {
 			attackTimer --;
-			if(shield.size() > 0) {
+			if(shield.size() > 0 && shield.get(shieldSelect) != null) {
 				shield.get(shieldSelect).setAction("Attack");
 				shield.get(shieldSelect).setFileType(".png");			
 			}	
-			if(sword.size() > 0) {
+			if(sword.size() > 0 && sword.get(weaponSelect) != null) {
 				sword.get(weaponSelect).setAction("Attack");
 				sword.get(weaponSelect).setFileType(".gif");
 			}

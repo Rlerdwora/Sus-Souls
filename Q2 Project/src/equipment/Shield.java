@@ -14,11 +14,15 @@ public class Shield extends Hand{
 
 	public Shield(Character character) {
 		super(character);
-		toString = "shield";
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
+		type = "sword";
 		tx = AffineTransform.getTranslateInstance(x, y );
+	}
+	
+	public String toString() {
+		return "shield";
 	}
 	
 	public void update() {

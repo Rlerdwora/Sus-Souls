@@ -19,11 +19,15 @@ public class Sword extends Hand{
 	public Sword(Character character) {
 		super(character);
 		effect = new Slash(character);
-		toString = "sword";
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
+		type = "sword";
 		tx = AffineTransform.getTranslateInstance(x, y );
+	}
+	
+	public String toString() {
+		return "sword";
 	}
 	
 	public void update() {
