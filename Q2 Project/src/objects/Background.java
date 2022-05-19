@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import equipment.Murasama;
+import equipment.Shield;
 import equipment.Sword;
 import runner.Frame;
 
@@ -41,15 +42,55 @@ public class Background{
 				}
 			}
 			
-			bricks.add(new Brick(x, y, "Up", "Left"));
-			bricks.add(new Brick(x + 8 * Brick.length, y, "Up", "Right"));
-			bricks.add(new Brick(x + 8 * Brick.length, y + 8 * Brick.length, "Down", "Right"));
-			bricks.add(new Brick(x, y + 8 * Brick.length, "Down", "Left"));
+			bricks.add(new Brick(x, y, 1, "Up", "Left"));
+			bricks.add(new Brick(x + 8 * Brick.length, y, 1, "Up", "Right"));
+			bricks.add(new Brick(x + 8 * Brick.length, y + 8 * Brick.length, 1, "Down", "Right"));
+			bricks.add(new Brick(x, y + 8 * Brick.length, 1, "Down", "Left"));
 			bricks.add(new Brick(x + 4 * Brick.length, y, "Up", false));
 			
-			chests.add(new Chest(x + Brick.length, y + Brick.length, "Right", new Murasama(Frame.amogus)));
-			chests.add(new Chest(x + 7 * Brick.length, y + Brick.length, "Left", new Sword(Frame.amogus)));
 			bonfires.add(new Bonfire(x + 4 * Brick.length, y + 6 * Brick.length, 1));
+			
+			for(int i = 0; i < 10; i ++) {
+				if(i != 6) {
+					bricks.add(new Brick(x + 5 * Brick.length, y - (1 + i) * Brick.length, "Right"));
+				}
+				bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, "Left"));
+				bricks.add(new Brick(x + 4 * Brick.length, y - (1 + i) * Brick.length));
+			}
+			bricks.add(new Brick(x + 5 * Brick.length, y - 7 * Brick.length, "Right", true));
+			
+			bricks.add(new Brick(x + 6 * Brick.length, y - 8 * Brick.length, "Up"));
+			bricks.add(new Brick(x + 6 * Brick.length, y - 6 * Brick.length, "Down"));
+			bricks.add(new Brick(x + 7 * Brick.length, y - 6 * Brick.length, 2, "Up", "Right"));
+			bricks.add(new Brick(x + 7 * Brick.length, y - 8 * Brick.length, 2, "Down", "Right"));
+			bricks.add(new Brick(x + 6 * Brick.length, y - 7 * Brick.length));
+			bricks.add(new Brick(x + 7 * Brick.length, y - 7 * Brick.length));
+			
+			for(int i = 0; i < 9; i ++) {
+				if(i != 3 && i != 4 && i != 5) {
+					bricks.add(new Brick(x + 7 * Brick.length, y - (i + 3) * Brick.length, "Left"));
+				}
+				bricks.add(new Brick(x + 13 * Brick.length, y - (i + 3) * Brick.length, "Right"));
+			}
+			
+			for(int i = 0; i < 5; i ++) {
+				bricks.add(new Brick(x + (i + 8) * Brick.length, y - 12 * Brick.length, "Up"));
+				bricks.add(new Brick(x + (i + 8) * Brick.length, y - 2 * Brick.length, "Down"));
+			}
+			
+			for(int i = 0; i < 9; i ++) {
+				for(int j = 0; j < 5; j ++) {
+					bricks.add(new Brick(x + (j + 8) * Brick.length, y - (i + 3) * Brick.length));
+				}
+			}
+			
+			bricks.add(new Brick(x + 7 * Brick.length, y - 2 * Brick.length, 1, "Down", "Left"));
+			bricks.add(new Brick(x + 13 * Brick.length, y - 2 * Brick.length, 1, "Down", "Right"));
+			bricks.add(new Brick(x + 7 * Brick.length, y - 12 * Brick.length, 1, "Up", "Left"));
+			bricks.add(new Brick(x + 13 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
+			
+			chests.add(new Chest(x + 12 * Brick.length, y - 7 * Brick.length, "Left", new Shield(Frame.amogus)));
+			
 			break;
 		}
 	}

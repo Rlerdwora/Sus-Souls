@@ -250,7 +250,15 @@ public class ItemMenu{
 	
 	public void paintShields(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;	
-		
+		int y = 0, count = 0;
+		for(int i = itemSelect; count < 3 && i < shields.size(); i ++) {
+			if(shields.get(i) != null) {
+				Img shieldImg = new Img(420, 217 + 84 * y, "/uiSprites/" + shields.get(i).toString() + "Icon.png");
+				shieldImg.paint(g2);
+				y ++;
+				count ++;
+			}
+		}
 	}
 	
 	public void paintSwords(Graphics g) {

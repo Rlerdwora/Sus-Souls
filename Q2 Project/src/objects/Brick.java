@@ -24,9 +24,9 @@ public class Brick extends Block{
 		img = getImage("/objectSprites/brickWall" + this.direction1 + ".png");
 	}
 	
-	public Brick(int x, int y, String vertical, String horizontal) {
+	public Brick(int x, int y, int id, String vertical, String horizontal) {
 		super(x, y, vertical, horizontal);
-		img = getImage("/objectSprites/brickCorner" + this.direction1 + this.direction2 + ".png");
+		img = getImage("/objectSprites/brickCorner" + id + this.direction1 + this.direction2 + ".png");
 	}
 	
 	public Brick(int x, int y, String direction, boolean open) {
