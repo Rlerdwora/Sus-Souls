@@ -11,6 +11,7 @@ import java.net.URL;
 import characters.Amogus;
 import equipment.Hand;
 import equipment.Shield;
+import equipment.Shoes;
 import equipment.Sword;
 import runner.Frame;
 import ui.Camera;
@@ -22,6 +23,8 @@ public class Chest{
 	private String direction;
 	private boolean opened;
 	private Hand loot;
+	private Shoes shoeLoot;
+	boolean shoe;
 	private Image img;
 	private AffineTransform tx;
 
@@ -30,6 +33,48 @@ public class Chest{
 		this.y = y;
 		this.loot = loot;
 		this.direction = direction;
+		shoe = false;
+		opened = false;
+		switch(direction) {
+		case "Right":
+			hurtBoxX = x + 20;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
+			break;
+		
+		case "Left":
+			hurtBoxX = x + 23;
+			hurtBoxY = y + 8;
+			width = 40;
+			height = 66;
+			break;
+			
+		case "Up":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
+			break;
+			
+		case "Down":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			width = 77;
+			height = 50;
+			break;
+		}
+		img = getImage("/objectSprites/chest" + direction +".png"); //load the image for Tree
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public Chest(int x, int y, String direction, Shoes shoeLoot) {
+		this.x = x;
+		this.y = y;
+		this.shoeLoot = shoeLoot;
+		this.direction = direction;
+		shoe = true;
 		opened = false;
 		switch(direction) {
 		case "Right":
@@ -160,14 +205,18 @@ public class Chest{
 		
 		opened = true;
 		img = getImage("/objectSprites/chestOpen" + direction + ".png");
-		switch(loot.type()) {
-		case "sword":
-			Frame.amogus.sword.add(loot);
-			break;
-			
-		case "shield":
-			Frame.amogus.shield.add(loot);
-			break;
+		if(shoe == false) {
+			switch(loot.type()) {
+			case "sword":
+				Frame.amogus.sword.add(loot);
+				break;
+				
+			case "shield":
+				Frame.amogus.shield.add(loot);
+				break;
+			}
+		}else {
+			((Amogus)Frame.amogus).shoes.add(shoeLoot);
 		}
 	}
 	

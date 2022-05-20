@@ -133,7 +133,7 @@ public class ItemMenu{
 					start = 1;
 				}
 				
-				if(itemSelect == swords.size()) {
+				if(itemSelect == swords.size() - 1) {
 					itemSelect = start;
 				}else {
 					itemSelect ++;
@@ -145,7 +145,7 @@ public class ItemMenu{
 					start = 1;
 				}
 				
-				if(itemSelect == shields.size()) {
+				if(itemSelect == shields.size() - 1) {
 					itemSelect = start;
 				}else {
 					itemSelect ++;
@@ -179,19 +179,20 @@ public class ItemMenu{
 				
 			case 1:
 				if(shields.get(itemSelect) != null) {
-					shieldIcon = new Img(320, 217, "/uiSprites/" + shields.get(itemSelect).toString() + "Icon.png");
+					shieldIcon = new Img(320, 313, "/uiSprites/" + shields.get(itemSelect).toString() + "Icon.png");
 					Frame.amogus.shieldSelect = itemSelect;
 				}
 				break;
 			
 			case 2:
-				if(shields.get(itemSelect) != null) {
-					shoeIcon = new Img(320, 217, "/uiSprites/" + shoes.get(itemSelect).toString() + "Icon.png");
+				if(shoes.get(itemSelect) != null) {
+					shoeIcon = new Img(320, 406, "/uiSprites/" + shoes.get(itemSelect).toString() + "Icon.png");
 					((Amogus)Frame.amogus).shoeSelect = itemSelect;
 				}
 				break;
 			}
 			itemCursor.x = 320;
+			typeSelect = 0;
 		}else {
 			itemCursor.x = 420;
 			itemCursor.y = 214;
@@ -228,6 +229,7 @@ public class ItemMenu{
 		if(selecting == true) {
 			selecting = false;
 			itemCursor.x = 320;
+			typeSelect = 0;
 		}else {
 			switch(typeSelect) {
 			case 0:
@@ -246,6 +248,11 @@ public class ItemMenu{
 				break;
 			}
 		}
+	}
+	
+	public void exit() {
+		selecting = false;
+		
 	}
 	
 	public void paintShields(Graphics g) {
@@ -276,11 +283,14 @@ public class ItemMenu{
 	
 	public void paintShoes(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;	
-		int y = 0;
-		for(int i = itemSelect + 1; i < i + 3 && i < shoes.size(); i ++) {
-			Img shoesImg = new Img(420, 217 + 84 * y, "/uiSprites/" + shoes.get(i).toString() + "Icon.png");
-			shoesImg.paint(g2);
-			y ++;
+		int y = 0, count = 0;
+		for(int i = itemSelect; count < 3 && i < shoes.size(); i ++) {
+			if(shoes.get(i) != null) {
+				Img shoeImg = new Img(420, 217 + 84 * y, "/uiSprites/" + shoes.get(i).toString() + "Icon.png");
+				shoeImg.paint(g2);
+				y ++;
+				count ++;
+			}
 		}
 	}
 	
@@ -291,6 +301,8 @@ public class ItemMenu{
 		shieldFrame.paint(g2);
 		shoeFrame.paint(g2);
 		if(swordIcon != null) {	swordIcon.paint(g2);}
+		if(shieldIcon != null) {	shieldIcon.paint(g2);}
+		if(shoeIcon != null) {	shoeIcon.paint(g2);}
 		itemCursor.paint(g2);
 		if(selecting == true) {
 			switch(typeSelect) {

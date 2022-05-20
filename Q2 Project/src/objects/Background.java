@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import equipment.Murasama;
 import equipment.Shield;
+import equipment.Shoes;
 import equipment.Sword;
 import runner.Frame;
 
@@ -90,7 +91,9 @@ public class Background{
 			bricks.add(new Brick(x + 13 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
 			
 			chests.add(new Chest(x + 12 * Brick.length, y - 7 * Brick.length, "Left", new Shield(Frame.amogus)));
-			
+			chests.add(new Chest(x + 1* Brick.length, y + 6 * Brick.length, "Right", new Sword(Frame.amogus)));
+			chests.add(new Chest(x + 7 * Brick.length, y + 6 * Brick.length, "Left", new Shield(Frame.amogus)));
+			chests.add(new Chest(x + 7 * Brick.length, y + 7 * Brick.length, "Left", new Shoes(Frame.amogus)));
 			break;
 		}
 	}

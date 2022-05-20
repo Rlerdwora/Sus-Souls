@@ -17,7 +17,7 @@ public class Shield extends Hand{
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
-		type = "sword";
+		type = "shield";
 		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	

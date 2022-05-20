@@ -17,17 +17,17 @@ public class Shoes{
 	//image related variables
 	public int x, y;
 	public Character character;
-	public String action, direction, fileType, toString;
+	public String action, direction, fileType;
 	public Image img;
 	public AffineTransform tx;
+	
+	public String toString() {
+		return "dripShoes";
+	}
 
 	public Shoes(Character character) {
 		this.character = character;
 		tx = AffineTransform.getTranslateInstance(x, y );
-	}
-	
-	public String toString() {
-		return toString;
 	}
 	
 	public void follow() {

@@ -516,10 +516,14 @@ public class Amogus extends Character{
 		}
 		
 		if(blocking == true) {
-			shield.get(shieldSelect).setAction("Block");
-			sword.get(weaponSelect).setAction("Block");
-			shield.get(shieldSelect).setFileType(".png");
-			sword.get(weaponSelect).setFileType(".png");
+			if(shield.get(shieldSelect) != null){
+				shield.get(shieldSelect).setAction("Block");
+				shield.get(shieldSelect).setFileType(".png");
+			}
+			if(sword.get(weaponSelect) != null) {
+				sword.get(weaponSelect).setAction("Block");
+				sword.get(weaponSelect).setFileType(".png");
+			}
 		}
 		
 		regenStamina();
