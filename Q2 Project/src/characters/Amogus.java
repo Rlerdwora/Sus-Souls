@@ -244,7 +244,7 @@ public class Amogus extends Character{
 				break;
 			}
 			
-			for(Character character : Frame.enemies) {
+			for(Character character : Frame.b.enemies) {
 				System.out.println(checkHitBox(character));
 				if(checkHitBox(character)){
 					character.takeDamage(10, direction);
@@ -603,17 +603,17 @@ public class Amogus extends Character{
 				if(shield.size() > 0 && shield.get(shieldSelect) != null) {
 					shield.get(shieldSelect).paint(g);
 				}				
-				break;		
+				break;
 		}else {
 			g2.drawImage(img, tx, null);
 			if(shoes.size() > 0 && shoes.get(shoeSelect) != null) {
 				shoes.get(shoeSelect).paint(g2);
 			}	
 		}
-		
+		/*
 		g.setColor(new Color(0,0,0));
 		g.drawRect(hitBoxX, hitBoxY, hitBoxW, hitBoxH);
-		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
+		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);*/
 				
 		if(health == 0) {
 			Frame.deathScreen.fadeIn();

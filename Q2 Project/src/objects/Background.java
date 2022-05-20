@@ -9,6 +9,8 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
+import characters.Character;
+import characters.Skeleton;
 import equipment.Murasama;
 import equipment.Shield;
 import equipment.Shoes;
@@ -21,6 +23,7 @@ public class Background{
 	public ArrayList<Block> bricks = new ArrayList<Block>();
 	public ArrayList<Chest> chests = new ArrayList<Chest>();
 	public ArrayList<Bonfire> bonfires = new ArrayList<Bonfire>();
+	public ArrayList<Character> enemies = new ArrayList<Character>();
 
 	public Background(int x, int y, int id) {
 		this.x = x;
@@ -94,6 +97,9 @@ public class Background{
 			chests.add(new Chest(x + 1* Brick.length, y + 6 * Brick.length, "Right", new Sword(Frame.amogus)));
 			chests.add(new Chest(x + 7 * Brick.length, y + 6 * Brick.length, "Left", new Shield(Frame.amogus)));
 			chests.add(new Chest(x + 7 * Brick.length, y + 7 * Brick.length, "Left", new Shoes(Frame.amogus)));
+			
+			enemies.add(new Skeleton(x + 10 * Brick.length, y - 11 * Brick.length));
+			enemies.add(new Skeleton(x + 10 * Brick.length, y - 3 * Brick.length));
 			break;
 		}
 	}
@@ -106,6 +112,12 @@ public class Background{
 		}
 		for(Chest c : chests) {
 			c.paint(g2);
+		}
+		for(Character c : enemies) {
+			c.paint(g);
+			for(Block block : bricks) {
+				block.checkCollision(c);
+			}
 		}
 		for(Bonfire b : bonfires) {
 			b.paint(g2);

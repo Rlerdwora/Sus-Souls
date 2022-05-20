@@ -40,13 +40,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Color green = new Color(0, 255, 0);
 	Color black = new Color(0,0,0);
 	public static Character amogus = new Amogus(430,600);
-	public static ArrayList<Character> enemies = new ArrayList<Character>();
 	public static Img deathScreen = new Img(0, 180, "/uiSprites/deathScreen.png", 0f);
 	public static Camera camera = new Camera(amogus);
 	SuspicionIcon susIcon = new SuspicionIcon(5,5);
 	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
-	Background b = new Background(0,0, 1);
+	public static Background b = new Background(0,0, 1);
 	Equipment equipment = new Equipment();
 	boolean itemMenuOpen = false;
 	ItemMenu itemMenu = new ItemMenu();
@@ -61,9 +60,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		health.paint(g);
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
-		for(Character c : enemies) {
-			//c.paint(g);
-		}
 		amogus.paint(g);
 		camera.focus();
 		equipment.paint(g);
@@ -91,7 +87,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-		enemies.add(new Skeleton(100,100));
 	}
 	
 	@Override

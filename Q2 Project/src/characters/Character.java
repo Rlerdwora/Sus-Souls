@@ -18,7 +18,6 @@ import ui.Camera;
 
 public class Character{
 	
-	//image related variables
 	public int x, y, xv, yv, hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH, hitBoxX, hitBoxY, hitBoxW, hitBoxH, health, maxHealth,
 	weaponSelect, shieldSelect, staggerTimer, hurtTimer, attackTimer, recoilTimer, deathTimer, detectRange, combatRange, staminaRegenTimer;
 	public double stamina, staminaRegen, maxStamina;
