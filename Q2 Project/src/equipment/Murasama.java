@@ -18,6 +18,8 @@ public class Murasama extends Sword{
 	public Murasama(Character character) {
 		super(character);
 		effect = new MurasamaSlash(character);
+		damage = 30;
+		staminaReduction = 3;
 	}
 	
 	public String toString() {

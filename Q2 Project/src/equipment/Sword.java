@@ -24,6 +24,8 @@ public class Sword extends Hand{
 		fileType = ".png";
 		type = "sword";
 		tx = AffineTransform.getTranslateInstance(x, y );
+		damage = 10;
+		staminaReduction = 10;
 	}
 	
 	public String toString() {

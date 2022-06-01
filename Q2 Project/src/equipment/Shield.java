@@ -19,6 +19,7 @@ public class Shield extends Hand{
 		fileType = ".png";
 		type = "shield";
 		tx = AffineTransform.getTranslateInstance(x, y );
+		staminaReduction = 5;
 	}
 	
 	public String toString() {

@@ -212,7 +212,7 @@ public class Amogus extends Character{
 		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5 && sword.size() > 0) {
 			if(sword.get(weaponSelect) == null) {return;}
 			attackTimer = 15;
-			decreaseStamina(5);
+			decreaseStamina(sword.get(weaponSelect).staminaReduction);
 			((Sword)sword.get(weaponSelect)).effect.play();
 			switch(direction) {
 			case "Right":
@@ -247,7 +247,7 @@ public class Amogus extends Character{
 			for(Character character : Frame.b.enemies) {
 				System.out.println(checkHitBox(character));
 				if(checkHitBox(character)){
-					character.takeDamage(10, direction);
+					character.takeDamage(sword.get(weaponSelect).damage, direction);
 				}
 			}
 		}
@@ -308,6 +308,12 @@ public class Amogus extends Character{
 	public void takeDamage(int damage, String direction) {
 		if(invincible == true) {return;}
 		
+		int defense = 0;
+		
+		if(shoes.size() > 1 && shoes.get(shoeSelect) != null) {
+			defense = shoes.get(shoeSelect).defense;
+		}
+		
 		boolean blocked = false;
 		
 		if(blocking == true) {
@@ -339,7 +345,7 @@ public class Amogus extends Character{
 		}
 		if(blocked == true) {
 			if(stamina - damage / 2 >= 0) {
-				decreaseStamina(damage / 2);
+				decreaseStamina(shield.get(shieldSelect).staminaReduction);
 			}else {
 				stopShield();
 				stamina = 0;
@@ -347,10 +353,10 @@ public class Amogus extends Character{
 				staggerTimer = 30;
 			}
 		}else if(health > 0) {
-			if(damage >= health) {
+			if(damage - defense >= health) {
 				die();
 			}else {
-				health -= damage;
+				health -= damage - defense;
 				hurtTimer = 20;
 				running = false;
 			}

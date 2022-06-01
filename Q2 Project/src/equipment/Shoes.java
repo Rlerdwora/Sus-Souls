@@ -18,6 +18,7 @@ public class Shoes{
 	public int x, y;
 	public Character character;
 	public String action, direction, fileType;
+	public int defense;
 	public Image img;
 	public AffineTransform tx;
 	
@@ -28,6 +29,7 @@ public class Shoes{
 	public Shoes(Character character) {
 		this.character = character;
 		tx = AffineTransform.getTranslateInstance(x, y );
+		defense = 8;
 	}
 	
 	public void follow() {

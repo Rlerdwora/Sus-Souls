@@ -17,6 +17,7 @@ public class Hand{
 	public int x, y, xPos, yPos;
 	public Character character;
 	public String action, direction, fileType, type;
+	public int damage, staminaReduction;
 	public Image img;
 	public AffineTransform tx;
 

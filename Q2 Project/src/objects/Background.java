@@ -58,7 +58,11 @@ public class Background{
 				if(i != 6) {
 					bricks.add(new Brick(x + 5 * Brick.length, y - (1 + i) * Brick.length, "Right"));
 				}
-				bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, "Left"));
+				if(i != 9) {
+					bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, "Left"));
+				}else {
+					bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, 2, "Up", "Right"));
+				}
 				bricks.add(new Brick(x + 4 * Brick.length, y - (1 + i) * Brick.length));
 			}
 			bricks.add(new Brick(x + 5 * Brick.length, y - 7 * Brick.length, "Right", true));
@@ -94,12 +98,22 @@ public class Background{
 			bricks.add(new Brick(x + 13 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
 			
 			chests.add(new Chest(x + 12 * Brick.length, y - 7 * Brick.length, "Left", new Shield(Frame.amogus)));
-			chests.add(new Chest(x + 1* Brick.length, y + 6 * Brick.length, "Right", new Sword(Frame.amogus)));
-			chests.add(new Chest(x + 7 * Brick.length, y + 6 * Brick.length, "Left", new Shield(Frame.amogus)));
-			chests.add(new Chest(x + 7 * Brick.length, y + 7 * Brick.length, "Left", new Shoes(Frame.amogus)));
 			
 			enemies.add(new Skeleton(x + 10 * Brick.length, y - 11 * Brick.length));
 			enemies.add(new Skeleton(x + 10 * Brick.length, y - 3 * Brick.length));
+			
+			bricks.add(new Brick(x + 4 * Brick.length, y - 11 * Brick.length));
+			bricks.add(new Brick(x + 3 * Brick.length, y - 11 * Brick.length));
+			bricks.add(new Brick(x + 2 * Brick.length, y - 11 * Brick.length));
+			bricks.add(new Brick(x + 5 * Brick.length, y - 11 * Brick.length, "Right"));
+			
+			bricks.add(new Brick(x + 5 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
+			bricks.add(new Brick(x + 4 * Brick.length, y - 12 * Brick.length, "Up"));
+			bricks.add(new Brick(x + 3 * Brick.length, y - 12 * Brick.length, "Up"));
+			bricks.add(new Brick(x + 2 * Brick.length, y - 12 * Brick.length, "Up"));
+			bricks.add(new Brick(x + 2 * Brick.length, y - 10 * Brick.length, "Down"));
+			bricks.add(new Brick(x + 2 * Brick.length, y - 10 * Brick.length, 2, "Up", "Left"));
+			bricks.add(new Brick(x + 2 * Brick.length, y - 12 * Brick.length, 2, "Down", "Left"));
 			break;
 		}
 	}
