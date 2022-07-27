@@ -34,6 +34,7 @@ public class Background{
 		switch(id) {
 		
 		case 1:
+			/*
 			for(int i = 0; i < 7; i ++) {
 				for(int j = 0; j < 7; j ++) {
 					bricks.add(new Brick(x + Brick.length + i * Brick.length, y + Brick.length + j * Brick.length));
@@ -118,11 +119,13 @@ public class Background{
 			bricks.add(new Brick(x + 2 * Brick.length, y - 10 * Brick.length, 2, "Up", "Left"));
 			bricks.add(new Brick(x + 2 * Brick.length, y - 12 * Brick.length, 2, "Down", "Left"));
 			break;
+			*/
+			buildLevel();
 		}
 	}
 	
 	public void buildLevel() {
-		String path = ".\\src\\levels\\";
+		String path = ".\\src\\levels\\Dungeon1";
 		File text = new File(path);
 		try {
 			try (Scanner scnnr = new Scanner(text)) {
@@ -132,11 +135,10 @@ public class Background{
 				int yDimension = scnnr.nextInt();
 				
 				int xPlacement = 0, yPlacement = 0;
-				//uses the dimensions to place the read id's in the correct spot
 				for(int i = 0; i < xDimension; i ++) {
 					for(int j = 0; j < yDimension; j ++) {
 						/* Block Id Table
-						 * 
+						 * 000: nothing
 						 * 001: tile
 						 * 002: right wall
 						 * 003: left wall
@@ -160,11 +162,15 @@ public class Background{
 						 * 024 - 27: chest with sword
 						 * 028 - 31: chest with drip
 						 * 032 - 35: chest with murasama
+						 * 036: skeleton
 						 */
-						xPlacement = 0;
 						int blockId = scnnr.nextInt();
 						
 						switch(blockId) {
+						case 0:
+							
+							break;
+						
 						case 1: //tile
 							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
 							break;
@@ -322,9 +328,15 @@ public class Background{
 							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
 							chests.add(new Chest(xPlacement * 84, yPlacement * 84, "Down", new Murasama(Frame.amogus)));
 							break;
+							
+						case 36:
+							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
+							enemies.add(new Skeleton(xPlacement * 84, yPlacement * 84));
 						}
+						xPlacement ++;
 					}
 					yPlacement ++;
+					xPlacement = 0;
 				}
 			}
 		} catch (FileNotFoundException e) {
