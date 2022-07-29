@@ -34,92 +34,6 @@ public class Background{
 		switch(id) {
 		
 		case 1:
-			/*
-			for(int i = 0; i < 7; i ++) {
-				for(int j = 0; j < 7; j ++) {
-					bricks.add(new Brick(x + Brick.length + i * Brick.length, y + Brick.length + j * Brick.length));
-				}
-			}
-			
-			for(int i = 0; i < 7; i ++) {
-				bricks.add(new Brick(x, y + (i + 1) * Brick.length, "Left"));
-				bricks.add(new Brick(x + 8 * Brick.length, y + (i + 1) * Brick.length, "Right"));
-				bricks.add(new Brick(x + (i + 1) * Brick.length, y + 8 * Brick.length, "Down"));
-				if(i != 3) {
-					bricks.add(new Brick(x + (i + 1) * Brick.length, y, "Up"));
-				}
-			}
-			
-			bricks.add(new Brick(x, y, 1, "Up", "Left"));
-			bricks.add(new Brick(x + 8 * Brick.length, y, 1, "Up", "Right"));
-			bricks.add(new Brick(x + 8 * Brick.length, y + 8 * Brick.length, 1, "Down", "Right"));
-			bricks.add(new Brick(x, y + 8 * Brick.length, 1, "Down", "Left"));
-			bricks.add(new Brick(x + 4 * Brick.length, y, "Up", false));
-			
-			bonfires.add(new Bonfire(x + 4 * Brick.length, y + 6 * Brick.length, 1));
-			
-			for(int i = 0; i < 10; i ++) {
-				if(i != 6) {
-					bricks.add(new Brick(x + 5 * Brick.length, y - (1 + i) * Brick.length, "Right"));
-				}
-				if(i != 9) {
-					bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, "Left"));
-				}else {
-					bricks.add(new Brick(x + 3 * Brick.length, y - (1 + i) * Brick.length, 2, "Up", "Right"));
-				}
-				bricks.add(new Brick(x + 4 * Brick.length, y - (1 + i) * Brick.length));
-			}
-			bricks.add(new Brick(x + 5 * Brick.length, y - 7 * Brick.length, "Right", true));
-			
-			bricks.add(new Brick(x + 6 * Brick.length, y - 8 * Brick.length, "Up"));
-			bricks.add(new Brick(x + 6 * Brick.length, y - 6 * Brick.length, "Down"));
-			bricks.add(new Brick(x + 7 * Brick.length, y - 6 * Brick.length, 2, "Up", "Right"));
-			bricks.add(new Brick(x + 7 * Brick.length, y - 8 * Brick.length, 2, "Down", "Right"));
-			bricks.add(new Brick(x + 6 * Brick.length, y - 7 * Brick.length));
-			bricks.add(new Brick(x + 7 * Brick.length, y - 7 * Brick.length));
-			
-			for(int i = 0; i < 9; i ++) {
-				if(i != 3 && i != 4 && i != 5) {
-					bricks.add(new Brick(x + 7 * Brick.length, y - (i + 3) * Brick.length, "Left"));
-				}
-				bricks.add(new Brick(x + 13 * Brick.length, y - (i + 3) * Brick.length, "Right"));
-			}
-			
-			for(int i = 0; i < 5; i ++) {
-				bricks.add(new Brick(x + (i + 8) * Brick.length, y - 12 * Brick.length, "Up"));
-				bricks.add(new Brick(x + (i + 8) * Brick.length, y - 2 * Brick.length, "Down"));
-			}
-			
-			for(int i = 0; i < 9; i ++) {
-				for(int j = 0; j < 5; j ++) {
-					bricks.add(new Brick(x + (j + 8) * Brick.length, y - (i + 3) * Brick.length));
-				}
-			}
-			
-			bricks.add(new Brick(x + 7 * Brick.length, y - 2 * Brick.length, 1, "Down", "Left"));
-			bricks.add(new Brick(x + 13 * Brick.length, y - 2 * Brick.length, 1, "Down", "Right"));
-			bricks.add(new Brick(x + 7 * Brick.length, y - 12 * Brick.length, 1, "Up", "Left"));
-			bricks.add(new Brick(x + 13 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
-			
-			chests.add(new Chest(x + 12 * Brick.length, y - 7 * Brick.length, "Left", new Shield(Frame.amogus)));
-			
-			enemies.add(new Skeleton(x + 10 * Brick.length, y - 11 * Brick.length));
-			enemies.add(new Skeleton(x + 10 * Brick.length, y - 3 * Brick.length));
-			
-			bricks.add(new Brick(x + 4 * Brick.length, y - 11 * Brick.length));
-			bricks.add(new Brick(x + 3 * Brick.length, y - 11 * Brick.length));
-			bricks.add(new Brick(x + 2 * Brick.length, y - 11 * Brick.length));
-			bricks.add(new Brick(x + 5 * Brick.length, y - 11 * Brick.length, "Right"));
-			
-			bricks.add(new Brick(x + 5 * Brick.length, y - 12 * Brick.length, 1, "Up", "Right"));
-			bricks.add(new Brick(x + 4 * Brick.length, y - 12 * Brick.length, "Up"));
-			bricks.add(new Brick(x + 3 * Brick.length, y - 12 * Brick.length, "Up"));
-			bricks.add(new Brick(x + 2 * Brick.length, y - 12 * Brick.length, "Up"));
-			bricks.add(new Brick(x + 2 * Brick.length, y - 10 * Brick.length, "Down"));
-			bricks.add(new Brick(x + 2 * Brick.length, y - 10 * Brick.length, 2, "Up", "Left"));
-			bricks.add(new Brick(x + 2 * Brick.length, y - 12 * Brick.length, 2, "Down", "Left"));
-			break;
-			*/
 			buildLevel();
 		}
 	}
@@ -131,8 +45,8 @@ public class Background{
 			try (Scanner scnnr = new Scanner(text)) {
 				
 				//level text files have dimensions at the top
-				int xDimension = scnnr.nextInt();
 				int yDimension = scnnr.nextInt();
+				int xDimension = scnnr.nextInt();
 				
 				int xPlacement = 0, yPlacement = 0;
 				for(int i = 0; i < xDimension; i ++) {
@@ -165,6 +79,7 @@ public class Background{
 						 * 036: skeleton
 						 */
 						int blockId = scnnr.nextInt();
+						System.out.print(blockId);
 						
 						switch(blockId) {
 						case 0:
@@ -240,6 +155,7 @@ public class Background{
 							break;
 							
 						case 18: //bonfire
+							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
 							bonfires.add(new Bonfire(xPlacement * 84, yPlacement * 84, 1));
 							break;
 							
@@ -329,7 +245,7 @@ public class Background{
 							chests.add(new Chest(xPlacement * 84, yPlacement * 84, "Down", new Murasama(Frame.amogus)));
 							break;
 							
-						case 36:
+						case 36: //spawn skeleton
 							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
 							enemies.add(new Skeleton(xPlacement * 84, yPlacement * 84));
 						}
@@ -337,6 +253,7 @@ public class Background{
 					}
 					yPlacement ++;
 					xPlacement = 0;
+					System.out.println();
 				}
 			}
 		} catch (FileNotFoundException e) {
