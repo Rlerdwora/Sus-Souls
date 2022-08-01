@@ -36,7 +36,7 @@ public class Slash extends Effect{
 			
 		case "Up":
 			xPos = 0;
-			yPos = -45;
+			yPos = -53;
 			break;
 			
 		case "Down":
@@ -52,8 +52,7 @@ public class Slash extends Effect{
 	/* Drawing commands */
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;		
-		
+		Graphics2D g2 = (Graphics2D) g;
 		if(timer > 0) {
 			update();
 			g2.drawImage(img, tx, null);

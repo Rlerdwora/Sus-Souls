@@ -1,5 +1,9 @@
 package ui;
 import characters.Character;
+import objects.Block;
+import objects.Bonfire;
+import objects.Chest;
+import runner.Frame;
 
 public class Camera {
 	
@@ -13,21 +17,65 @@ public class Camera {
 	public void focus() {
 		while(character.x() != 395) {
 			if(character.x() < 395) {
-				x ++;
-				character.setX(character.x() + 1);
+				character.x ++;
+				for(Block b : Frame.b.bricks) {
+					b.x ++;
+				}
+				for(Chest c : Frame.b.chests) {
+					c.x ++;
+				}
+				for(Bonfire b : Frame.b.bonfires) {
+					b.x ++;
+				}
+				for(Character c : Frame.b.enemies) {
+					c.x ++;
+				}
 			}else if(character.x() > 395){
-				x --;
-				character.setX(character.x() - 1);
+				character.x --;
+				for(Block b : Frame.b.bricks) {
+					b.x --;
+				}
+				for(Chest c : Frame.b.chests) {
+					c.x --;
+				}
+				for(Bonfire b : Frame.b.bonfires) {
+					b.x --;
+				}
+				for(Character c : Frame.b.enemies) {
+					c.x --;
+				}
 			}
 		}
 		
 		while(character.y() != 270) {
 			if(character.y() < 270) {
-				y ++;
-				character.setY(character.y() + 1);
+				character.y ++;
+				for(Block b : Frame.b.bricks) {
+					b.y ++;
+				}
+				for(Chest c : Frame.b.chests) {
+					c.y ++;
+				}
+				for(Bonfire b : Frame.b.bonfires) {
+					b.y ++;
+				}
+				for(Character c : Frame.b.enemies) {
+					c.y ++;
+				}
 			}else if(character.y() > 270){
-				y --;
-				character.setY(character.y() - 1);
+				character.y --;
+				for(Block b : Frame.b.bricks) {
+					b.y --;
+				}
+				for(Chest c : Frame.b.chests) {
+					c.y --;
+				}
+				for(Bonfire b : Frame.b.bonfires) {
+					b.y --;
+				}
+				for(Character c : Frame.b.enemies) {
+					c.y --;
+				}
 			}
 		}
 	}

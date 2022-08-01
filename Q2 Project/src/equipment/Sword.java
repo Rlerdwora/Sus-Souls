@@ -11,29 +11,78 @@ import java.net.URL;
 import characters.Character;
 import effects.Effect;
 import effects.Slash;
+import runner.Frame;
 
 public class Sword extends Hand{
 	
 	public Effect effect;
+	public int attackTimer, attackTimerSet, attackStart, attackEnd;
+	public Hitbox hitbox;
 	
 	public Sword(Character character) {
 		super(character);
+		damage = 20;
+		staminaReduction = 10;
+		attackTimerSet = 15;
+		attackStart = 9;
+		attackEnd = 2;
 		effect = new Slash(character);
+		hitbox = new Hitbox(damage);
 		direction = "Right";
 		action = "Stand";
 		fileType = ".png";
 		type = "sword";
 		tx = AffineTransform.getTranslateInstance(x, y );
-		damage = 10;
-		staminaReduction = 10;
 	}
 	
 	public String toString() {
 		return "sword";
 	}
 	
+	public void attack() {
+		if(attackTimer == 0)
+		attackTimer = attackTimerSet;
+	}
+	
 	public void update() {
 		super.follow();
+		
+		if(attackTimer > 0) {
+			attackTimer --;
+			action = "Attack";
+			fileType = ".gif";
+			if(attackTimer <= attackStart && attackTimer >= attackEnd) {
+				if(attackTimer == attackStart) {
+					effect.play();
+					hitbox.hits = new boolean[Frame.b.enemies.size()];
+					for(boolean b : hitbox.hits) {
+						b = false;
+					}
+				}
+				switch(direction) {
+				case "Right":
+					hitbox.checkCollision(x + 66, y - 4, 60, 90, direction);
+					break;
+					
+				case "Left":
+					hitbox.checkCollision(x - 44, y - 4, 60, 90, direction);
+					break;
+					
+				case "Up":
+					hitbox.checkCollision(x - 4, y - 46, 90, 60, direction);
+					break;
+					
+				case "Down":
+					hitbox.checkCollision(x - 4, y + 69, 90, 60, direction);
+					break;
+				}
+				if(attackTimer == attackEnd)
+					hitbox.resetHits();
+				System.out.println("hitbox active");
+			}else {
+				System.out.println("hitbox inactive");				
+			}
+		}
 		
 		switch(direction) {
 		case "Right":			
@@ -117,7 +166,7 @@ public class Sword extends Hand{
 				break;
 				
 			case "Attack":
-				xPos = -30;
+				xPos = -25;
 				yPos = -20;
 				break;
 			}
@@ -162,5 +211,25 @@ public class Sword extends Hand{
 		update();
 		g2.drawImage(img, tx, null);
 		effect.paint(g2);
+		
+		if(attackTimer <= attackStart && attackTimer >= attackEnd) {
+			switch(direction) {
+			case "Right":
+				g.drawRect(x + 66, y - 4, 60, 90);
+				break;
+				
+			case "Left":
+				g.drawRect(x - 44, y - 4, 60, 90);
+				break;
+				
+			case "Up":
+				g.drawRect(x - 4, y - 46, 90, 60);
+				break;
+				
+			case "Down":
+				g.drawRect(x - 4, y + 69, 90, 60);
+				break;
+			}
+		}
 	}
 }

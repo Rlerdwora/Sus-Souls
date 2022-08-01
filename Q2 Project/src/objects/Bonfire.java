@@ -12,10 +12,13 @@ import ui.Camera;
 
 public class Bonfire{
 	
-	private int x, y, kindleLevel, leanRegen;
-	private boolean kindled;
-	private Image img;
-	private AffineTransform tx;
+	public int x;
+	public int y;
+	public int kindleLevel;
+	public int leanRegen;
+	public boolean kindled;
+	public Image img;
+	public AffineTransform tx;
 
 	public Bonfire(int x, int y, int kindleLevel) {
 		this.x = x;
@@ -45,12 +48,12 @@ public class Bonfire{
 		}
 	}
 	
-	private void init(double a, double b) {
+	public void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
-	private Image getImage(String path) {
+	public Image getImage(String path) {
 		Image tempImage = null;
 		try {
 			URL imageURL = Bonfire.class.getResource(path);

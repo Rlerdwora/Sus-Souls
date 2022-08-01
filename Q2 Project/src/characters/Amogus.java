@@ -25,7 +25,6 @@ public class Amogus extends Character{
 	public int rollTimer, leanCount, leanTimer, suspicion, shoeSelect;
 	public boolean blocking, invincible, control, running;
 	public Hand lean;
-	public ArrayList<Shoes> shoes = new ArrayList<Shoes>();
 
 	public Amogus(int x, int y) {
 		this.x = x;
@@ -56,7 +55,8 @@ public class Amogus extends Character{
 		shieldSelect = 0;
 		shoeSelect = 0;
 		shield.add(null);
-		sword.add(null);
+		//sword.add(null);
+		sword.add(new Sword(this));
 		lean = new Lean(this);
 		shoes.add(null);
 	}
@@ -209,48 +209,10 @@ public class Amogus extends Character{
 	}
 	
 	public void attack() {
-		if(attackTimer <= 0 && health > 0 && blocking == false && stamina >= 5 && sword.size() > 0) {
-			if(sword.get(weaponSelect) == null) {return;}
-			attackTimer = 15;
-			decreaseStamina(sword.get(weaponSelect).staminaReduction);
-			((Sword)sword.get(weaponSelect)).effect.play();
-			switch(direction) {
-			case "Right":
-				hitBoxX = hurtBoxX + hurtBoxW + 20;
-				hitBoxY = hurtBoxY - 10;
-				hitBoxW = 40;
-				hitBoxH = 90;
-				break;
-				
-			case "Left":
-				hitBoxX = hurtBoxX - hitBoxW - 20;
-				hitBoxY = hurtBoxY - 10;		
-				hitBoxW = 40;
-				hitBoxH = 90;
-				break;
-				
-			case "Up":
-				hitBoxX = hurtBoxX - 20;
-				hitBoxY = hurtBoxY - hurtBoxH + 20;
-				hitBoxW = 90;
-				hitBoxH = 40;
-				break;
-				
-			case "Down":
-				hitBoxX = hurtBoxX - 20;
-				hitBoxY = hurtBoxY + hurtBoxH + 20;
-				hitBoxW = 90;
-				hitBoxH = 40;
-				break;
-			}
-			
-			for(Character character : Frame.b.enemies) {
-				System.out.println(checkHitBox(character));
-				if(checkHitBox(character)){
-					character.takeDamage(sword.get(weaponSelect).damage, direction);
-				}
-			}
-		}
+		if(sword.get(weaponSelect) == null)
+			return;
+		
+		((Sword)sword.get(weaponSelect)).attack();
 	}
 	
 	public void shield() {
@@ -509,15 +471,10 @@ public class Amogus extends Character{
 			shield.get(shieldSelect).copyAction();
 		}		
 		
-		if(attackTimer > 0) {
-			attackTimer --;
-			if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+		if(((Sword)sword.get(weaponSelect)).attackTimer > 0) {
+			if(shield.get(shieldSelect) != null) {
 				shield.get(shieldSelect).setAction("Attack");
 				shield.get(shieldSelect).setFileType(".png");			
-			}	
-			if(sword.size() > 0 && sword.get(weaponSelect) != null) {
-				sword.get(weaponSelect).setAction("Attack");
-				sword.get(weaponSelect).setFileType(".gif");
 			}
 		}
 		
@@ -620,6 +577,7 @@ public class Amogus extends Character{
 		g.setColor(new Color(0,0,0));
 		g.drawRect(hitBoxX, hitBoxY, hitBoxW, hitBoxH);
 		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);*/
+		
 				
 		if(health == 0) {
 			Frame.deathScreen.fadeIn();

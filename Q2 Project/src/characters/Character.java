@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import effects.Effect;
 import equipment.Hand;
 import equipment.Shield;
+import equipment.Shoes;
 import equipment.Sword;
 import runner.Frame;
 import ui.Camera;
@@ -24,6 +25,7 @@ public class Character{
 	public boolean blocking, invincible;
 	public String direction, action, fileType;
 	public ArrayList<Hand> shield = new ArrayList<Hand>(), sword = new ArrayList<Hand>();
+	public ArrayList<Shoes> shoes = new ArrayList<Shoes>();
 	public Image img; 	
 	public AffineTransform tx;
 
@@ -115,8 +117,8 @@ public class Character{
 	}
 	
 	public boolean detect() {
-		int xDiff = Math.abs((Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2));
-		int yDiff = Math.abs((Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY + Camera.y() + hurtBoxH/2));
+		int xDiff = Math.abs((Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX  + hurtBoxW/2));
+		int yDiff = Math.abs((Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY  + hurtBoxH/2));
 		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) <= detectRange) {
 			return true;
 		}else {
@@ -125,30 +127,30 @@ public class Character{
 	}
 	
 	public void follow() {
-		int xDiff = (Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX + Camera.x() + hurtBoxW/2);
-		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY + Camera.y() + hurtBoxH/2);
+		int xDiff = (Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX  + hurtBoxW/2);
+		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY  + hurtBoxH/2);
 		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) > combatRange) {
-			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX + Camera.x() + hurtBoxW/2){
+			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX  + hurtBoxW/2){
 				moveRight();
-			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX + Camera.x() + hurtBoxW/2){
+			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX  + hurtBoxW/2){
 				moveLeft();
 			}
 			
-			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY + Camera.y() + hurtBoxH/2){
+			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY  + hurtBoxH/2){
 				moveDown();
-			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY + Camera.y() + hurtBoxH/2){
+			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY  + hurtBoxH/2){
 				moveUp();
 			}
 		}else {
-			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX + Camera.x() + hurtBoxW/2){
+			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX  + hurtBoxW/2){
 				direction = "Right";
-			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX + Camera.x() + hurtBoxW/2){
+			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX  + hurtBoxW/2){
 				direction = "Left";
 			}
 			
-			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY + Camera.y() + hurtBoxH/2){
+			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY  + hurtBoxH/2){
 				direction = "Down";
-			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY + Camera.y() + hurtBoxH/2){
+			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY  + hurtBoxH/2){
 				direction = "Up";
 			}
 			stopMove();
@@ -157,13 +159,8 @@ public class Character{
 	}
 	
 	public boolean checkHitBox(Character character) {
-		if(character == Frame.amogus) {
-			return(hitBoxX + hitBoxW + Camera.x() > character.hurtBoxX && hitBoxX + Camera.x() < character.hurtBoxX + character.hurtBoxW
-				&& hitBoxY + hitBoxH + Camera.y() > character.hurtBoxY && hitBoxY + Camera.y() < character.hurtBoxY + character.hurtBoxH);
-		}else {
-			return(hitBoxX + hitBoxW > character.hurtBoxX + Camera.x() && hitBoxX < character.hurtBoxX + character.hurtBoxW + Camera.x()
-				&& hitBoxY + hitBoxH > character.hurtBoxY  + Camera.y() && hitBoxY < character.hurtBoxY + character.hurtBoxH + Camera.y());		
-		}
+		return(hitBoxX + hitBoxW  > character.hurtBoxX && hitBoxX  < character.hurtBoxX + character.hurtBoxW
+			&& hitBoxY + hitBoxH  > character.hurtBoxY && hitBoxY  < character.hurtBoxY + character.hurtBoxH);
 	}
 	
 	public void update() {}

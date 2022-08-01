@@ -19,14 +19,19 @@ import ui.Camera;
 public class Chest{
 	
 	//image related variables
-	private int x, y, hurtBoxX, hurtBoxY, width, height;
-	private String direction;
-	private boolean opened;
-	private Hand loot;
-	private Shoes shoeLoot;
+	public int x;
+	public int y;
+	public int hurtBoxX;
+	public int hurtBoxY;
+	public int width;
+	public int height;
+	public String direction;
+	public boolean opened;
+	public Hand loot;
+	public Shoes shoeLoot;
 	boolean shoe;
-	private Image img;
-	private AffineTransform tx;
+	public Image img;
+	public AffineTransform tx;
 
 	public Chest(int x, int y, String direction, Hand loot) {
 		this.x = x;
@@ -112,8 +117,8 @@ public class Chest{
 	
 	public void checkCollision() {
 		//amogus is to the left of wall
-		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < hurtBoxX + width + Camera.x() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height + Camera.y()) {
+		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < hurtBoxX + width  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
 			if(Frame.amogus.xv > 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
@@ -124,8 +129,8 @@ public class Chest{
 		}
 		
 		//amogus is to the right of wall
-		if(Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x() && Frame.amogus.hurtBoxX > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height + Camera.y()) {
+		if(Frame.amogus.hurtBoxX < hurtBoxX + width  && Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height  
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
 			if(Frame.amogus.xv < 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
@@ -136,8 +141,8 @@ public class Chest{
 		}
 		
 		//amogus is above wall
-		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < hurtBoxY + height + Camera.y() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width + Camera.x()) {
+		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < hurtBoxY + height  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
 			if(Frame.amogus.yv > 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
@@ -148,8 +153,8 @@ public class Chest{
 		}
 		
 		//amogus is above wall
-		if(Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y() && Frame.amogus.hurtBoxY > hurtBoxY + Camera.y() && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX + Camera.x() && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width + Camera.x()) {
+		if(Frame.amogus.hurtBoxY < hurtBoxY + height  && Frame.amogus.hurtBoxY > hurtBoxY  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
 			if(Frame.amogus.yv < 0) {
 				if(((Amogus)Frame.amogus).running() == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
@@ -163,37 +168,37 @@ public class Chest{
 	public void interact() {
 		switch(Frame.amogus.direction) {
 		case "Right":
-			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x() - 10
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= hurtBoxX + Camera.x() + 10
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y()
-			&& Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX  - 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= hurtBoxX  + 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY 
+			&& Frame.amogus.hurtBoxY < hurtBoxY + height ) {
 				open();
 			}
 			break;
 			
 		case "Left":
-			if(Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x() + 10
-			&& Frame.amogus.hurtBoxX >= hurtBoxX + width + Camera.x() - 10
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y()
-			&& Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y()) {
+			if(Frame.amogus.hurtBoxX < hurtBoxX + width  + 10
+			&& Frame.amogus.hurtBoxX >= hurtBoxX + width  - 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY 
+			&& Frame.amogus.hurtBoxY < hurtBoxY + height ) {
 				open();
 			}
 			break;
 			
 		case "Up":
-			if(Frame.amogus.hurtBoxY < hurtBoxY + height + Camera.y() + 10
-			&& Frame.amogus.hurtBoxY >= hurtBoxY + height + Camera.y() - 10
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x()
-			&& Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()) {
+			if(Frame.amogus.hurtBoxY < hurtBoxY + height  + 10
+			&& Frame.amogus.hurtBoxY >= hurtBoxY + height  - 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX 
+			&& Frame.amogus.hurtBoxX < hurtBoxX + width) {
 				open();
 			}
 			break;
 			
 		case "Down":
-			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY + Camera.y() - 10
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= hurtBoxY + Camera.y() + 10
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX + Camera.x()
-			&& Frame.amogus.hurtBoxX < hurtBoxX + width + Camera.x()) {
+			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY - 10
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= hurtBoxY + 10
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX
+			&& Frame.amogus.hurtBoxX < hurtBoxX + width) {
 				open();
 			}			
 			break;
@@ -223,18 +228,39 @@ public class Chest{
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		checkCollision();
-		init(x + Camera.x(), y + Camera.y());
+		init(x, y);
+		switch(direction) {
+		case "Right":
+			hurtBoxX = x + 20;
+			hurtBoxY = y + 8;
+			break;
+		
+		case "Left":
+			hurtBoxX = x + 23;
+			hurtBoxY = y + 8;
+			break;
+			
+		case "Up":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			break;
+			
+		case "Down":
+			hurtBoxX = x + 3;
+			hurtBoxY = y + 15;
+			break;
+		}
 		g2.drawImage(img, tx, null);
-		g.drawRect(hurtBoxX + Camera.x(), hurtBoxY + Camera.y(), width, height);
+		g.drawRect(hurtBoxX, hurtBoxY, width, height);
 	}
 
 	
-	private void init(double a, double b) {
+	public void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
-	private Image getImage(String path) {
+	public Image getImage(String path) {
 		Image tempImage = null;
 		try {
 			URL imageURL = Chest.class.getResource(path);

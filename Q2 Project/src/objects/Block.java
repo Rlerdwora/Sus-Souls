@@ -73,13 +73,13 @@ public class Block{
 			return;
 		}
 		
-		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length + Camera.x() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY < y + length + Camera.y()
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY + 20 < y + length + Camera.y()) {
-			while(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()) {
+		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x  
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length  
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
+		&& Frame.amogus.hurtBoxY < y + length 
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y  
+		&& Frame.amogus.hurtBoxY + 20 < y + length ) {
+			while(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x ) {
 				Frame.amogus.x --;
 				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
@@ -87,13 +87,13 @@ public class Block{
 		}
 		
 		//amogus is to the right of wall
-		if(Frame.amogus.hurtBoxX < x + length + Camera.x() 
-		&& Frame.amogus.hurtBoxX > x + Camera.x() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY < y + length + Camera.y() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY + 20 < y + length + Camera.y()) {
-			while(Frame.amogus.hurtBoxX < x + length + Camera.x()) {
+		if(Frame.amogus.hurtBoxX < x + length  
+		&& Frame.amogus.hurtBoxX > x  
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
+		&& Frame.amogus.hurtBoxY < y + length  
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y  
+		&& Frame.amogus.hurtBoxY + 20 < y + length ) {
+			while(Frame.amogus.hurtBoxX < x + length ) {
 				Frame.amogus.x ++;
 				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
@@ -101,26 +101,26 @@ public class Block{
 		}
 				
 		//amogus is above wall
-		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length + Camera.y() 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX + 20 < x + length + Camera.x()) {
-			while(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()) {
+		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
+		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length  
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x  
+		&& Frame.amogus.hurtBoxX < x + length 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x  
+		&& Frame.amogus.hurtBoxX + 20 < x + length ) {
+			while(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y ) {
 				Frame.amogus.y --;
 				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
 			}
 		}
 		//amogus is below wall
-		if(Frame.amogus.hurtBoxY < y + length + Camera.y() 
-		&& Frame.amogus.hurtBoxY > y + Camera.y() 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX < x + length + Camera.x()
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x + Camera.x() 
-		&& Frame.amogus.hurtBoxX + 20 < x + length + Camera.x()) {
-			while(Frame.amogus.hurtBoxY < y + length + Camera.y()) {
+		if(Frame.amogus.hurtBoxY < y + length  
+		&& Frame.amogus.hurtBoxY > y  
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x  
+		&& Frame.amogus.hurtBoxX < x + length 
+		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x  
+		&& Frame.amogus.hurtBoxX + 20 < x + length ) {
+			while(Frame.amogus.hurtBoxY < y + length ) {
 				Frame.amogus.y ++;
 				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
 				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
@@ -129,7 +129,7 @@ public class Block{
 	}
 	
 	public void checkCollision(Character c) {
-		if(wall == false) {
+		if(wall == false || ((Math.abs(x + length/2 - c.hurtBoxX - c.hurtBoxW/2) > 84) && (Math.abs(y + length/2 - c.hurtBoxY - c.hurtBoxH/2) > 84))) {
 			return;
 		}
 		
@@ -193,10 +193,10 @@ public class Block{
 		
 		switch(Frame.amogus.direction) {
 		case "Right":
-			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x() - 20
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= x + Camera.x() + 20
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()
-			&& Frame.amogus.hurtBoxY < y + length + Camera.y()) {
+			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x  - 20
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW <= x  + 20
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y 
+			&& Frame.amogus.hurtBoxY < y + length ) {
 				if(wall) {
 					wall = false;
 					img = getImage("/objectSprites/" + material() + "DoorOpen" + direction1 + ".png");
@@ -208,10 +208,10 @@ public class Block{
 			break;
 			
 		case "Left":
-			if(Frame.amogus.hurtBoxX < x + length + Camera.x() + 20
-			&& Frame.amogus.hurtBoxX >= x + length + Camera.x() - 20
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y()
-			&& Frame.amogus.hurtBoxY < y + length + Camera.y()) {
+			if(Frame.amogus.hurtBoxX < x + length  + 20
+			&& Frame.amogus.hurtBoxX >= x + length  - 20
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y 
+			&& Frame.amogus.hurtBoxY < y + length ) {
 				if(wall) {
 					wall = false;
 					img = getImage("/objectSprites/" + material() + "DoorOpen" + direction1 + ".png");
@@ -223,10 +223,10 @@ public class Block{
 			break;
 			
 		case "Up":
-			if(Frame.amogus.hurtBoxY < y + length + Camera.y() + 20
-			&& Frame.amogus.hurtBoxY >= y + length + Camera.y() - 20
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()
-			&& Frame.amogus.hurtBoxX < x + length + Camera.x()) {
+			if(Frame.amogus.hurtBoxY < y + length  + 20
+			&& Frame.amogus.hurtBoxY >= y + length  - 20
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x 
+			&& Frame.amogus.hurtBoxX < x + length ) {
 				if(wall) {
 					wall = false;
 					img = getImage("/objectSprites/" + material() + "DoorOpen" + direction1 + ".png");
@@ -238,10 +238,10 @@ public class Block{
 			break;
 			
 		case "Down":
-			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y + Camera.y() - 20
-			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= y + Camera.y() + 20
-			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x + Camera.x()
-			&& Frame.amogus.hurtBoxX < x + length + Camera.x()) {
+			if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  - 20
+			&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH <= y  + 20
+			&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x 
+			&& Frame.amogus.hurtBoxX < x + length ) {
 				if(wall) {
 					wall = false;
 					img = getImage("/objectSprites/" + material() + "DoorOpen" + direction1 + ".png");
@@ -256,7 +256,7 @@ public class Block{
 
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		init(x + Camera.x(), y + Camera.y());
+		init(x , y );
 		g2.drawImage(img, tx, null);
 		checkCollision();
 	}
