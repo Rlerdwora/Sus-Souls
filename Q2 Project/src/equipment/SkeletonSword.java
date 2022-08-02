@@ -11,20 +11,49 @@ import java.net.URL;
 import characters.Character;
 import effects.Effect;
 import effects.Slash;
+import runner.Frame;
 import ui.Camera;
 
 public class SkeletonSword extends Sword{
 	
 	public SkeletonSword(Character character) {
 		super(character);
-		effect = new Slash(character);
-		direction = "Right";
-		action = "Stand";
-		fileType = ".png";
 	}
 	
 	public void update() {
 		super.follow();
+		effect.follow();
+		
+		if(attackTimer > 0) {
+			attackTimer --;
+			action = "Attack";
+			fileType = ".gif";
+			if(attackTimer <= attackStart && attackTimer >= attackEnd) {
+				if(attackTimer == attackStart) {
+					effect.play();
+					hitbox.crewmateHit = false;
+				}
+				switch(direction) {
+				case "Right":
+					hitbox.checkCrewmateCollision(x + 66, y - 4, 60, 90, direction);
+					break;
+					
+				case "Left":
+					hitbox.checkCrewmateCollision(x - 44, y - 4, 60, 90, direction);
+					break;
+					
+				case "Up":
+					hitbox.checkCrewmateCollision(x - 4, y - 46, 90, 60, direction);
+					break;
+					
+				case "Down":
+					hitbox.checkCrewmateCollision(x - 4, y + 69, 90, 60, direction);
+					break;
+				}
+				if(attackTimer == attackEnd)
+					hitbox.resetCrewmateHit();
+			}
+		}
 		
 		switch(direction) {
 		case "Right":			
@@ -108,7 +137,7 @@ public class SkeletonSword extends Sword{
 				break;
 				
 			case "Attack":
-				xPos = -30;
+				xPos = -25;
 				yPos = -20;
 				break;
 			}
@@ -146,12 +175,5 @@ public class SkeletonSword extends Sword{
 
 		img = getImage("/skeletonSprites/skeletonSword" + action + direction + fileType);
 		init(x + xPos + Camera.x(), y + yPos + Camera.y());
-	}
-	
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		update();
-		g2.drawImage(img, tx, null);
-		effect.paint(g2);
 	}
 }

@@ -22,7 +22,7 @@ public class Sword extends Hand{
 	public Sword(Character character) {
 		super(character);
 		damage = 20;
-		staminaReduction = 10;
+		staminaReduction = 7;
 		attackTimerSet = 15;
 		attackStart = 9;
 		attackEnd = 2;
@@ -46,6 +46,7 @@ public class Sword extends Hand{
 	
 	public void update() {
 		super.follow();
+		effect.follow();
 		
 		if(attackTimer > 0) {
 			attackTimer --;
@@ -78,9 +79,6 @@ public class Sword extends Hand{
 				}
 				if(attackTimer == attackEnd)
 					hitbox.resetHits();
-				System.out.println("hitbox active");
-			}else {
-				System.out.println("hitbox inactive");				
 			}
 		}
 		

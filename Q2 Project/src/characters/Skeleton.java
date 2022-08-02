@@ -128,43 +128,10 @@ public class Skeleton extends Character{
 	}
 	
 	public void attack() {
-		if(attackTimer <= 0 && health > 0 && blocking == false) {
-			attackTimer = 15;
-			((Sword)sword.get(weaponSelect)).effect.play();
-			switch(direction) {
-			case "Right":
-				hitBoxX = hurtBoxX + hurtBoxW + 20;
-				hitBoxY = hurtBoxY - 10;
-				hitBoxW = 40;
-				hitBoxH = 90;
-				break;
-				
-			case "Left":
-				hitBoxX = hurtBoxX - hitBoxW - 20;
-				hitBoxY = hurtBoxY - 10;		
-				hitBoxW = 40;
-				hitBoxH = 90;
-				break;
-				
-			case "Up":
-				hitBoxX = hurtBoxX - 20;
-				hitBoxY = hurtBoxY - hurtBoxH + 20;
-				hitBoxW = 90;
-				hitBoxH = 40;
-				break;
-				
-			case "Down":
-				hitBoxX = hurtBoxX - 20;
-				hitBoxY = hurtBoxY + hurtBoxH + 20;
-				hitBoxW = 90;
-				hitBoxH = 40;
-				break;
-			}
-			
-			if(checkHitBox(Frame.amogus)) {
-				Frame.amogus.takeDamage(10, direction);
-			}
-		}
+		if(sword.get(weaponSelect) == null)
+			return;
+		
+		((Sword)sword.get(weaponSelect)).attack();
 	}
 	
 	public void takeDamage(int damage, String direction) {
@@ -297,8 +264,6 @@ public class Skeleton extends Character{
 		}
 		
 		sword.get(weaponSelect).copyAction();
-		((Sword)sword.get(weaponSelect)).effect.x = x + Camera.x();
-		((Sword)sword.get(weaponSelect)).effect.y = y + Camera.y();
 		
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {

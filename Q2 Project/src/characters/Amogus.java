@@ -55,8 +55,8 @@ public class Amogus extends Character{
 		shieldSelect = 0;
 		shoeSelect = 0;
 		shield.add(null);
-		//sword.add(null);
-		sword.add(new Sword(this));
+		sword.add(null);
+		//sword.add(new Murasama(this));
 		lean = new Lean(this);
 		shoes.add(null);
 	}
@@ -209,10 +209,11 @@ public class Amogus extends Character{
 	}
 	
 	public void attack() {
-		if(sword.get(weaponSelect) == null)
+		if(sword.get(weaponSelect) == null || ((Sword)sword.get(weaponSelect)).attackTimer != 0)
 			return;
 		
 		((Sword)sword.get(weaponSelect)).attack();
+		decreaseStamina(sword.get(weaponSelect).staminaReduction);
 	}
 	
 	public void shield() {
@@ -462,30 +463,27 @@ public class Amogus extends Character{
 			staggerTimer --;
 		}
 		
-		if(sword.size() > 0 && sword.get(weaponSelect) != null) {
-			sword.get(weaponSelect).copyAction();
-			((Sword)sword.get(weaponSelect)).effect.follow();
-
-		}
-		if(shield.size() > 0 && shield.get(shieldSelect) != null) {
-			shield.get(shieldSelect).copyAction();
-		}		
-		
-		if(((Sword)sword.get(weaponSelect)).attackTimer > 0) {
-			if(shield.get(shieldSelect) != null) {
-				shield.get(shieldSelect).setAction("Attack");
-				shield.get(shieldSelect).setFileType(".png");			
-			}
-		}
-		
 		if(blocking == true) {
 			if(shield.get(shieldSelect) != null){
 				shield.get(shieldSelect).setAction("Block");
 				shield.get(shieldSelect).setFileType(".png");
 			}
+			
 			if(sword.get(weaponSelect) != null) {
 				sword.get(weaponSelect).setAction("Block");
 				sword.get(weaponSelect).setFileType(".png");
+			}
+		}else {
+			if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+				shield.get(shieldSelect).copyAction();
+			}
+			
+			if(sword.get(weaponSelect) != null) {
+				sword.get(weaponSelect).copyAction();
+				if(shield.get(shieldSelect) != null && ((Sword)sword.get(weaponSelect)).attackTimer > 0) {
+					shield.get(shieldSelect).setAction("Attack");
+					shield.get(shieldSelect).setFileType(".png");
+				}
 			}
 		}
 		

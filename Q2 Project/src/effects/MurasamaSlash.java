@@ -11,13 +11,13 @@ import java.net.URL;
 import characters.Character;
 
 public class MurasamaSlash extends Effect{
-
+	
 	public MurasamaSlash(Character character) {
 		super(character);
 	}
 	
 	public void play() {
-		timer = 13;
+		timer = 10;
 		direction = character.direction();
 	}
 	

@@ -8,6 +8,7 @@ public class Hitbox {
 	
 	public int x, y, w, h, damage;
 	public boolean[] hits;
+	public boolean crewmateHit;
 	
 	public Hitbox(int damage) {
 		this.damage = damage;
@@ -46,9 +47,25 @@ public class Hitbox {
 		}
 	}
 	
+	public void checkCrewmateCollision(int x, int y, int w, int h, String direction) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		
+		if(crewmateHit == false && checkCollision(Frame.amogus)) {
+			crewmateHit = true;
+			Frame.amogus.takeDamage(damage, direction);
+		}
+	}
+	
 	public void resetHits() {
 		for(boolean b : hits) {
 			b = false;
 		}
+	}
+	
+	public void resetCrewmateHit() {
+		crewmateHit = false;
 	}
 }
