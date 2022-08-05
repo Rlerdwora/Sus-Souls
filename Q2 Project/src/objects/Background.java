@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import characters.Character;
+import characters.Enemy;
 import characters.Skeleton;
 import equipment.Murasama;
 import equipment.Shield;
@@ -26,7 +27,7 @@ public class Background{
 	public ArrayList<Block> bricks = new ArrayList<Block>();
 	public ArrayList<Chest> chests = new ArrayList<Chest>();
 	public ArrayList<Bonfire> bonfires = new ArrayList<Bonfire>();
-	public ArrayList<Character> enemies = new ArrayList<Character>();
+	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	public Background(int x, int y, int id) {
 		this.x = x;

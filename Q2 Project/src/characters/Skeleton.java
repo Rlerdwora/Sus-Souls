@@ -16,9 +16,7 @@ import ui.Camera;
 
 import java.awt.Color;
 
-public class Skeleton extends Character{
-
-	private int moveTimer, randomTimer;
+public class Skeleton extends Enemy{
 	
 	public Skeleton(int x, int y) {
 		this.x = x;
@@ -29,7 +27,6 @@ public class Skeleton extends Character{
 		hitBoxH = 90;
 		health = 100;
 		hurtTimer = 0;
-		attackTimer = 0;
 		recoilTimer = 0;
 		deathTimer = 0;
 		randomTimer = 10;
@@ -215,7 +212,6 @@ public class Skeleton extends Character{
 		
 		if(health > 0) {
 			if(detect() == true) {
-				stopMove();
 				follow();
 			}else {
 				moveRandom();
@@ -276,12 +272,6 @@ public class Skeleton extends Character{
 			deathTimer --;
 		}
 		
-		if(attackTimer > 0) {
-			attackTimer --;
-			sword.get(weaponSelect).setAction("Attack");
-			sword.get(weaponSelect).setFileType(".gif");
-		}
-		
 		img = getImage("/skeletonSprites/skeleton" + action + fileType);
 		init(x + Camera.x(),y + Camera.y());
 	}
@@ -312,7 +302,11 @@ public class Skeleton extends Character{
 				break;		
 		}else {
 			g2.drawImage(img, tx, null);
-		}/*
+		}
+		
+		effect.paint(g2);
+		
+		/*
 		g.setColor(new Color(255,0,0));
 		g.drawOval(hurtBoxX + hurtBoxW/2 + Camera.x() - combatRange, hurtBoxY + hurtBoxH/2 + Camera.y() - combatRange, combatRange * 2, combatRange * 2);
 		g.drawRect(hitBoxX + Camera.x(), hitBoxY + Camera.y(), hitBoxW, hitBoxH);

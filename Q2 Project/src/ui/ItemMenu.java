@@ -252,7 +252,13 @@ public class ItemMenu{
 	
 	public void exit() {
 		selecting = false;
-		
+		Frame.amogus.img.flush();
+		if(Frame.amogus.sword.get(Frame.amogus.weaponSelect) != null)
+			Frame.amogus.sword.get(Frame.amogus.weaponSelect).img.flush();
+		if(Frame.amogus.shield.get(Frame.amogus.shieldSelect) != null)
+			Frame.amogus.shield.get(Frame.amogus.shieldSelect).img.flush();
+		if(Frame.amogus.shoes.get(((Amogus)Frame.amogus).shoeSelect) != null)
+			Frame.amogus.shoes.get(((Amogus)Frame.amogus).shoeSelect).img.flush();
 	}
 	
 	public void paintShields(Graphics g) {

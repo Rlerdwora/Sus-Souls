@@ -214,6 +214,7 @@ public class Amogus extends Character{
 		
 		((Sword)sword.get(weaponSelect)).attack();
 		decreaseStamina(sword.get(weaponSelect).staminaReduction);
+		leanTimer = 0;
 	}
 	
 	public void shield() {
@@ -425,14 +426,14 @@ public class Amogus extends Character{
 			}
 		}
 		
-		if(hurtTimer > 0) {
-			if(hurtTimer == 1) {
-				invincible = false;
-			}else {
-				invincible = true;
-			}
-			hurtTimer --;
-		}
+//		if(hurtTimer > 0) {
+//			if(hurtTimer == 1) {
+//				invincible = false;
+//			}else {
+//				invincible = true;
+//			}
+//			hurtTimer --;
+//		}
 		
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {

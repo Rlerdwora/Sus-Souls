@@ -116,48 +116,6 @@ public class Character{
 		}
 	}
 	
-	public boolean detect() {
-		int xDiff = Math.abs((Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX  + hurtBoxW/2));
-		int yDiff = Math.abs((Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY  + hurtBoxH/2));
-		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) <= detectRange) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
-	public void follow() {
-		int xDiff = (Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2) - (hurtBoxX  + hurtBoxW/2);
-		int yDiff = (Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2) - (hurtBoxY  + hurtBoxH/2);
-		if(Math.sqrt(xDiff * xDiff + yDiff * yDiff) > combatRange) {
-			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX  + hurtBoxW/2){
-				moveRight();
-			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX  + hurtBoxW/2){
-				moveLeft();
-			}
-			
-			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY  + hurtBoxH/2){
-				moveDown();
-			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY  + hurtBoxH/2){
-				moveUp();
-			}
-		}else {
-			if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 - combatRange/2 > hurtBoxX  + hurtBoxW/2){
-				direction = "Right";
-			}else if(Frame.amogus.hurtBoxX() + Frame.amogus.hurtBoxW()/2 + combatRange/2 < hurtBoxX  + hurtBoxW/2){
-				direction = "Left";
-			}
-			
-			if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 - combatRange/2 > hurtBoxY  + hurtBoxH/2){
-				direction = "Down";
-			}else if(Frame.amogus.hurtBoxY() + Frame.amogus.hurtBoxH()/2 + combatRange/2 < hurtBoxY  + hurtBoxH/2){
-				direction = "Up";
-			}
-			stopMove();
-			attack();
-		}
-	}
-	
 	public boolean checkHitBox(Character character) {
 		return(hitBoxX + hitBoxW  > character.hurtBoxX && hitBoxX  < character.hurtBoxX + character.hurtBoxW
 			&& hitBoxY + hitBoxH  > character.hurtBoxY && hitBoxY  < character.hurtBoxY + character.hurtBoxH);
