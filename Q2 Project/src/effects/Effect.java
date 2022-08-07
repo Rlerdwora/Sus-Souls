@@ -27,9 +27,9 @@ public class Effect{
 	}
 	
 	public void follow() {
-		 x = character.x();
-		 y = character.y();
-		 direction = character.direction();
+		 x = character.x;
+		 y = character.y;
+		 direction = character.direction;
 	}
 	
 	public void play() {}

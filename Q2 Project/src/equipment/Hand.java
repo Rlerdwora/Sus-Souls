@@ -29,14 +29,14 @@ public class Hand{
 	public String type() {return type;}
 	
 	public void follow() {
-		x = character.x();
-		y = character.y();
-		direction = character.direction();
+		x = character.x;
+		y = character.y;
+		direction = character.direction;
 	}
 	
 	public void copyAction() {
-		action = character.action();
-		if(character.action().equals("Stand")) {
+		action = character.action;
+		if(character.action.equals("Stand")) {
 			fileType = ".png";
 		}else {
 			fileType = ".gif";

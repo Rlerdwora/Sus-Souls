@@ -120,7 +120,7 @@ public class Chest{
 		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < hurtBoxX + width  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height 
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
 			if(Frame.amogus.xv > 0) {
-				if(((Amogus)Frame.amogus).running() == false) {
+				if(((Amogus)Frame.amogus).running == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
 				}else {
 					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
@@ -132,7 +132,7 @@ public class Chest{
 		if(Frame.amogus.hurtBoxX < hurtBoxX + width  && Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height  
 		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
 			if(Frame.amogus.xv < 0) {
-				if(((Amogus)Frame.amogus).running() == false) {
+				if(((Amogus)Frame.amogus).running == false) {
 					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
 				}else {
 					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
@@ -144,7 +144,7 @@ public class Chest{
 		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < hurtBoxY + height  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
 		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
 			if(Frame.amogus.yv > 0) {
-				if(((Amogus)Frame.amogus).running() == false) {
+				if(((Amogus)Frame.amogus).running == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
 				}else {
 					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
@@ -156,7 +156,7 @@ public class Chest{
 		if(Frame.amogus.hurtBoxY < hurtBoxY + height  && Frame.amogus.hurtBoxY > hurtBoxY  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
 		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
 			if(Frame.amogus.yv < 0) {
-				if(((Amogus)Frame.amogus).running() == false) {
+				if(((Amogus)Frame.amogus).running == false) {
 					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
 				}else {
 					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;

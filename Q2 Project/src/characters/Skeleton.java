@@ -16,18 +16,16 @@ import ui.Camera;
 
 import java.awt.Color;
 
+							//skeleton class is a child class of Enemy
 public class Skeleton extends Enemy{
 	
+	//constructor with parameters integer x and y to determine where the skeleton is, instantiates all other variables
 	public Skeleton(int x, int y) {
 		this.x = x;
 		this.y = y;
 		hurtBoxW = 50;
 		hurtBoxH = 70;
-		hitBoxW = 40;
-		hitBoxH = 90;
 		health = 100;
-		hurtTimer = 0;
-		recoilTimer = 0;
 		deathTimer = 0;
 		randomTimer = 10;
 		weaponSelect = 0;
@@ -162,7 +160,6 @@ public class Skeleton extends Enemy{
 	public void die() {
 		health = 0;
 		attackTimer = 0;
-		hurtTimer = 0;
 		deathTimer = 22;
 		xv = 0;
 		yv = 0;
@@ -170,46 +167,11 @@ public class Skeleton extends Enemy{
 		action = "Death";
 	}
 	
-	public void moveRandom() {
-		if(randomTimer > 0) {
-			randomTimer --;
-			if(randomTimer == 0) {
-				moveTimer = (int) (Math.random()*15) + 1;
-				int randomX = (int)(Math.random() * 3);
-				int randomY = (int)(Math.random() * 3);
-				switch(randomX) {
-				case 0:
-					moveRight();
-					break;
-					
-				case 1:
-					moveLeft();
-					break;
-				}
-				switch(randomY) {
-				case 0:
-					moveUp();
-					break;
-					
-				case 1:
-					moveDown();
-					break;
-				}
-			}
-		}
-		
-		if(moveTimer > 0) {
-			moveTimer --;
-			if(moveTimer == 0) {
-				stopMove();
-				randomTimer = (int)(Math.random() * 20) + 40;
-			}
-		}
-	}
-	
 	/* update variables here */
 	public void update() {
 		
+		//if the skeleton is alive it will try to detect the player, if it returns true then it will
+		//call the follow method. Otherwise it will randomly move
 		if(health > 0) {
 			if(detect() == true) {
 				follow();
@@ -218,6 +180,7 @@ public class Skeleton extends Enemy{
 			}
 		}
 		
+		//nested if statements to adjust the xv and yv in certain directions
 		if(xv == 0) {
 			if(yv > 0) {
 				yv = 4;
@@ -244,11 +207,14 @@ public class Skeleton extends Enemy{
 			}
 		}
 		
+		//add the velocities to the coordinates
 		x += xv;
 		y += yv;
+		//align the hurtbox to the sprite
 		hurtBoxX = x + 16;
 		hurtBoxY = y + 6;
 		
+		//if alive, the skeleton will be standing if it is still and walking if it is moving
 		if(health > 0) {
 			if(xv == 0 && yv == 0) {
 				action = "Stand";
@@ -259,8 +225,10 @@ public class Skeleton extends Enemy{
 			}
 		}
 		
+		//sword constantly copies the skeleton's action
 		sword.get(weaponSelect).copyAction();
 		
+		//nested if-statement-timer to pick appropriate death sprite
 		if(deathTimer > 0 && health <= 0) {
 			if(deathTimer <= 20 && deathTimer > 1) {
 				action = "Death";
@@ -272,16 +240,20 @@ public class Skeleton extends Enemy{
 			deathTimer --;
 		}
 		
+		//variable naming system
 		img = getImage("/skeletonSprites/skeleton" + action + fileType);
-		init(x + Camera.x(),y + Camera.y());
+		//initialize sprite location
+		init(x, y);
 	}
 	
+	//paint method to draw sprites
 	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
+		//calls update method to update variables every frame
 		update();
 		
+		//facing different directions while alive will cause the layers of sprites to be ordered differently
 		if(health > 0)
 			switch(direction) {
 			case "Right":
@@ -300,10 +272,11 @@ public class Skeleton extends Enemy{
 				g2.drawImage(img, tx, null);
 				sword.get(weaponSelect).paint(g);			
 				break;		
-		}else {
+		}else {	//only draw the enemy when dead
 			g2.drawImage(img, tx, null);
 		}
 		
+		//paint the red eye flash
 		effect.paint(g2);
 		
 		/*

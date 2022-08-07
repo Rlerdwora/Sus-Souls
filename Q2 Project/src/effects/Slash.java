@@ -18,7 +18,7 @@ public class Slash extends Effect{
 	
 	public void play() {
 		timer = 8;
-		direction = character.direction();
+		direction = character.direction;
 	}
 	
 	/* update variables here */

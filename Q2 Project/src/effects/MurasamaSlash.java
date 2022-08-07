@@ -18,7 +18,7 @@ public class MurasamaSlash extends Effect{
 	
 	public void play() {
 		timer = 10;
-		direction = character.direction();
+		direction = character.direction;
 	}
 	
 	/* update variables here */
