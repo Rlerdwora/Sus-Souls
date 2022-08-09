@@ -10,8 +10,10 @@ import java.net.URL;
 
 import characters.Character;
 
-public class LeanAura extends Effect{
+//unused
 
+public class LeanAura extends Effect{
+	
 	public LeanAura(Character character) {
 		super(character);
 		img = getImage("/effectSprites/leanAura.gif");

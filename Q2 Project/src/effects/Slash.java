@@ -10,18 +10,21 @@ import java.net.URL;
 
 import characters.Character;
 
+			//subclass of effect for the sword class
 public class Slash extends Effect{
 
+	//constructor that calls the parent class's constructor
 	public Slash(Character character) {
 		super(character);
 	}
 	
+	//sets the timer and direction
 	public void play() {
 		timer = 8;
 		direction = character.direction;
 	}
 	
-	/* update variables here */
+	//update method uses a switch statement for the direction to adjust the xPos and yPos
 	public void update() {
 		switch(direction) {
 		case "Right":
@@ -46,17 +49,6 @@ public class Slash extends Effect{
 		}
 		
 		img = getImage("/effectSprites/slash" + direction + ".gif");
-		init(x + xPos,y + yPos);
-	}
-	
-	/* Drawing commands */
-	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;
-		if(timer > 0) {
-			update();
-			g2.drawImage(img, tx, null);
-			timer --;
-		}
-	}
+		init(x + xPos,y + yPos);						//adjusted xPos and yPos are added to the x and y
+	}													//to make the image appear in the appropriate place
 }
