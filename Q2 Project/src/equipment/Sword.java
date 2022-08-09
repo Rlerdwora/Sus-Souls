@@ -13,11 +13,14 @@ import effects.Effect;
 import effects.Slash;
 import runner.Frame;
 
+		//sword class is subclass of hand, is main class of weapons
 public class Sword extends Hand{
 	
-	public Effect effect;
-	public int attackTimer, attackTimerSet, attackStart, attackEnd;
-	public Hitbox hitbox;
+	public Effect effect;											//effect variable
+	
+	public int attackTimer, attackTimerSet, attackStart, attackEnd;	//weapon stats
+	
+	public Hitbox hitbox;											//hitbox variable
 	
 	public Sword(Character character) {
 		super(character);
@@ -35,55 +38,68 @@ public class Sword extends Hand{
 		tx = AffineTransform.getTranslateInstance(x, y );
 	}
 	
+	//tostring method to identify what kind of equipment the hand subclass is for sorting
 	public String toString() {
 		return "sword";
 	}
 	
+	//attackmethdo to instantiate the attacktimer to be the attacktimerset
 	public void attack() {
 		if(attackTimer == 0)
 		attackTimer = attackTimerSet;
 	}
 	
+	//copyaction method to copy the action of its character
+	public void copyAction() {
+		action = character.action;
+		if(character.action.equals("Stand")) {
+			fileType = ".png";
+		}else {
+			fileType = ".gif";
+		}
+	}
+	
+	//update method overriden
 	public void update() {
 		super.follow();
 		effect.follow();
 		
-		if(attackTimer > 0) {
-			attackTimer --;
-			action = "Attack";
+		if(attackTimer > 0) {				//nested if-statement for hitbox
+			attackTimer --;					//attackTimer ticking down
+			action = "Attack";				//adjust image variables
 			fileType = ".gif";
-			if(attackTimer <= attackStart && attackTimer >= attackEnd) {
-				if(attackTimer == attackStart) {
-					effect.play();
-					hitbox.hits = new boolean[Frame.b.enemies.size()];
+			if(attackTimer <= attackStart && attackTimer >= attackEnd) {	//if the attackTimer is between the
+				if(attackTimer == attackStart) {							//attackStart and attackEnd values
+					effect.play();											//the effect plays and the hitbox is
+					hitbox.hits = new boolean[Frame.b.enemies.size()];		//active
 					for(boolean b : hitbox.hits) {
 						b = false;
 					}
 				}
-				switch(direction) {
-				case "Right":
-					hitbox.checkCollision(x + 66, y - 4, 60, 90, direction);
+				switch(direction) {							//switch statement with parameter direction
+				case "Right":								//to adjust dimensions of hitbox
+					hitbox.startHitBox(x + 66, y - 4, 60, 90, direction);
 					break;
 					
 				case "Left":
-					hitbox.checkCollision(x - 44, y - 4, 60, 90, direction);
+					hitbox.startHitBox(x - 44, y - 4, 60, 90, direction);
 					break;
 					
 				case "Up":
-					hitbox.checkCollision(x - 4, y - 46, 90, 60, direction);
+					hitbox.startHitBox(x - 4, y - 46, 90, 60, direction);
 					break;
 					
 				case "Down":
-					hitbox.checkCollision(x - 4, y + 69, 90, 60, direction);
+					hitbox.startHitBox(x - 4, y + 69, 90, 60, direction);
 					break;
 				}
-				if(attackTimer == attackEnd)
+				if(attackTimer == attackEnd)				//timer ends, and the hitbox resets
 					hitbox.resetHits();
 			}
 		}
 		
-		switch(direction) {
-		case "Right":			
+		switch(direction) {				//nested switch statement to adjust xPos and yPos
+		case "Right":					//depending on direction and action	
 			switch(action) {
 			case "Run":
 				xPos = 0;
@@ -200,17 +216,20 @@ public class Sword extends Hand{
 			break;
 		}
 		
+		//variable naming system
 		img = getImage("/equipmentSprites/handSword" + action + direction + fileType);
+		//edited xPos and yPos values are used to shift the location of the sprite
 		init(x + xPos, y + yPos);
 	}
 	
+	//paint method overriden
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		update();
-		g2.drawImage(img, tx, null);
-		effect.paint(g2);
+		update();							//updates variables
+		g2.drawImage(img, tx, null);		//draws image
+		effect.paint(g2);					//draws effect	
 		
-		if(attackTimer <= attackStart && attackTimer >= attackEnd) {
+		if(attackTimer <= attackStart && attackTimer >= attackEnd) {	//shows the hitboxes
 			switch(direction) {
 			case "Right":
 				g.drawRect(x + 66, y - 4, 60, 90);

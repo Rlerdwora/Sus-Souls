@@ -14,8 +14,10 @@ import effects.Slash;
 import runner.Frame;
 import ui.Camera;
 
+					//skeleton sword exclusive to enemeis, subclass of sword
 public class SkeletonSword extends Sword{
 	
+	//constructor
 	public SkeletonSword(Character character) {
 		super(character);
 	}
@@ -24,39 +26,39 @@ public class SkeletonSword extends Sword{
 		super.follow();
 		effect.follow();
 		
-		if(attackTimer > 0) {
-			attackTimer --;
-			action = "Attack";
+		if(attackTimer > 0) {				//nested if-statement for hitbox
+			attackTimer --;					//attackTimer ticking down
+			action = "Attack";				//adjust image variables
 			fileType = ".gif";
-			if(attackTimer <= attackStart && attackTimer >= attackEnd) {
-				if(attackTimer == attackStart) {
-					effect.play();
-					hitbox.crewmateHit = false;
+			if(attackTimer <= attackStart && attackTimer >= attackEnd) {		//if the attackTimer is between the
+				if(attackTimer == attackStart) {								//attackstart and attackend values
+					effect.play();												//the effect plays and the effect
+					hitbox.crewmateHit = false;									//is active
 				}
-				switch(direction) {
-				case "Right":
-					hitbox.checkCrewmateCollision(x + 66, y - 4, 60, 90, direction);
+				switch(direction) {							//switch statement with parameter direction
+				case "Right":								//to adjust dimensions of hitbox
+					hitbox.startCrewmateHitBox(x + 66, y - 4, 60, 90, direction);
 					break;
 					
 				case "Left":
-					hitbox.checkCrewmateCollision(x - 44, y - 4, 60, 90, direction);
+					hitbox.startCrewmateHitBox(x - 44, y - 4, 60, 90, direction);
 					break;
 					
 				case "Up":
-					hitbox.checkCrewmateCollision(x - 4, y - 46, 90, 60, direction);
+					hitbox.startCrewmateHitBox(x - 4, y - 46, 90, 60, direction);
 					break;
 					
 				case "Down":
-					hitbox.checkCrewmateCollision(x - 4, y + 69, 90, 60, direction);
+					hitbox.startCrewmateHitBox(x - 4, y + 69, 90, 60, direction);
 					break;
 				}
-				if(attackTimer == attackEnd)
+				if(attackTimer == attackEnd)				//timer ends, and the hitbox resets
 					hitbox.resetCrewmateHit();
 			}
 		}
 		
-		switch(direction) {
-		case "Right":			
+		switch(direction) {				//nested switch statement to adjust xPos and yPos
+		case "Right":					//depending on direction and action	
 			switch(action) {
 			case "Run":
 				xPos = 0;
@@ -173,7 +175,9 @@ public class SkeletonSword extends Sword{
 			break;
 		}
 
+		//variable naming system
 		img = getImage("/skeletonSprites/skeletonSword" + action + direction + fileType);
+		//edited xPos and yPos values are used to shift the location of the sprite
 		init(x + xPos + Camera.x(), y + yPos + Camera.y());
 	}
 }

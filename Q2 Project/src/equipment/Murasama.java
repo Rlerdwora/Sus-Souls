@@ -14,10 +14,12 @@ import effects.MurasamaSlash;
 import effects.Slash;
 import runner.Frame;
 
+		//murasama is a sword, so it extends the sword class
 public class Murasama extends Sword{
 	
-	public int count = 1;
+	public int count = 1;				//integer count to keep track of how many times you swing
 	
+	//constructor that initializes the effect to be the murasama slash and initializes the weapon stats
 	public Murasama(Character character) {
 		super(character);
 		effect = new MurasamaSlash(character);
@@ -28,15 +30,18 @@ public class Murasama extends Sword{
 		attackEnd = 2;
 	}
 	
+	//tostring for messages
 	public String toString() {
 		return "murasama";
 	}
 	
-	public void copyAction() {
+	//copyaction method overriden to add a line of code initializing filetype to a .gif because most
+	public void copyAction() {						//murasama sprites are gifs
 		action = character.action;
 		fileType = ".gif";
 	}
 	
+	//attack method overriden to add and image resseting if-statement
 	public void attack() {
 		if(attackTimer == 0) {
 			if(count == 3) {
@@ -51,45 +56,47 @@ public class Murasama extends Sword{
 		}
 	}
 	
+	//update method overriden
 	public void update() {
 		super.follow();
 		effect.follow();
-		if(attackTimer > 0) {
-			attackTimer --;
-			action = "Attack";
+		
+		if(attackTimer > 0) {				//nested if-statement for hitbox
+			attackTimer --;					//attackTimer ticking down
+			action = "Attack";				//adjust image variables
 			fileType = ".gif";
-			if(attackTimer <= attackStart && attackTimer >= attackEnd) {
-				if(attackTimer == attackStart) {
-					effect.play();
-					hitbox.hits = new boolean[Frame.b.enemies.size()];
+			if(attackTimer <= attackStart && attackTimer >= attackEnd) {	//if the attackTimer is between the
+				if(attackTimer == attackStart) {							//attackStart and attackEnd values
+					effect.play();											//the effect plays and the hitbox is
+					hitbox.hits = new boolean[Frame.b.enemies.size()];		//active
 					for(boolean b : hitbox.hits) {
 						b = false;
 					}
 				}
-				switch(direction) {
-				case "Right":
-					hitbox.checkCollision(x + 66, y - 4, 60, 90, direction);
+				switch(direction) {							//switch statement with parameter direction
+				case "Right":								//to adjust dimensions of hitbox
+					hitbox.startHitBox(x + 66, y - 4, 60, 90, direction);
 					break;
 					
 				case "Left":
-					hitbox.checkCollision(x - 44, y - 4, 60, 90, direction);
+					hitbox.startHitBox(x - 44, y - 4, 60, 90, direction);
 					break;
 					
 				case "Up":
-					hitbox.checkCollision(x - 4, y - 46, 90, 60, direction);
+					hitbox.startHitBox(x - 4, y - 46, 90, 60, direction);
 					break;
 					
 				case "Down":
-					hitbox.checkCollision(x - 4, y + 69, 90, 60, direction);
+					hitbox.startHitBox(x - 4, y + 69, 90, 60, direction);
 					break;
 				}
-				if(attackTimer == attackEnd)
+				if(attackTimer == attackEnd)				//timer ends, and the hitbox resets
 					hitbox.resetHits();
 			}
 		}
 		
-		switch(direction) {
-		case "Right":			
+		switch(direction) {				//nested switch statement to adjust xPos and yPos
+		case "Right":					//depending on direction and action
 			switch(action) {
 			case "Run":
 				xPos = 0;
@@ -206,7 +213,9 @@ public class Murasama extends Sword{
 			break;
 		}
 		
+		//variable naming system
 		img = getImage("/equipmentSprites/murasama" + action + direction + fileType);
+		//edited xPos and yPos values are used to shift the location of the sprite
 		init(x + xPos, y + yPos);
 	}
 }

@@ -467,13 +467,13 @@ public class Amogus extends Character{
 		//when blocking change the images of equipment to be blocking
 		if(blocking == true) {
 			if(shield.get(shieldSelect) != null){
-				shield.get(shieldSelect).setAction("Block");
-				shield.get(shieldSelect).setFileType(".png");
+				shield.get(shieldSelect).action = "Block";
+				shield.get(shieldSelect).fileType = ".png";
 			}
 			
 			if(sword.get(weaponSelect) != null) {
-				sword.get(weaponSelect).setAction("Block");
-				sword.get(weaponSelect).setFileType(".png");
+				sword.get(weaponSelect).action = "Block";
+				sword.get(weaponSelect).fileType = ".png";
 			}
 		}else {				//if not blocking then make the equipment match the action performed by the amogus
 			if(shield.size() > 0 && shield.get(shieldSelect) != null) {
@@ -483,8 +483,8 @@ public class Amogus extends Character{
 			if(sword.get(weaponSelect) != null) {
 				sword.get(weaponSelect).copyAction();
 				if(shield.get(shieldSelect) != null && ((Sword)sword.get(weaponSelect)).attackTimer > 0) {
-					shield.get(shieldSelect).setAction("Attack");
-					shield.get(shieldSelect).setFileType(".png");
+					shield.get(shieldSelect).action = "Attack";
+					shield.get(shieldSelect).fileType = ".png";
 				}
 			}
 		}

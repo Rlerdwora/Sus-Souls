@@ -10,8 +10,10 @@ import java.net.URL;
 
 import characters.Character;
 
+				//shield is equipment, so it is subclass of hand
 public class Shield extends Hand{
 
+	//constructor
 	public Shield(Character character) {
 		super(character);
 		direction = "Right";
@@ -29,8 +31,8 @@ public class Shield extends Hand{
 	public void update() {
 		super.follow();
 		
-		switch(direction) {
-			case "Right":
+		switch(direction) {							//nested switch statement to adjust xPos and yPos
+			case "Right":							//depending on direction and action
 				switch(action) {
 				case "Run":
 					xPos = 0;
@@ -148,7 +150,9 @@ public class Shield extends Hand{
 				break;
 			}
 		
+		//variable naming system
 		img = getImage("/equipmentSprites/handShield" + action + direction + fileType);
+		//edited xPos and yPos values are used to shift the location of the sprite
 		init(x + xPos, y + yPos);
 	}
 }
