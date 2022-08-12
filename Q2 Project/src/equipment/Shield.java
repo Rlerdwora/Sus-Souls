@@ -28,6 +28,16 @@ public class Shield extends Hand{
 		return "shield";
 	}
 	
+	//copyaction method to copy the action of its character
+	public void copyAction() {
+		action = character.action;
+		if(character.action.equals("Stand")) {
+			fileType = ".png";
+		}else {
+			fileType = ".gif";
+		}
+	}
+	
 	public void update() {
 		super.follow();
 		

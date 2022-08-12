@@ -23,24 +23,26 @@ import runner.Frame;
 
 public class Background{
 	
-	private int x, y;
-	public ArrayList<Block> bricks = new ArrayList<Block>();
-	public ArrayList<Chest> chests = new ArrayList<Chest>();
-	public ArrayList<Bonfire> bonfires = new ArrayList<Bonfire>();
-	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	/* Background class is the level
+	 * it uses the java file and scanner utility libraries to read text files to make levels
+	 */
+	
+	public ArrayList<Block> bricks = new ArrayList<Block>();		//array for blocks
+	public ArrayList<Chest> chests = new ArrayList<Chest>();		//array for chests
+	public ArrayList<Bonfire> bonfires = new ArrayList<Bonfire>();	//array for bonfires
+	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();		//array for enemies
 
-	public Background(int x, int y, int id) {
-		this.x = x;
-		this.y = y;
-		switch(id) {
+	//constructor with integer parameter id to determine what level to build
+	public Background(int id) {
+		switch(id) {			//switch statement for id to determine what level to build, only 1 so far
 		
 		case 1:
-			buildLevel();
+			buildLevel(".\\src\\levels\\Dungeon1");	//calls buildlevel method, explained below
 		}
 	}
 	
-	public void buildLevel() {
-		String path = ".\\src\\levels\\Dungeon1";
+	//buildlevel method to build the level by placing blocks, chests, bonfires and enemies in their respective arrays
+	public void buildLevel(String path) {	//string parameter path for the name of the text file
 		File text = new File(path);
 		try {
 			try (Scanner scnnr = new Scanner(text)) {
@@ -80,9 +82,9 @@ public class Background{
 						 * 036: skeleton
 						 */
 						int blockId = scnnr.nextInt();
-						System.out.print(blockId);
-						
-						switch(blockId) {
+
+						//switch statement reads what the next integer in the map is and picks an object to place
+						switch(blockId) {	//based on it
 						case 0:
 							
 							break;
@@ -250,15 +252,13 @@ public class Background{
 							bricks.add(new Brick(xPlacement * 84, yPlacement * 84));
 							enemies.add(new Skeleton(xPlacement * 84, yPlacement * 84));
 						}
-						xPlacement ++;
+						xPlacement ++;	//after placing the correct object, shift the xplacement by 1
 					}
-					yPlacement ++;
-					xPlacement = 0;
-					System.out.println();
+					yPlacement ++;	//after placing all the objects in one horizontal row, move the yplacement down
+					xPlacement = 0;	//and reset the xplacement to start on the next horizontal row
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -268,14 +268,19 @@ public class Background{
 		Graphics2D g2 = (Graphics2D) g;
 		for(Block brick : bricks) {
 			brick.paint(g);
+			brick.checkCollision(Frame.amogus);
 		}
 		for(Chest c : chests) {
 			c.paint(g2);
+			c.checkCollision(Frame.amogus);
 		}
 		for(Character c : enemies) {
 			c.paint(g);
 			for(Block block : bricks) {
 				block.checkCollision(c);
+			}
+			for(Chest ch : chests) {
+				ch.checkCollision(c);
 			}
 		}
 		for(Bonfire b : bonfires) {

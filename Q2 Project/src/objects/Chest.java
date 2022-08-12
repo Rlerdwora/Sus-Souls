@@ -9,6 +9,7 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import characters.Amogus;
+import characters.Character;
 import equipment.Hand;
 import equipment.Shield;
 import equipment.Shoes;
@@ -18,27 +19,36 @@ import ui.Camera;
 
 public class Chest{
 	
-	//image related variables
-	public int x;
-	public int y;
-	public int hurtBoxX;
-	public int hurtBoxY;
-	public int width;
-	public int height;
-	public String direction;
-	public boolean opened;
-	public Hand loot;
-	public Shoes shoeLoot;
-	boolean shoe;
-	public Image img;
-	public AffineTransform tx;
-
+	/* chest class for the chest object
+	 * solid object meaning you cannot walk through it
+	 * has loot inside of it that you can collect by interacting with the chest
+	 */
+	
+	public int x, y;				//integers x and y for location
+	
+	public int hurtBoxX, hurtBoxY;	//integers hurtboxX and hurtboxy for hurtbox location
+	
+	public int width, height;		//hurtbox dimensions
+	
+	public String direction;		//direction for variable naming system
+	
+	public boolean opened;			//boolean for if you have opened
+	
+	public Hand loot;				//arraylist for the loot contained
+	
+	public Shoes shoeLoot;			//another arraylist for specifically shoes since
+									//they are not a subclass of hand
+	
+	public Image img;				//img for sprite
+	
+	public AffineTransform tx;		//tx for sprite editing
+	
+	//hand loot constructor
 	public Chest(int x, int y, String direction, Hand loot) {
 		this.x = x;
 		this.y = y;
 		this.loot = loot;
 		this.direction = direction;
-		shoe = false;
 		opened = false;
 		switch(direction) {
 		case "Right":
@@ -74,12 +84,12 @@ public class Chest{
 		init(x, y);
 	}
 	
+	//shoe loot constructor
 	public Chest(int x, int y, String direction, Shoes shoeLoot) {
 		this.x = x;
 		this.y = y;
 		this.shoeLoot = shoeLoot;
 		this.direction = direction;
-		shoe = true;
 		opened = false;
 		switch(direction) {
 		case "Right":
@@ -115,56 +125,66 @@ public class Chest{
 		init(x, y);
 	}
 	
-	public void checkCollision() {
-		//amogus is to the left of wall
-		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > hurtBoxX  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < hurtBoxX + width  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
-			if(Frame.amogus.xv > 0) {
-				if(((Amogus)Frame.amogus).running == false) {
-					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
-				}else {
-					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
-				}
-			}
+	//collision method, same as block
+	public void checkCollision(Character c) {
+		//if the block is not near the amogus, do not check for collision to make the game run faster
+		if((Math.abs(x + height/2 - c.hurtBoxX - c.hurtBoxW/2) > 84) && (Math.abs(y + height/2 - c.hurtBoxY - c.hurtBoxH/2) > 84)) {
+			return;
 		}
 		
-		//amogus is to the right of wall
-		if(Frame.amogus.hurtBoxX < hurtBoxX + width  && Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY < hurtBoxY + height  
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 3 > hurtBoxY  && Frame.amogus.hurtBoxY + 3 < hurtBoxY + height ) {
-			if(Frame.amogus.xv < 0) {
-				if(((Amogus)Frame.amogus).running == false) {
-					Frame.amogus.x = Frame.amogus.x - Frame.amogus.xv;
-				}else {
-					Frame.amogus.x = Frame.amogus.x - 2 * Frame.amogus.xv;
-				}
+		//amogus is to the left of chest
+		if(c.hurtBoxX + c.hurtBoxW > x  
+		&& c.hurtBoxX + c.hurtBoxW < x + width  
+		&& c.hurtBoxY + c.hurtBoxH > y  
+		&& c.hurtBoxY < y + width 
+		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
+		&& c.hurtBoxY + 20 < y + width ) {
+			while(c.x + 16 + c.hurtBoxW > x ) {
+				c.x --;
 			}
+			return;
 		}
 		
-		//amogus is above wall
-		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > hurtBoxY  && Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < hurtBoxY + height  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
-			if(Frame.amogus.yv > 0) {
-				if(((Amogus)Frame.amogus).running == false) {
-					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
-				}else {
-					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
-				}
+		//amogus is to the right of chest
+		if(c.hurtBoxX < x + width  
+		&& c.hurtBoxX > x  
+		&& c.hurtBoxY + c.hurtBoxH > y  
+		&& c.hurtBoxY < y + width  
+		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
+		&& c.hurtBoxY + 20 < y + width ) {
+			while(c.x + 16 < x + width ) {
+				c.x ++;
 			}
+			return;
 		}
-		
-		//amogus is above wall
-		if(Frame.amogus.hurtBoxY < hurtBoxY + height  && Frame.amogus.hurtBoxY > hurtBoxY  && Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > hurtBoxX  && Frame.amogus.hurtBoxX < hurtBoxX + width 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 3 > hurtBoxX  && Frame.amogus.hurtBoxX + 3 < hurtBoxX + width ) {
-			if(Frame.amogus.yv < 0) {
-				if(((Amogus)Frame.amogus).running == false) {
-					Frame.amogus.y = Frame.amogus.y - Frame.amogus.yv;
-				}else {
-					Frame.amogus.y = Frame.amogus.y - 2 * Frame.amogus.yv;
-				}
+				
+		//amogus is above chest
+		if(c.hurtBoxY + c.hurtBoxH > y  
+		&& c.hurtBoxY + c.hurtBoxH < y + height  
+		&& c.hurtBoxX + c.hurtBoxX > x  
+		&& c.hurtBoxX < x + height 
+		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
+		&& c.hurtBoxX + 20 < x + height ) {
+			while(c.y + 6 + c.hurtBoxH > y) {
+				c.y --;
 			}
+			return;
+		}
+		//amogus is below chest
+		if(c.hurtBoxY < y + height  
+		&& c.hurtBoxY > y  
+		&& c.hurtBoxX + c.hurtBoxX > x  
+		&& c.hurtBoxX < x + height 
+		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
+		&& c.hurtBoxX + 20 < x + height ) {
+			while(c.y + 6 < y + height ) {
+				c.y ++;
+			}
+			return;
 		}
 	}
 	
+	//interact method that checks if the chest is in front of and close to the player
 	public void interact() {
 		switch(Frame.amogus.direction) {
 		case "Right":
@@ -205,12 +225,13 @@ public class Chest{
 		}
 	}
 	
+	//open method to give the player the loot
 	public void open() {
 		if(opened == true) {return;}
 		
 		opened = true;
 		img = getImage("/objectSprites/chestOpen" + direction + ".png");
-		if(shoe == false) {
+		if(shoeLoot == null) {
 			switch(loot.type()) {
 			case "sword":
 				Frame.amogus.sword.add(loot);
@@ -225,9 +246,9 @@ public class Chest{
 		}
 	}
 	
+	//paint method
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		checkCollision();
 		init(x, y);
 		switch(direction) {
 		case "Right":
@@ -254,12 +275,13 @@ public class Chest{
 		g.drawRect(hurtBoxX, hurtBoxY, width, height);
 	}
 
-	
+	//initializes sprite location
 	public void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
+	//initializes sprite image
 	public Image getImage(String path) {
 		Image tempImage = null;
 		try {

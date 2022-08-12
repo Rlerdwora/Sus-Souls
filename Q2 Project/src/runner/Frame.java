@@ -45,7 +45,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	SuspicionIcon susIcon = new SuspicionIcon(5,5);
 	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
 	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
-	public static Background b = new Background(0,0, 1);
+	public static Background b = new Background(1);
 	Equipment equipment = new Equipment();
 	boolean itemMenuOpen = false;
 	ItemMenu itemMenu = new ItemMenu();

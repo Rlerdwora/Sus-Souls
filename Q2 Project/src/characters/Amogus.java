@@ -476,7 +476,7 @@ public class Amogus extends Character{
 				sword.get(weaponSelect).fileType = ".png";
 			}
 		}else {				//if not blocking then make the equipment match the action performed by the amogus
-			if(shield.size() > 0 && shield.get(shieldSelect) != null) {
+			if(shield.get(shieldSelect) != null) {
 				shield.get(shieldSelect).copyAction();
 			}
 			

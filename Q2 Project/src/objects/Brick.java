@@ -12,23 +12,28 @@ import characters.Amogus;
 import runner.Frame;
 import ui.Camera;
 
+				//brick sublcass of block, just changes the folder of images
 public class Brick extends Block{
 
+	//tile constructor
 	public Brick(int x, int y) {
 		super(x, y);
 		img = getImage("/objectSprites/brickTile.png");
 	}
 	
+	//wall constructor
 	public Brick(int x, int y, String direction) {
 		super(x, y, direction);
 		img = getImage("/objectSprites/brickWall" + this.direction1 + ".png");
 	}
 	
+	//corner constructor
 	public Brick(int x, int y, int id, String vertical, String horizontal) {
-		super(x, y, vertical, horizontal);
+		super(x, y, id, vertical, horizontal);
 		img = getImage("/objectSprites/brickCorner" + id + this.direction1 + this.direction2 + ".png");
 	}
 	
+	//door constructor
 	public Brick(int x, int y, String direction, boolean open) {
 		super(x, y, direction, open);
 		if(open) {
@@ -38,6 +43,7 @@ public class Brick extends Block{
 		}
 	}
 	
+	//material is brick
 	public String material() {
 		return "brick";
 	}

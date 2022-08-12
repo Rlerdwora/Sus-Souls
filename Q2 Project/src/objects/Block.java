@@ -14,16 +14,28 @@ import characters.Character;
 import runner.Frame;
 import ui.Camera;
 
+//block class is an obstacle that appears on the map that you cannot move through
 public class Block{
-	
-	//image related variables
-	public int x, y;
-	public static int length = 84;
-	public boolean wall, door;
-	public String direction1, direction2;
-	public Image img; 	
-	public AffineTransform tx;
 
+	public int x, y;						//integers x and y for location
+	
+	public static int length = 84;			//integer length is static because every block is 84 pixels wide	
+	
+	public boolean wall, door;				//there are multiple types of blocks so there is a boolean for wall
+											//if it is a solid block or door if it is a door
+	
+	public String direction1, direction2;	//direction1 is used for which way a block is facing,
+											//and direction2 is used for corners, defining the 
+											//second direction. (Corners have the image format
+											//vertical direction + horizontal direction while walls
+											//only use one direction)
+	
+	public Image img; 						//image variable for sprite
+	
+	public AffineTransform tx;				//affinetransform vairable for editing sprite
+
+	//Multiple constructors for multiple types of blocks
+	//tile block, decoration and can be moved through
 	public Block(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -33,6 +45,7 @@ public class Block{
 		init(x, y);
 	}
 	
+	//wall block, is solid and can't be moved through
 	public Block(int x, int y, String direction) {
 		this.x = x;
 		this.y = y;
@@ -44,7 +57,8 @@ public class Block{
 		init(x, y);
 	}
 	
-	public Block(int x, int y, String vertical, String horizontal) {
+	//corner block, solid, paramter id 1 for inward corner, 2 for outward corner
+	public Block(int x, int y, int id, String vertical, String horizontal) {
 		this.x = x;
 		this.y = y;
 		direction1 = vertical;
@@ -55,6 +69,7 @@ public class Block{
 		init(x, y);
 	}
 	
+	//door block, solidness can be toggled on and off
 	public Block(int x, int y, String direction, boolean open) {
 		this.x = x;
 		this.y = y;
@@ -68,82 +83,23 @@ public class Block{
 	
 	public String material() {return "";}
 	
-	public void checkCollision() {
-		if(wall == false) {
-			return;
-		}
-		
-		if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x  
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW < x + length  
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
-		&& Frame.amogus.hurtBoxY < y + length 
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y  
-		&& Frame.amogus.hurtBoxY + 20 < y + length ) {
-			while(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x ) {
-				Frame.amogus.x --;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
-				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
-			}
-		}
-		
-		//amogus is to the right of wall
-		if(Frame.amogus.hurtBoxX < x + length  
-		&& Frame.amogus.hurtBoxX > x  
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
-		&& Frame.amogus.hurtBoxY < y + length  
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH - 20 > y  
-		&& Frame.amogus.hurtBoxY + 20 < y + length ) {
-			while(Frame.amogus.hurtBoxX < x + length ) {
-				Frame.amogus.x ++;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
-				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
-			}
-		}
-				
-		//amogus is above wall
-		if(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y  
-		&& Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH < y + length  
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x  
-		&& Frame.amogus.hurtBoxX < x + length 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x  
-		&& Frame.amogus.hurtBoxX + 20 < x + length ) {
-			while(Frame.amogus.hurtBoxY + Frame.amogus.hurtBoxH > y ) {
-				Frame.amogus.y --;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
-				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
-			}
-		}
-		//amogus is below wall
-		if(Frame.amogus.hurtBoxY < y + length  
-		&& Frame.amogus.hurtBoxY > y  
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxX > x  
-		&& Frame.amogus.hurtBoxX < x + length 
-		&& Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW - 20 > x  
-		&& Frame.amogus.hurtBoxX + 20 < x + length ) {
-			while(Frame.amogus.hurtBoxY < y + length ) {
-				Frame.amogus.y ++;
-				Frame.amogus.hurtBoxX = Frame.amogus.x + 20;
-				Frame.amogus.hurtBoxY = Frame.amogus.y + 6;
-			}
-		}
-	}
-	
 	public void checkCollision(Character c) {
+		//if the block is not near the amogus, do not check for collision to make the game run faster
 		if(wall == false || ((Math.abs(x + length/2 - c.hurtBoxX - c.hurtBoxW/2) > 84) && (Math.abs(y + length/2 - c.hurtBoxY - c.hurtBoxH/2) > 84))) {
 			return;
 		}
 		
+		//amogus is to the left of wall
 		if(c.hurtBoxX + c.hurtBoxW > x  
 		&& c.hurtBoxX + c.hurtBoxW < x + length  
 		&& c.hurtBoxY + c.hurtBoxH > y  
 		&& c.hurtBoxY < y + length 
 		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
 		&& c.hurtBoxY + 20 < y + length ) {
-			while(c.hurtBoxX + c.hurtBoxW > x ) {
+			while(c.x + 16 + c.hurtBoxW > x ) {
 				c.x --;
-				c.hurtBoxX = c.x + 20;
-				c.hurtBoxY = c.y + 6;
 			}
+			return;
 		}
 		
 		//amogus is to the right of wall
@@ -153,11 +109,10 @@ public class Block{
 		&& c.hurtBoxY < y + length  
 		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
 		&& c.hurtBoxY + 20 < y + length ) {
-			while(c.hurtBoxX < x + length ) {
+			while(c.x + 16 < x + length ) {
 				c.x ++;
-				c.hurtBoxX = c.x + 20;
-				c.hurtBoxY = c.y + 6;
 			}
+			return;
 		}
 				
 		//amogus is above wall
@@ -167,11 +122,10 @@ public class Block{
 		&& c.hurtBoxX < x + length 
 		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
 		&& c.hurtBoxX + 20 < x + length ) {
-			while(c.hurtBoxY + c.hurtBoxH > y ) {
+			while(c.y + 6 + c.hurtBoxH > y) {
 				c.y --;
-				c.hurtBoxX = c.x + 20;
-				c.hurtBoxY = c.y + 6;
 			}
+			return;
 		}
 		//amogus is below wall
 		if(c.hurtBoxY < y + length  
@@ -180,17 +134,19 @@ public class Block{
 		&& c.hurtBoxX < x + length 
 		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
 		&& c.hurtBoxX + 20 < x + length ) {
-			while(c.hurtBoxY < y + length ) {
+			while(c.y + 6 < y + length ) {
 				c.y ++;
-				c.hurtBoxX = c.x + 20;
-				c.hurtBoxY = c.y + 6;
 			}
+			return;
 		}
 	}
 	
+	//interact method to check if the amogus can interact with the block
 	public void interact() {
+		//so far only the door is interactable so if the block isn't a door stop the method
 		if(door == false) {return;}
 		
+		//switch statement checks if the block is in front of and close enough to the amogus
 		switch(Frame.amogus.direction) {
 		case "Right":
 			if(Frame.amogus.hurtBoxX + Frame.amogus.hurtBoxW > x  - 20
@@ -254,19 +210,20 @@ public class Block{
 		}
 	}
 
+	//paint method draws the image
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		init(x , y );
 		g2.drawImage(img, tx, null);
-		checkCollision();
 	}
 
-	
+	//init method initializes the location of the sprite
 	public void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
+	//getimage method to choose the image for the sprite
 	public Image getImage(String path) {
 		Image tempImage = null;
 		try {
