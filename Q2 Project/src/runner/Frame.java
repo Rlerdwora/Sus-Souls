@@ -36,31 +36,52 @@ import java.util.ArrayList;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	Color red = new Color(255,0,0);
+	Color red = new Color(255,0,0);														//colors
 	Color green = new Color(0, 255, 0);
 	Color black = new Color(0,0,0);
-	public static Character amogus = new Amogus(430,600);
-	public static Img deathScreen = new Img(0, 180, "/uiSprites/deathScreen.png", 0f);
-	public static Camera camera = new Camera(amogus);
-	SuspicionIcon susIcon = new SuspicionIcon(5,5);
-	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);
-	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);
-	public static Background b = new Background(1);
-	Equipment equipment = new Equipment();
-	boolean itemMenuOpen = false;
-	ItemMenu itemMenu = new ItemMenu();
+	
+	public static Character amogus = new Amogus(430,600);								//the player
+	
+	public static Img deathScreen = new Img(0, 180, "/uiSprites/deathScreen.png", 0f);	//deathscreen instantiated
+	
+	public static Camera camera = new Camera(amogus);									//camera
+	
+	SuspicionIcon susIcon = new SuspicionIcon(5,5);										//susicon for ui
+	
+	Bar health = new Bar(90,20, Frame.amogus.health, 10, red);							//healthbar for ui
+	
+	Bar stamina = new Bar(90,50, (int)Frame.amogus.stamina, 5, green);					//staminabar for ui
+	
+	public static Background b = new Background(1);										//background for the level
+	
+	Equipment equipment = new Equipment();												//equipment for ui
+	
+	boolean itemMenuOpen = false;														//itemmenuopen to know 
+																						//when to paint the menu
+																						//and when not to
+	ItemMenu itemMenu = new ItemMenu();													//itemmenu for ui
 
+	//paint method
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		
+		//make the color black for the void in the background
 		g.setColor(black);
+		//paint the black void in the background
 		g.fillRect(0, 0, 900, 720);
+		
+		//paint level
 		b.paint(g);
+		
+		//paint the player
+		amogus.paint(g);
+		
+		//painting ui
 		susIcon.paint(g);
 		health.updateValue(amogus.health);
 		health.paint(g);
 		stamina.updateValue((int)amogus.stamina);
 		stamina.paint(g);
-		amogus.paint(g);
 		camera.focus();
 		equipment.paint(g);
 		g.setColor(green);
