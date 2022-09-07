@@ -9,14 +9,19 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
+//image class that is used so that ui classes dont need to have multiple affinetransform variables
 public class Img{
 	
-	public int x, y;
-	public double scaleX, scaleY;
-	public float alpha;
-	public Image img;
-	public AffineTransform tx;
+	public int x, y;					//x and y for location
+	public double scaleX, scaleY;		//scalex and scaley for how large the image is
+	
+	public float alpha;					//how transparent the image is
+	
+	public Image img;					//the image
+	
+	public AffineTransform tx;			//affinetransform to edit image
 
+	//constructor that customizes x, y and the image
 	public Img(int x, int y, String url) {
 		this.x = x;
 		this.y = y;
@@ -28,6 +33,7 @@ public class Img{
 		init(x, y);
 	}
 	
+	//constructor that customizes x, y, scaling, and image
 	public Img(int x, int y, double scaleX, double scaleY, String url) {
 		this.x = x;
 		this.y = y;
@@ -39,6 +45,7 @@ public class Img{
 		init(x, y);
 	}
 	
+	//constructor that customizes x, y, alpha, and image
 	public Img(int x, int y, String url, float alpha) {
 		this.x = x;
 		this.y = y;
@@ -50,6 +57,7 @@ public class Img{
 		init(x, y);
 	}
 	
+	//constructor that customizes x, y, scaling, alpha, and image
 	public Img(int x, int y, double scaleX, double scaleY, String url, float alpha) {
 		this.x = x;
 		this.y = y;
@@ -61,6 +69,7 @@ public class Img{
 		init(x, y);
 	}
 
+	//paint
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;	
 		init(x,y);

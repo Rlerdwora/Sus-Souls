@@ -10,11 +10,21 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
+//bar class for ui purposes like displaying health or stamina
 public class Bar{
-	private Color color;
-	private int x, y, maxValue, value, length;
-	private ArrayList<BarSegment> barSegments = new ArrayList<BarSegment>();
+	private Color color;														//color of the bar
+	
+	private int x, y;															//int x and y for location
+	
+	public int value, maxValue;													//int value for the current bar value
+																				//int maxvalue for the max value
+	
+	public int length;															//int length for how long the bar is
+	
+	private ArrayList<BarSegment> barSegments = new ArrayList<BarSegment>();	//arraylist of barsegments to
+																				//make up the bar
 
+	//constructor with parameters for the previous variables
 	public Bar(int x, int y, int value, int length, Color color) {
 		this.x = x;
 		this.y = y;
@@ -23,7 +33,7 @@ public class Bar{
 		maxValue = value;
 		barSegments.add(new BarSegment(x, y, "start"));
 		this.length = barSegments.get(0).length();
-		for(int i = 0; i < length - 1; i ++) {
+		for(int i = 0; i < length - 1; i ++) {				//makes the bar have the parameter length amount of segments
 			BarSegment barSegment = new BarSegment(x + this.length, y, "middle");
 			barSegments.add(barSegment);
 			this.length += barSegment.length();
@@ -32,14 +42,12 @@ public class Bar{
 		this.length += barSegments.get(barSegments.size() - 1).length();
 	}
 	
+	//update the value
 	public void updateValue(int value) {
 		this.value = value;
 	}
 	
-	public void increase() {
-		
-	}
-	
+	//paint method
 	public void paint(Graphics g) {
 		g.setColor(color);
 		if(value != 0) {

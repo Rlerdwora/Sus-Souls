@@ -5,17 +5,19 @@ import objects.Bonfire;
 import objects.Chest;
 import runner.Frame;
 
+//camera class to keep the player on the center of the screen
 public class Camera {
 	
-	private Character character;
-	private static int x, y;
+	public Character character;
 	
+	//constructor with character parameter to focus on
 	public Camera(Character focus) {
 		character = focus;
 	}
 	
+	//focus method detects if the character is not on the center of the screen and moves everything if so
 	public void focus() {
-		while(character.x != 395) {
+		while(character.x != 395) {					//x centering
 			if(character.x < 395) {
 				character.x ++;
 				for(Block b : Frame.b.bricks) {
@@ -47,7 +49,7 @@ public class Camera {
 			}
 		}
 		
-		while(character.y != 270) {
+		while(character.y != 270) {					//y centering		
 			if(character.y < 270) {
 				character.y ++;
 				for(Block b : Frame.b.bricks) {
@@ -79,8 +81,4 @@ public class Camera {
 			}
 		}
 	}
-	
-	public static int x() {return x;}
-
-	public static int y() {return y;}
 }

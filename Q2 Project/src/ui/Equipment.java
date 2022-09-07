@@ -12,17 +12,21 @@ import java.util.ArrayList;
 import objects.Background;
 import runner.Frame;
 
+//the equipment class is what displays what equipment you are carrying in the bottom left corner
 public class Equipment{
 
-	private ArrayList<Img> frames = new ArrayList<Img>();
-	private Img shield, sword, lean = new Img(10 + 65, 520 + 42, "/uiSprites/leanIcon.png");
+	private ArrayList<Img> frames = new ArrayList<Img>();										//frames
 	
+	private Img shield, sword, lean = new Img(10 + 65, 520 + 42, "/uiSprites/leanIcon.png");	//images to go in frames
+	
+	//default constructor initializes the empty frames
 	public Equipment() {
 		frames.add(new Img(10,520, "/uiSprites/iconFrame1.png"));
 		frames.add(new Img(10 + 65, 520 + 42, "/uiSprites/iconFrame2.png"));
 		frames.add(new Img(10 + 130, 520, "/uiSprites/iconFrame2.png"));
 	}
 	
+	//update method to fill the frames with the equipped equipment after exiting the item menu
 	public void update() {
 		if(Frame.amogus.shield.get(Frame.amogus.shieldSelect) != null){
 			shield = new Img(10, 520, "/uiSprites/" + Frame.amogus.shield.get(Frame.amogus.shieldSelect).toString() + "Icon.png");

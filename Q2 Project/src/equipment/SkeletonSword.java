@@ -178,6 +178,6 @@ public class SkeletonSword extends Sword{
 		//variable naming system
 		img = getImage("/skeletonSprites/skeletonSword" + action + direction + fileType);
 		//edited xPos and yPos values are used to shift the location of the sprite
-		init(x + xPos + Camera.x(), y + yPos + Camera.y());
+		init(x + xPos, y + yPos);
 	}
 }

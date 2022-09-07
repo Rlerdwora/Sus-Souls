@@ -39,7 +39,7 @@ public class Bonfire{
 	//paint method
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;	
-		init(x + Camera.x(), y + Camera.y());
+		init(x, y);
 		g2.drawImage(img, tx, null);
 	}
 
