@@ -125,59 +125,59 @@ public class Chest{
 		init(x, y);
 	}
 	
-	//collision method, same as block
+	//collision method
 	public void checkCollision(Character c) {
 		//if the block is not near the amogus, do not check for collision to make the game run faster
-		if((Math.abs(x + height/2 - c.hurtBoxX - c.hurtBoxW/2) > 84) && (Math.abs(y + height/2 - c.hurtBoxY - c.hurtBoxH/2) > 84)) {
+		if((Math.abs(x + width/2 - c.hurtBoxX - c.hurtBoxW/2) > 84) && (Math.abs(y + height/2 - c.hurtBoxY - c.hurtBoxH/2) > 84)) {
 			return;
 		}
 		
-		//amogus is to the left of chest
-		if(c.hurtBoxX + c.hurtBoxW > x  
-		&& c.hurtBoxX + c.hurtBoxW < x + width  
-		&& c.hurtBoxY + c.hurtBoxH > y  
-		&& c.hurtBoxY < y + width 
-		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
-		&& c.hurtBoxY + 20 < y + width ) {
-			while(c.x + 16 + c.hurtBoxW > x ) {
+		//amogus is to the left of wall
+		if(c.hurtBoxX + c.hurtBoxW > hurtBoxX  
+		&& c.hurtBoxX + c.hurtBoxW < hurtBoxX + width  
+		&& c.hurtBoxY + c.hurtBoxH > hurtBoxY  
+		&& c.hurtBoxY < hurtBoxY + height 
+		&& c.hurtBoxY + c.hurtBoxH - 20 > hurtBoxY  
+		&& c.hurtBoxY + 20 < hurtBoxY + height ) {
+			while(c.x + 16 + c.hurtBoxW > hurtBoxX ) {
 				c.x --;
 			}
 			return;
 		}
 		
-		//amogus is to the right of chest
-		if(c.hurtBoxX < x + width  
-		&& c.hurtBoxX > x  
-		&& c.hurtBoxY + c.hurtBoxH > y  
-		&& c.hurtBoxY < y + width  
-		&& c.hurtBoxY + c.hurtBoxH - 20 > y  
-		&& c.hurtBoxY + 20 < y + width ) {
-			while(c.x + 16 < x + width ) {
+		//amogus is to the right of wall
+		if(c.hurtBoxX < hurtBoxX + width  
+		&& c.hurtBoxX > hurtBoxX
+		&& c.hurtBoxY + c.hurtBoxH > hurtBoxY  
+		&& c.hurtBoxY < hurtBoxY + height  
+		&& c.hurtBoxY + c.hurtBoxH - 20 > hurtBoxY  
+		&& c.hurtBoxY + 20 < hurtBoxY + height ) {
+			while(c.x + 16 < hurtBoxX + width ) {
 				c.x ++;
 			}
 			return;
 		}
-				
-		//amogus is above chest
-		if(c.hurtBoxY + c.hurtBoxH > y  
-		&& c.hurtBoxY + c.hurtBoxH < y + height  
-		&& c.hurtBoxX + c.hurtBoxX > x  
-		&& c.hurtBoxX < x + height 
+		
+		//amogus is above wall
+		if(c.hurtBoxY + c.hurtBoxH > hurtBoxY
+		&& c.hurtBoxY + c.hurtBoxH < hurtBoxY + height  
+		&& c.hurtBoxX + c.hurtBoxX > hurtBoxX  
+		&& c.hurtBoxX < hurtBoxX + width 
 		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
-		&& c.hurtBoxX + 20 < x + height ) {
-			while(c.y + 6 + c.hurtBoxH > y) {
+		&& c.hurtBoxX + 20 < hurtBoxX + width ) {
+			while(c.y + 6 + c.hurtBoxH > hurtBoxY) {
 				c.y --;
 			}
 			return;
 		}
-		//amogus is below chest
-		if(c.hurtBoxY < y + height  
-		&& c.hurtBoxY > y  
-		&& c.hurtBoxX + c.hurtBoxX > x  
-		&& c.hurtBoxX < x + height 
-		&& c.hurtBoxX + c.hurtBoxW - 20 > x  
-		&& c.hurtBoxX + 20 < x + height ) {
-			while(c.y + 6 < y + height ) {
+		//amogus is below wall
+		if(c.hurtBoxY < hurtBoxY + height  
+		&& c.hurtBoxY > hurtBoxY
+		&& c.hurtBoxX + c.hurtBoxX > hurtBoxX  
+		&& c.hurtBoxX < hurtBoxX + width 
+		&& c.hurtBoxX + c.hurtBoxW - 20 > hurtBoxX  
+		&& c.hurtBoxX + 20 < hurtBoxX + width ) {
+			while(c.y + 6 < hurtBoxY + height ) {
 				c.y ++;
 			}
 			return;

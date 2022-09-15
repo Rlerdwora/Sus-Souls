@@ -580,10 +580,9 @@ public class Amogus extends Character{
 				shoes.get(shoeSelect).paint(g2);
 			}	
 		}
-		/*
+		
 		g.setColor(new Color(0,0,0));
-		g.drawRect(hitBoxX, hitBoxY, hitBoxW, hitBoxH);
-		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);*/
+		g.drawRect(hurtBoxX, hurtBoxY, hurtBoxW, hurtBoxH);
 		
 		//when the player is dead the death screen will fade in
 		if(health == 0) {
