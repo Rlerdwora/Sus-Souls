@@ -139,9 +139,10 @@ public class Chest{
 		&& c.hurtBoxY < hurtBoxY + height 
 		&& c.hurtBoxY + c.hurtBoxH - 20 > hurtBoxY  
 		&& c.hurtBoxY + 20 < hurtBoxY + height ) {
-			while(c.x + 16 + c.hurtBoxW > hurtBoxX ) {
-				c.x --;
-			}
+//			while(c.x + 16 + c.hurtBoxW > hurtBoxX ) {
+//				c.x --;
+//			}
+			c.x = hurtBoxX - c.hurtBoxW - 16;
 			return;
 		}
 		
